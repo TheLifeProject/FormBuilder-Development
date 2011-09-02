@@ -1,0 +1,128 @@
+<?php formbuilder_admin_nav('edit form'); ?>
+<form name="form1" method="post" class="formBuilderForm" 
+	action="[ADMIN_PATH]&fbaction=editFormObject&fbid=[FORM_ID]">
+
+	<h3 class="info-box-title"><?php _e('Form Details', 'formbuilder'); ?></h3>
+	<fieldset class="options">
+		<p><?php _e('You may use these controls to modify a form on your blog.', 'formbuilder'); ?></p>
+
+		<table width="100%" cellspacing="2" cellpadding="5" class="widefat">
+			<tr valign="top">
+				<td>
+					<h4><?php _e('Form Controls', 'formbuilder'); ?>:</h4>
+					
+					<div style='padding: 1px 0 2px 20px;'>
+						<span class='formbuilderLabel'><?php _e('NAME', 'formbuilder'); ?>: </span>
+						<span class='formbuilderField'>
+							<input name='formbuilder[name]' id='name' 
+								type='text' size='50' maxlength='255' 
+								value='[NAME_VALUE]' 
+								alt='<?php _e('What do you want to call this contact form?', 'formbuilder'); ?>' 
+								title='<?php _e('What do you want to call this contact form?', 'formbuilder'); ?>' />
+						</span> 
+						<a href="javascript:;" onClick="alert('<?php _e('What do you want to call this contact form?', 'formbuilder'); ?>');">?</a> 
+					</div>
+					
+					<div style='padding: 1px 0 2px 20px;'>
+						<span class='formbuilderLabel'><?php _e('SUBJECT', 'formbuilder'); ?>: </span>
+						<span class='formbuilderField'>
+							<input name='formbuilder[subject]' id='subject' 
+								type='text' size='50' maxlength='255' 
+								value='[SUBJECT_VALUE]' 
+								alt='<?php _e('The subject line for the email you receive from the form.', 'formbuilder'); ?>' 
+								title='<?php _e('The subject line for the email you receive from the form.', 'formbuilder'); ?>' />
+						</span> 
+						<a href="javascript:;" onClick="alert('<?php _e('The subject line for the email you receive from the form.', 'formbuilder'); ?>');">?</a> 
+					</div>
+					
+					<div style='padding: 1px 0 2px 20px;'>
+						<span class='formbuilderLabel'><?php _e('RECIPIENT', 'formbuilder'); ?>: </span>
+						<span class='formbuilderField'>
+							<input name='formbuilder[recipient]' id='recipient' 
+								type='text' size='50' maxlength='255' 
+								value='[RECIPIENT_VALUE]' 
+								alt='<?php _e('What email address should the data from this contact form be mailed to?', 'formbuilder'); ?>' 
+								title='<?php _e('What email address should the data from this contact form be mailed to?', 'formbuilder'); ?>' />
+						</span> 
+						<a href="javascript:;" onClick="alert('<?php _e('What email address should the data from this contact form be mailed to?', 'formbuilder'); ?>');">?</a> 
+					</div>
+					
+					<div style='padding: 1px 0 2px 20px;'>
+						<span class='formbuilderLabel'><?php _e('METHOD', 'formbuilder'); ?>: </span>
+						<span class='formbuilderField'>
+							<select name='formbuilder[method]' id='method' 
+								alt='<?php _e('How should this form post data?  If you are unsure, leave it on POST', 'formbuilder'); ?>' 
+								title='<?php _e('How should this form post data?  If you are unsure, leave it on POST', 'formbuilder'); ?>' >
+								
+								[METHOD_SELECT]
+								
+							</select>
+						</span> 
+						<a href="javascript:;" onClick="alert('<?php _e('How should this form post data?  If you are unsure, leave it on POST', 'formbuilder'); ?>');">?</a> 
+					</div>
+					
+					<div style='padding: 1px 0 2px 20px;'>
+						<span class='formbuilderLabel'><?php _e('ACTION', 'formbuilder'); ?>: </span>
+						<span class='formbuilderField'>
+							<select name='formbuilder[action]' id='action' 
+								alt='<?php _e('You may specify an alternate form processing system if necessary.  If you are unsure, leave it alone.', 'formbuilder'); ?>' 
+								title='<?php _e('You may specify an alternate form processing system if necessary.  If you are unsure, leave it alone.', 'formbuilder'); ?>' >
+								
+								[ACTION_SELECT]
+								
+							</select>
+						</span> 
+						<a href="javascript:;" onClick="alert('<?php _e('You may specify an alternate form processing system if necessary.  If you are unsure, leave it alone.\n\nIf you are using the Alternate Action module, you may specify the full URL of the alternate form processor in the THANKYOUTEXT field of the form.  Once the submitted data has been verified, it will be re-posted to this alternate system.  This ability may not be supported on all servers.  Please test before deploying to production systems.\n\nIf you are using the Form Redirect module, create a \'followup page\' type form field, and put the url you wish to redirect people to in the field value.', 'formbuilder'); ?>');">?</a> 
+					</div>
+					
+					<div style='padding: 1px 0 2px 20px;'>
+						<span class='formbuilderLabel'><?php _e('THANKYOUTEXT', 'formbuilder'); ?>: </span>
+						<span class='formbuilderField'>
+							<textarea name='formbuilder[thankyoutext]' id='thankyoutext' 
+								cols='52' rows='4' 
+								alt='<?php _e('What message would you like to show your visitors?', 'formbuilder'); ?>' 
+								title='<?php _e('What message would you like to show your visitors?', 'formbuilder'); ?>' 
+								>[THANKS_VALUE]</textarea>
+						</span> 
+						<a href="javascript:;" onClick="alert('<?php _e('What message would you like to show your visitors when the successfully complete the form?', 'formbuilder'); ?>');">?</a> 
+					</div>
+					
+					<div style='padding: 1px 0 2px 20px;'>
+						<span class='formbuilderLabel'><?php _e('AUTORESPONSE', 'formbuilder'); ?>: </span>
+						<span class='formbuilderField'>
+							<select name='formbuilder[autoresponse]' id='autoresponse' 
+								alt='<?php _e('You may specify an autoresponse to send back if necessary.', 'formbuilder'); ?>' 
+								title='<?php _e('You may specify an autoresponse to send back if necessary.', 'formbuilder'); ?>' >
+								
+								[AUTORESPONSE_SELECT]
+								
+							</select>
+						</span> 
+						<a href="javascript:;" onClick="alert('<?php _e('You may specify an autoresponse to send back if necessary.  You should have alread created them on the main FormBuilder Management page.', 'formbuilder'); ?>');">?</a> 
+					</div>
+				</td>
+			</tr>
+			<tr valign="top">
+				<td>
+					<input type="submit" name="Save" value="<?php _e('Save Form', 'formbuilder'); ?>">
+				</td>
+			</tr>
+			<tr valign="top">
+				<td>
+				<h4><?php _e('Fields', 'formbuilder'); ?>:</h4>
+				
+				[SHOW_FIELDS]
+				
+				</td>
+			</tr>
+			<tr valign="top">
+				<td>
+					<input type='submit' name='fieldAction[newField]' value='<?php _e('Add New Field', 'formbuilder'); ?>'>
+					<input type="submit" name="Save" value="<?php _e('Save', 'formbuilder'); ?>">
+				</td>
+			</tr>
+		</table>
+
+	</fieldset>
+
+</form>

@@ -1,0 +1,108 @@
+<div id='formbuilderEditFieldWrapper-[FIELD_ID]'>
+
+	<!-- Field Controls -->
+	<p style='background-color: #E5F3FF;'>
+	    <a name='field_[FIELD_ID]'></a><?php _e('Field Options', 'formbuilder'); ?>: 
+	    <input type='submit' name='fieldAction[[FIELD_ID]]' value='<?php _e('Add Another', 'formbuilder'); ?>' title='<?php _e('Add another field where this one is now.', 'formbuilder'); ?>' />
+	    <input type='submit' name='fieldAction[[FIELD_ID]]' value='<?php _e('Delete', 'formbuilder'); ?>' title='<?php _e('Delete this field.', 'formbuilder'); ?>' />
+	    <input type='submit' name='fieldAction[[FIELD_ID]]' value='<?php _e('Move Up', 'formbuilder'); ?>' title='<?php _e('Move this field up one.', 'formbuilder'); ?>' />
+	    <input type='submit' name='fieldAction[[FIELD_ID]]' value='<?php _e('Move Down', 'formbuilder'); ?>' title='<?php _e('Move this field down one.', 'formbuilder'); ?>' />
+	</p>
+	<!-- Done field controls -->
+	
+	
+	<div style='padding: 1px 0 2px 20px;'>
+	    <span class='formbuilderLabel'><?php _e('FIELD TYPE', 'formbuilder'); ?>: </span>
+	    <span class='formbuilderField'>
+	        <select name='formbuilderfields[[FIELD_ID]][field_type]' id='field_type' 
+	        	alt='<?php _e('Select the type of field that you wish to have shown in this location.', 'formbuilder'); ?>' 
+	        	title='<?php _e('Select the type of field that you wish to have shown in this location.', 'formbuilder'); ?>'>
+	        	
+	        	[FIELD_TYPE_SELECT]
+	            
+	        </select>
+	    </span>
+	    <a href="javascript:;" onClick="alert('[FIELD_TYPE_HELP]');">?</a>
+	</div>
+	
+	
+	<div style='padding: 1px 0 2px 20px;'>
+	    <span class='formbuilderLabel'><?php _e('FIELD NAME', 'formbuilder'); ?>: </span>
+	    <span class='formbuilderField'>
+	    	<input name='formbuilderfields[[FIELD_ID]][field_name]' id='field_name' 
+	    		type='text' size='50' maxlength='255' 
+	    		alt='<?php _e('Enter a name for this field.  Should be only letters and underscores.', 'formbuilder'); ?>' 
+	    		title='<?php _e('Enter a name for this field.  Should be only letters and underscores.', 'formbuilder'); ?>' 
+	    		value='[FIELD_NAME]' />
+	    </span>
+	    <a href="javascript:;" onClick="alert('<?php _e('Enter a name for this field.  Should be only letters and underscores.  This field will come through in the email something like this:\n\nFIELD NAME: The data entered by the user would be here.', 'formbuilder'); ?>');">?</a>
+	</div>
+	
+	
+	<div style='padding: 1px 0 2px 20px;'>
+	    <span class='formbuilderLabel'><?php _e('FIELD VALUE', 'formbuilder'); ?>: </span>
+	    <span class='formbuilderField'>
+	        <textarea name='formbuilderfields[[FIELD_ID]][field_value]' id='field_value' 
+	        	cols='52' rows='2' 
+	        	alt='<?php _e('If necessary, enter a predefined value for the field.', 'formbuilder'); ?>' 
+	        	title='<?php _e('If necessary, enter a predefined value for the field.', 'formbuilder'); ?>'>[FIELD_VALUE]</textarea>
+	    </span>
+	    <a href="javascript:;" onClick="alert('<?php _e('If necessary, enter a predefined value for the fiel.  Most field types do not require a value.  Only Radio Buttons, Selection Dropdowns and Comments.\n\nRadio Buttons and Selection Dropdowns:\nEach option should be put in the field value, one per line.  These options will be used as the values for users to choose from on the form.\n\nComments Fields:\nThe information in the field value will be displayed as a comment on the form.', 'formbuilder'); ?>');">?</a>
+	</div>
+	
+	
+	<div style='padding: 1px 0 2px 20px;'>
+	    <span class='formbuilderLabel'><?php _e('FIELD LABEL', 'formbuilder'); ?>: </span>
+	    <span class='formbuilderField'>
+	    	<input name='formbuilderfields[[FIELD_ID]][field_label]' id='field_label' 
+	    	type='text' size='50' maxlength='255' 
+	    	alt='<?php _e('The label you want to have in front of this field.', 'formbuilder'); ?>' 
+	    	title='<?php _e('The label you want to have in front of this field.', 'formbuilder'); ?>' 
+	    	value='[FIELD_LABEL]' />
+	    </span>
+	    <a href="javascript:;" onClick="alert('<?php _e('The label you want to have in front of this field.  When shown on the form, it will appear something like:\n\nFIELD LABEL: [input box]\n\nFor submit images, this must be the path to the image to be used.', 'formbuilder'); ?>');">?</a>
+	</div>
+	
+	
+	<div style='padding: 1px 0 2px 20px;'>
+	    <span class='formbuilderLabel'><?php _e('REQUIRED DATA', 'formbuilder'); ?>: </span>
+	    <span class='formbuilderField'>
+	        <select name='formbuilderfields[[FIELD_ID]][required_data]' id='required_data' 
+	        	alt='<?php _e('If you want this field to be required, select the type of data it should look for.', 'formbuilder'); ?>' 
+	        	title='<?php _e('If you want this field to be required, select the type of data it should look for.', 'formbuilder'); ?>'>
+	        	
+	        	<option></option>
+	        	[FIELD_REQUIRED_SELECT]
+	            
+	        </select>
+	    </span>
+	    <a href="javascript:;" onClick="alert('[FIELD_REQUIRED_HELP]');">?</a>
+	</div>
+	
+	
+	<div style='padding: 1px 0 2px 20px;'>
+	    <span class='formbuilderLabel'><?php _e('ERROR MESSAGE', 'formbuilder'); ?>: </span>
+	    <span class='formbuilderField'>
+	    	<input name='formbuilderfields[[FIELD_ID]][error_message]' id='error_message' 
+	    		type='text' size='50' maxlength='255' 
+	    		alt='<?php _e('The error message to be displayed if the required field is not filled in.', 'formbuilder'); ?>' 
+	    		title='<?php _e('The error message to be displayed if the required field is not filled in.', 'formbuilder'); ?>' 
+	    		value='[FIELD_ERROR]' />
+	    </span>
+	    <a href="javascript:;" onClick="alert('<?php _e('The error message to be displayed if the required field is not filled in.', 'formbuilder'); ?>');">?</a>
+	</div>
+	
+	
+	<div style='padding: 1px 0 2px 20px;'>
+	    <span class='formbuilderLabel'><?php _e('HELP TEXT', 'formbuilder'); ?>: </span>
+	    <span class='formbuilderField'>
+	    	<input name='formbuilderfields[[FIELD_ID]][help_text]' id='help_text' 
+	    		type='text' size='50' maxlength='255' 
+	    		alt='<?php _e('The help text to be (optionally) shown as additional instructions to the visitor.', 'formbuilder'); ?>' 
+	    		title='<?php _e('The help text to be (optionally) shown as additional instructions to the visitor.', 'formbuilder'); ?>' 
+	    		value='[FIELD_HELP]' />
+	    </span>
+	    <a href="javascript:;" onClick="alert('<?php _e('The help text to be (optionally) shown as additional instructions to the visitor.', 'formbuilder'); ?>');">?</a>
+	</div>
+
+</div>

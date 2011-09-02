@@ -1,0 +1,204 @@
+
+
+/* Generic FormBuilder Display Configuration */
+form.formBuilderForm, div.formBuilderSuccess {
+	text-align: left;
+	padding: 10px;
+ 	clear: both;
+}
+.formBuilderForm div{
+	margin: 0;
+	padding: 0;
+}
+div.formBuilderSuccess h4 {
+	margin: 0;
+	padding: 0;
+}
+
+
+/* The div class around each form field*/
+.formBuilderForm .formBuilderField {
+	padding-bottom: 4px;
+	clear: both;
+}
+
+/* The div class around the error message, in the event that a required field is not filled in*/
+.formBuilderForm .formBuilderError {
+	font-weight: bold;
+}
+
+/* Generic Display Controls */
+.formBuilderForm div.formBuilderComment {
+	font-style: italic;
+	padding: 4px;
+	margin: 4px 0 4px 0;
+	clear: both;
+	float: left;
+	width: 95%;
+}
+.formBuilderForm .formBuilderHidden {
+	visibility: hidden;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	position: absolute;
+}
+.formBuilderForm .formBuilderSubmit {
+	clear: both;
+	text-align: right;
+}
+
+/* Generic Label Controls */
+.formBuilderForm .formBuilderLabel, .formBuilderForm .formBuilderLabelRequired {
+	clear: left;
+	float: left;
+	vertical-align: top;
+	width: 160px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+.formBuilderForm .formBuilderLabelRequired {
+	font-weight: bold;
+}
+
+
+
+
+/**** Field Type Specific Display Controls ****/
+
+.formBuilderForm .small_text_area .formBuilderLabel,
+.formBuilderForm .small_text_area .formBuilderLabelRequired
+{
+	width: auto;
+	clear: both;
+}
+.formBuilderForm .small_text_area textarea
+{
+	width: 98%;
+}
+.formBuilderForm .large_text_area .formBuilderLabel,
+.formBuilderForm .large_text_area .formBuilderLabelRequired
+{
+	width: auto;
+	clear: both;
+}
+.formBuilderForm .large_text_area textarea
+{
+	width: 98%;
+}
+.formBuilderForm .checkbox
+{
+	float: left;
+	width: 100%;
+}
+
+.formBuilderForm .radio_buttons
+{
+	position: relative;
+}
+.formBuilderForm .radio_buttons .formBuilderRadio
+{
+	display: block;
+	position: relative;
+	margin-left: 170px;
+	padding-left: 0;
+}
+div.formBuilderFailure {
+	border: 1px solid red;
+	background-color: #FFEBEB;
+	margin: 2px;
+	padding: 4px;
+}
+div.formBuilderFailure h4, div.formBuilderFailure p {
+	margin: 0 0 4px 0;
+	padding: 0;
+}
+
+div.formBuilderCaptcha {
+	display: block;
+	width: 260px;
+	float: left;
+}
+div.formBuilderCaptcha input {
+	width: 120px;
+}
+
+div.formBuilderPageBreak {
+	text-align: right;
+}
+
+
+.calendar-box {
+	display:none;
+	background-color:#fff;
+	border:1px solid #444;
+	position:absolute;
+	width:250px;
+	padding: 0 5px;
+	z-index:100;
+}
+.calendar-box select.calendar-month {
+	width:90px;
+}
+.calendar-box select.calendar-year {
+	width:70px;
+}
+.calendar-box .calendar-cancel {
+	width:100%;
+}
+.calendar-box table td {
+	width:14%;
+}
+.calendar-box .calendar-title {
+	text-align:center;
+}
+.calendar-box a {
+	text-decoration:none;
+}
+.calendar-box .today a {
+	padding:0 5px;
+	margin-left:-5px;
+	background-color:#ffe9c6;
+} 
+.calendar-box .selected a {
+	padding:0 5px;
+	margin-left:-5px;
+	background-color:#c9ff8b;
+}
+
+.formBuilderForm input {
+}
+
+.formBuilderHelpTextToggle {
+	position: relative;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background:none repeat scroll 0 0 #F9F9F9;
+	border:1px solid #CCCCCC;
+	padding:2px 6px;
+	color:#000000 !important;
+	text-decoration: none;
+	font-weight:normal;
+}
+
+.formBuilderForm div.formBuilderHelpText {
+	position: absolute;
+	visibility: hidden;
+}
+
+.formBuilderForm div.formBuilderHelpTextHidden {
+	visibility: hidden;
+	position: absolute;
+}
+
+.formBuilderForm div.formBuilderHelpTextVisible {
+	visibility: visible;
+	position: relative;
+	background-color: #FFFFEE;
+	border-style: dotted;
+	border-width: thin;
+	padding: 3px;
+	margin-bottom: 20px;
+	font-weight:normal;
+	text-align: left;
+}

@@ -1,0 +1,773 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: FormBuilder 0.77\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/formbuilder\n"
+"POT-Creation-Date: 2009-03-25 23:28+0000\n"
+"PO-Revision-Date: 2009-06-11 14:09-0800\n"
+"Last-Translator: TruthMedia Webmaster <webmaster@truthmedia.com>\n"
+"Language-Team: Eesti <fred.el@mail.ee>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Estonian\n"
+"X-Poedit-Country: ESTONIA\n"
+"Plural-Forms: nplurals=2;plural=n!=1\n"
+
+#: captcha/CaptchaSecurityImages.php:48
+msgid "Cannot initialize new GD image stream"
+msgstr "Ei sa kasutada uut GD pildi töötlust"
+
+#: captcha/CaptchaSecurityImages.php:62
+msgid "Error in imagettfbbox function"
+msgstr "Viga funktsioonis imagettfbox"
+
+#: captcha/CaptchaSecurityImages.php:65
+msgid "Error in imagettftext function"
+msgstr "Viga funktdoonis imagettftext"
+
+#: dbaccess.class.php:311
+#: html/options_edit_form.inc.php:97
+#: html/options_edit_form.inc.php:236
+msgid "Save Form"
+msgstr "Salvesta vorm"
+
+#: dbaccess.class.php:358
+msgid "Field type not found!"
+msgstr "Välja tüüpi ei leitud!"
+
+#: extensions/formbuilder_xml_db_results.class.php:39
+msgid "Database Backup"
+msgstr "Andmebaasi varundamine"
+
+#: extensions/formbuilder_xml_db_results.class.php:63
+msgid "Database XML Backup"
+msgstr "Andmebaasi XML varundamine"
+
+#: extensions/formbuilder_xml_db_results.class.php:65
+msgid "FormBuilder is now able to store XML copies of all submitted form data in the MySQL database.  If you wish to enable this feature, select the checkbox below and click Save."
+msgstr "FormBuilder on nüüd võimeline salvestama XML kujul kogu vormiga saabunud teabe MySQL andmebaasis. Aktiveerige see soovi korral tehes linnukese allolevas kastis ja vajutades Salvesta nupule"
+
+#: extensions/formbuilder_xml_db_results.class.php:77
+msgid "Save form data in XML format in the database"
+msgstr "Salvesta vormi teave XML kujul andmebaasis"
+
+#: extensions/formbuilder_xml_db_results.class.php:77
+msgid "Yes!"
+msgstr "Jah!"
+
+#: extensions/formbuilder_xml_db_results.class.php:78
+#: html/options_default.inc.php:119
+#: html/options_default.inc.php:146
+#: html/options_default.inc.php:172
+msgid "Save"
+msgstr "Salvesta"
+
+#: extensions/formbuilder_xml_db_results.class.php:80
+msgid "Click here to manage the forms currently stored in your database."
+msgstr "Vajuta siia, et hallata hetkel baasis olevaid vorme "
+
+#: extensions/formbuilder_xml_db_results.class.php:81
+msgid "Click here to export form results to CSV."
+msgstr "Vajuta siia, et salvestada vormi saabunud teave CSV kujul"
+
+#: extensions/formbuilder_xml_db_results.class.php:89
+#: extensions/formbuilder_xml_db_results.class.php:120
+#: extensions/formbuilder_xml_db_results.class.php:186
+msgid "Export"
+msgstr "Ekspordi"
+
+#: extensions/formbuilder_xml_db_results.class.php:96
+msgid "Export Data:"
+msgstr "Ekspordi andmed:"
+
+#: extensions/formbuilder_xml_db_results.class.php:100
+msgid "Please select the date range you wish to export data from:"
+msgstr "Palun valige ajavahemik millelt soovite tulemit:"
+
+#: extensions/formbuilder_xml_db_results.class.php:101
+msgid "From:"
+msgstr "Saatja:"
+
+#: extensions/formbuilder_xml_db_results.class.php:102
+msgid "To:"
+msgstr "Kellele:"
+
+# Kahtlane ?.  Vahetage ekspordiks/ tulemiks kui väljundiks ei meeldi..
+#: extensions/formbuilder_xml_db_results.class.php:104
+msgid "Select the form(s) you would like to export data from:"
+msgstr "Valige palun vorm(id) andmete väljundiks:"
+
+#: extensions/formbuilder_xml_db_results.class.php:106
+msgid "All Forms (non-standard CSV format)"
+msgstr "Kõik vormid (mitte-standardne CSV kuju)"
+
+#: extensions/formbuilder_xml_db_results.class.php:132
+#: extensions/formbuilder_xml_db_results.class.php:146
+#: html/options_edit_form.inc.php:3
+msgid "Form Details"
+msgstr "Vormi üksikasjad"
+
+#: extensions/formbuilder_xml_db_results.class.php:172
+msgid "Recent Form Results:"
+msgstr "Hiljutised vormi tulemused:"
+
+#: extensions/formbuilder_xml_db_results.class.php:183
+msgid "Date:"
+msgstr "Kuupäev:"
+
+#: extensions/formbuilder_xml_db_results.class.php:188
+#: extensions/formbuilder_xml_db_results.class.php:208
+msgid "Message:"
+msgstr "Sõnum:"
+
+#: extensions/formbuilder_xml_db_results.class.php:216
+msgid "previous"
+msgstr "eelnev"
+
+#: extensions/formbuilder_xml_db_results.class.php:222
+msgid "next"
+msgstr "järgmine"
+
+#: extensions/formbuilder_xml_db_results.class.php:267
+msgid "Result ID"
+msgstr "Tulemuse ID"
+
+#: extensions/formbuilder_xml_db_results.class.php:267
+msgid "Form ID"
+msgstr "Vormi ID"
+
+#: extensions/formbuilder_xml_db_results.class.php:267
+msgid "Timestamp"
+msgstr "Ajatempel"
+
+#: extensions/formbuilder_xml_db_results.class.php:283
+#: extensions/formbuilder_xml_db_results.class.php:287
+msgid "Field Values"
+msgstr "Välja väärtused"
+
+#: formbuilder.php:91
+#: formbuilder_admin_functions.php:59
+msgid "FormBuilder Management"
+msgstr "FormBuilderi haldamine"
+
+#. #-#-#-#-#  plugin.pot (PACKAGE VERSION)  #-#-#-#-#
+#. Plugin Name of an extension
+#: formbuilder.php:91
+#: formbuilder_admin_functions.php:60
+#: formbuilder_post_metabox.inc.php:33
+#: formbuilder_post_metabox.inc.php:36
+msgid "FormBuilder"
+msgstr "FormBuilder"
+
+#: formbuilder.php:300
+msgid "Error: Form processing failure.  Unable to store the form data in the database."
+msgstr "Viga: Vormi töötlemine ebaõnnestus. Ei saa salvestada tulemit vormi andmebaasi"
+
+#: formbuilder.php:365
+msgid "* It looks like an alternate destination_email field was defined for this form, but the email address it contained was invalid"
+msgstr "* Paistab, et määrati algsest erinev saaja_epost väli, kuid sisalduv e-posti aadress oli vigane"
+
+#: formbuilder.php:429
+msgid "TO Header Injection Detected!"
+msgstr "Leiti Kellele: päise süstimine (Header Injection)"
+
+#: formbuilder.php:432
+msgid "SUBJECT Header Injection Detected!"
+msgstr "Leiti Teema: päise süstimine (Header Injection)"
+
+#: formbuilder.php:444
+msgid "Mail server error.  Unable to send email."
+msgstr "Meiliserveri viga. Ei saa e-posti saata."
+
+#: formbuilder.php:556
+#, php-format
+msgid "Ooops!%sYou have already submitted this form data once."
+msgstr "Vabandage!%sOlete korra  juba selle teabe saatnud."
+
+#: formbuilder.php:637
+msgid "The CAPTCHA field below may not work due to cookies being disabled in your browser.  Please turn on cookies in order to fill out this form."
+msgstr "CAPTCHA kaitse väli  võib mitte töötada, sest küpsised Teie lehitsejas on välja lülitatud. Vormi täitmise jaoks oleks vaja küpsised lubada."
+
+#: formbuilder.php:843
+msgid "Captcha functionality unavailable.  Please inform the website administrator."
+msgstr "Captcha kaitse ei tööta enam. Teatage sellest palun lehe haldajale."
+
+#: formbuilder.php:899
+#: formbuilder.php:912
+#: formbuilder.php:924
+#: formbuilder.php:967
+msgid "Previous"
+msgstr "Eelnev"
+
+#: formbuilder.php:901
+msgid "Next"
+msgstr "Järgmine"
+
+#: formbuilder.php:970
+msgid "Send!"
+msgstr "Saada!"
+
+#: formbuilder.php:1007
+msgid "Success!"
+msgstr "Õnnestus!"
+
+#: formbuilder.php:1007
+msgid "Your message has been sent successfully."
+msgstr "Teie teave saadeti edukalt"
+
+#: formbuilder.php:1011
+#: formbuilder.php:1014
+msgid "Failed!"
+msgstr "Ebaõnnestus!"
+
+#: formbuilder.php:1011
+msgid "Your message has NOT been sent successfully."
+msgstr "Teie teavet EI õnnestunud saata."
+
+#: formbuilder.php:1022
+msgid "Ooops!"
+msgstr "Kirevane!"
+
+#: formbuilder.php:1022
+msgid "You seem to have missed or had mistakes in the following required field(s)."
+msgstr "Olete ära jätnud või vigaselt täitnud allpool näidatud nõutud välju(a)."
+
+#: formbuilder.php:1037
+msgid "ERROR!  Unable to display form!"
+msgstr "VIGA! Ei saa vormi kuvada!"
+
+#: formbuilder_activation_script.inc.php:755
+#: formbuilder_activation_script.inc.php:799
+msgid "UnInstall FormBuilder"
+msgstr "Eemalda FormBuilder"
+
+#: formbuilder_activation_script.inc.php:756
+msgid "You must have administrator privilages to uninstall FormBuilder."
+msgstr "Teil on vaja haldaja õigusi, et eemaldada FormBuilder"
+
+#: formbuilder_activation_script.inc.php:787
+msgid "FormBuilder UnInstalled!"
+msgstr "FormBuilder eemaldatud"
+
+#: formbuilder_activation_script.inc.php:788
+msgid "FormBuilder has been uninstalled from your blog.  You should now deactivate the plugin on your plugins page.  If you do not do so, and instead return to the FormBuilder administration page, the plugin will be reinstalled with a fresh set of databases. (ie. if you want to start over with a clean install)"
+msgstr "FormBuilder on Teie ajaveebist eemaldatud. Võiksite nüüd ka selle plugina haldusest deaktiveerida. Vastasel juhul, pöördudes tagasi FormBuilderi haldamise lehele, paigaldatakse see koos andebaasidega uuesti. (Saate uue, puhta paigalduse)"
+
+#: formbuilder_activation_script.inc.php:789
+msgid "Click here to go to your plugins page and deactivate FormBuilder"
+msgstr "Vajutage palun siia pluginate halduse lehele jõudmiseks ja FormBuilderi deaktiveerimiseks."
+
+#: formbuilder_activation_script.inc.php:800
+msgid "Do you really want to completely uninstall the FormBuilder plugin?  This will completely remove all FormBuilder related data from the database."
+msgstr "Kas tõesti soovite FormBuilderi täielikult eemaldada ? See kustutab ka kogu FormBuilderiga seotud kirjed andmebaasist !"
+
+#: formbuilder_activation_script.inc.php:800
+msgid "BE VERY SURE YOU WANT TO DO THIS!"
+msgstr "OLGE IKKA VÄGA KINDEL, ET SOOVITE SEDA TEHA !"
+
+#: formbuilder_activation_script.inc.php:801
+msgid "No thanks!  Take me away from here."
+msgstr "Ei tänan! Kaome siit!"
+
+#: formbuilder_activation_script.inc.php:804
+msgid "Last chance to turn back... Are you sure you want to remove FormBuilder and all it\\'s data from your blog?"
+msgstr "Viimane võimalus tagasi minna... Olete ikka kindel, et soovite FormBuilderi koos kogu selle teabega ajaveebist kustutada?"
+
+#: formbuilder_activation_script.inc.php:805
+msgid "YES, PLEASE REMOVE FORMBUILDER FROM MY BLOG!"
+msgstr "JAH, PALUN EEMALDA FORMBUILDER MINU AJAVEEBIST!"
+
+#: formbuilder_admin_functions.php:60
+msgid "Navigation"
+msgstr "Liikumine"
+
+#: formbuilder_admin_pages.inc.php:37
+msgid "New Form"
+msgstr "Uus vorm"
+
+#: formbuilder_admin_pages.inc.php:38
+msgid "Generic Website Feedback Form"
+msgstr "Tavapärane lehe tagasiside vorm"
+
+#: formbuilder_admin_pages.inc.php:53
+msgid "Unable to create new form fields."
+msgstr "Ei suuda tekitada uusi vormi välju."
+
+#: formbuilder_admin_pages.inc.php:56
+msgid "Unable to create new form."
+msgstr "Ei suuda tekitada uut vormi."
+
+#: formbuilder_admin_pages.inc.php:92
+msgid "ERROR.  Problems were detected while saving your form fields."
+msgstr "VIGA. Leiti probleeme Teie vormi väljade salvestamisel."
+
+#: formbuilder_admin_pages.inc.php:102
+#: html/options_edit_form.inc.php:235
+msgid "Add New Field"
+msgstr "Lisa uus väli"
+
+#: formbuilder_admin_pages.inc.php:115
+#: html/options_edit_form.inc.php:114
+msgid "Add Another"
+msgstr "Lisa veel"
+
+#: formbuilder_admin_pages.inc.php:133
+#: html/options_edit_form.inc.php:115
+msgid "Delete"
+msgstr "Kustuta"
+
+#: formbuilder_admin_pages.inc.php:150
+#: html/options_edit_form.inc.php:116
+msgid "Move Up"
+msgstr "Liiguta üles"
+
+#: formbuilder_admin_pages.inc.php:179
+#: html/options_edit_form.inc.php:117
+msgid "Move Down"
+msgstr "Liiguta alla"
+
+#: formbuilder_admin_pages.inc.php:211
+#, php-format
+msgid "Your form has been saved.  %sYou may click here to return to the main FormBuilder options page.%s"
+msgstr "Teie vorm salvestati.  %sVõite vajutada siia, et minna tagasi Formbuilderi põhiomaduste lehele.%s"
+
+#: formbuilder_admin_pages.inc.php:216
+msgid "Edit Form"
+msgstr "Muuda vormi"
+
+#: formbuilder_admin_pages.inc.php:233
+#: formbuilder_autoresponse_functions.inc.php:82
+msgid " (COPY)"
+msgstr "(KOPEERI)"
+
+#: formbuilder_autoresponse_functions.inc.php:32
+msgid "New AutoResponse"
+msgstr "Uus automaatvastus"
+
+#: formbuilder_autoresponse_functions.inc.php:33
+msgid "This is a new, empty autoresponse that you can now modify to suit your needs."
+msgstr "See on uus, tühi automaatvastus, mida saab omale vastavaks kohandada."
+
+#: formbuilder_autoresponse_functions.inc.php:61
+#, php-format
+msgid "Your autoresponse has been saved.  %sYou may click here to return to the main FormBuilder options page.%s"
+msgstr "Teie automaatvastus on salvestatud. %sVõite vajutada siia, et minna tagasi Formbuilderi põhiomaduste lehele.%s"
+
+#: formbuilder_autoresponse_functions.inc.php:66
+msgid "Edit Autoresponse"
+msgstr "Muuda automaatvastust"
+
+#: formbuilder_export_results.php:40
+msgid "You must be logged in as an editor or higher to access this page."
+msgstr "Peate olema registreeritud vähemalt toimetajana, et pääseda sellele lehele."
+
+#: formbuilder_post_metabox.inc.php:63
+msgid "Description for this field"
+msgstr "Välja kirjeldus"
+
+#: formbuilder_post_metabox.inc.php:99
+msgid "If you wish to display a contact form that you have created using the FormBuilder plugin, please select it from the following options."
+msgstr "Kui soovite kuvada oma Formuilderiga tehtud vormi, siis valige see palun järgmistest valikutest."
+
+#: formbuilder_post_metabox.inc.php:101
+msgid "Select Contact Form..."
+msgstr "Valige tagasiside vorm..."
+
+#: html/options_default.inc.php:4
+msgid "Current Forms"
+msgstr "Olemasolevad vormid"
+
+#: html/options_default.inc.php:6
+msgid "These are the forms that you currently have running on your blog."
+msgstr "Siin on hetkel Teie ajaveebis kasutuses olevad vormid."
+
+#: html/options_default.inc.php:7
+#, php-format
+msgid "Click here%s to create a new form"
+msgstr "Vajutage siia%s, et luua uus vorm "
+
+#: html/options_default.inc.php:11
+msgid "ID #"
+msgstr "ID #"
+
+#: html/options_default.inc.php:12
+#: html/options_default.inc.php:61
+msgid "Name"
+msgstr "Nimi"
+
+#: html/options_default.inc.php:13
+#: html/options_default.inc.php:62
+msgid "Subject"
+msgstr "Teema"
+
+#: html/options_default.inc.php:14
+msgid "Recipient"
+msgstr "Saaja"
+
+#: html/options_default.inc.php:15
+#: html/options_default.inc.php:63
+msgid "Actions"
+msgstr "Tegevused"
+
+# Kahtlane kuidas käänab ...
+#: html/options_default.inc.php:36
+#, php-format
+msgid "Manually include this form with %s in the page/post content."
+msgstr "Lisa see vorm käsitsi  koos kirjega %s lehe/postituse sisule."
+
+#: html/options_default.inc.php:41
+#: html/options_default.inc.php:87
+msgid "Edit"
+msgstr "Muuda"
+
+#: html/options_default.inc.php:43
+#: html/options_default.inc.php:89
+msgid "Copy"
+msgstr "Kopeeri"
+
+#: html/options_default.inc.php:45
+msgid "Are you sure you want to delete this form?"
+msgstr "Olete kindel, et soovite vormi kustutada ?"
+
+#: html/options_default.inc.php:45
+#: html/options_default.inc.php:91
+msgid "Remove"
+msgstr "Kustuta"
+
+#: html/options_default.inc.php:54
+#: html/options_edit_response.inc.php:2
+msgid "Current Autoresponses"
+msgstr "Olemasolevad automaatvastused"
+
+#: html/options_default.inc.php:56
+msgid "These are the autoresponses that you have available to use with your forms."
+msgstr "Siin on automaatvastused, mida saate oma vormises kasutada."
+
+#: html/options_default.inc.php:57
+#, php-format
+msgid "Click here%s to create a new autoresponse."
+msgstr "Vajutage siia%s, et teha uus automaatvastus."
+
+#: html/options_default.inc.php:91
+msgid "Are you sure you want to delete this autoresponse?"
+msgstr "Olete kindel, et soovite kustutada selle automaatvastuse?"
+
+#: html/options_default.inc.php:106
+msgid "Spam Blocker"
+msgstr "Spämmiblokkija"
+
+#: html/options_default.inc.php:108
+#, php-format
+msgid "The FormBuilder can employ a %sspam blocking system%s in order to prevent automated computers from spamming the forms.  To accomplish this we put a field on the form that has been hidden, so that computers can see it, but people cannot.  If the field has been filled out when the form is submitted, the system will assume that a spammer is attempting to use the form, and will ignore the submission."
+msgstr "FormBuilder võimaldab %sspämmiblokkijat%s, et kuritahtliku tarkvaraga arvutid ei saaks vormi spämmida. Selleks on vormil kasutajale nähtamatu väli , mida spämmiv tarkvara täidab ja tühistab seega oma vormi sisu töötlemise ..."
+
+#: html/options_default.inc.php:109
+msgid "In order to help make this spam blocker more effective, you can specify a name for this spam blocker that will be used when it is displayed in the code of your form."
+msgstr "Et spämmiblokkija oleks edukam, saab  nähtamatule kontrollväljale anda mõne võimalikult tavapärase nime, et spämmirobot teda ikka täidaks."
+
+#: html/options_default.inc.php:135
+msgid "Standard CSS: "
+msgstr "Standardne CSS: "
+
+#: html/options_default.inc.php:136
+#: html/options_default.inc.php:143
+#: html/options_default.inc.php:161
+#: html/options_default.inc.php:169
+msgid "Enabled"
+msgstr "Sisse lülitatud"
+
+#: html/options_default.inc.php:137
+#: html/options_default.inc.php:144
+#: html/options_default.inc.php:162
+#: html/options_default.inc.php:170
+msgid "Disabled"
+msgstr "Välja lülitatud"
+
+#: html/options_default.inc.php:140
+msgid "The FormBuilder comes with a standard CSS formatting file which can be used in the event that your template does not have support for the FormBuilder fields.  By default, use of this standard CSS is enabled, but in the event that you wish to use custom CSS, or a template which already supports the FormBuilder system, you may disable the built-in CSS formatting by selecting your preference below."
+msgstr "FormBuilder sisaldab oma CSS faili juhuks kui Teie mall ei sobi  FormBuilderi CSSi väljadega. Vaikimisi kasutataksegi seda, kuid järgnevad valikud võimaldavad asendada selle oma seadistustega."
+
+#: html/options_default.inc.php:165
+msgid "FormBuilder can now attempt to capture the IP address of visitors who fill in forms on your website.  This information can be used for security purposes, or to report harassment problems to the appropriate authorities."
+msgstr "FormBuilder üritab vormi täitja IP aadressit salvestada. IP -ga saab siis uurida väärkasutusega seotud muresid."
+
+#: html/options_default.inc.php:181
+msgid "Uninstall FormBuilder"
+msgstr "Eemalda FormBuilder"
+
+#: html/options_default.inc.php:183
+#, php-format
+msgid "If for some reason you need to uninstall the FormBuilder plugin, you may %sclick here to uninstall the FormBuilder tables from your database%s."
+msgstr "Kui soovite FormBuilderit eemaldada %svajutage siia, et kustuda Formbuilderi andmebaasi tabelid%s."
+
+#: html/options_edit_form.inc.php:5
+msgid "You may use these controls to modify a form on your blog."
+msgstr "Neid seadistusi kasutatakse  Teie ajaveebis vormi muutmiseks."
+
+#: html/options_edit_form.inc.php:10
+msgid "Form Controls"
+msgstr "Vormi seaded"
+
+#: html/options_edit_form.inc.php:18
+#: html/options_edit_form.inc.php:19
+msgid "What do you want to call this contact form?"
+msgstr "Kuidas oleks selle vormi nimi?"
+
+#: html/options_edit_form.inc.php:24
+#: html/options_edit_form.inc.php:25
+msgid "The subject line for the email you receive from the form."
+msgstr "Teema kirje vormilt saadud e-kirjale."
+
+#: html/options_edit_form.inc.php:30
+#: html/options_edit_form.inc.php:31
+msgid "What email address should the data from this contact form be mailed to?"
+msgstr "Millisele e-postile peaks selle vormi teave minema ?"
+
+#: html/options_edit_form.inc.php:36
+#: html/options_edit_form.inc.php:37
+msgid "How should this form post data?  If you are unsure, leave it on POST"
+msgstr "Millise päringuga peaks see vorm töötama. Kahtluse korral jätke POST"
+
+#: html/options_edit_form.inc.php:41
+#: html/options_edit_form.inc.php:42
+msgid "You may specify an alternate form processing system if necessary.  If you are unsure, leave it alone."
+msgstr "Vajadusel määrake oma valitud  vormi töötlemise süsteem. Kahtluse korral mitte muuta."
+
+#: html/options_edit_form.inc.php:43
+msgid "Form to Email - Convert the form results to an email."
+msgstr "Vorm epostiks - Muuda vormi tulemid e-postiks"
+
+#: html/options_edit_form.inc.php:76
+msgid "You may specify an autoresponse to send back if necessary."
+msgstr "Võite määratleda automaatvastuse, et vajadusel sellega vastata."
+
+#: html/options_edit_form.inc.php:77
+msgid "You may specify an autoresponse to send back if necessary.  You should have alread created them on the main FormBuilder Management page."
+msgstr "Saate valida vajadusel automaatvastuse. Need peaksid juba tehtud FormBuilderi halduse pealehel."
+
+#: html/options_edit_form.inc.php:102
+msgid "Fields"
+msgstr "Väljad"
+
+#: html/options_edit_form.inc.php:113
+msgid "Field #"
+msgstr "Väli #"
+
+#: html/options_edit_form.inc.php:113
+msgid "Options"
+msgstr "Valikud"
+
+#: html/options_edit_form.inc.php:114
+msgid "Add another field where this one is now."
+msgstr "Lisada siia uus väli."
+
+#: html/options_edit_form.inc.php:115
+msgid "Delete this field."
+msgstr "Eemalda see väli"
+
+#: html/options_edit_form.inc.php:116
+msgid "Move this field up one."
+msgstr "Liiguta see väli ühe võrra üles."
+
+#: html/options_edit_form.inc.php:117
+msgid "Move this field down one."
+msgstr "Liiguta see väli ühe võrra alla."
+
+#: html/options_edit_form.inc.php:124
+msgid "Select the type of field that you wish to have shown in this location."
+msgstr "Valige siia kuvatav välja tüüp."
+
+#: html/options_edit_form.inc.php:126
+msgid "Select the type of field that you wish to have shown in this location.  Most of them require a field name and label.  Field value is optional."
+msgstr "Valige siia kuvatav välja tüüp. Need vajavad tavaliselt välja nime ja tähistust. Välja väärtuse võib ka tühjaks jätta"
+
+#: html/options_edit_form.inc.php:127
+msgid "Standard single line text box."
+msgstr "Tavaline üherealine teksti väli."
+
+#: html/options_edit_form.inc.php:128
+msgid "Small multi-line text box."
+msgstr "Väike mitmerealine tekstikast"
+
+#: html/options_edit_form.inc.php:129
+msgid "Large multi-line text box."
+msgstr "Suur mitmerealine tekstikast"
+
+#: html/options_edit_form.inc.php:130
+msgid "Used for password entry.  Characters are hidden."
+msgstr "Kasutatakse salasõna jaoks. Tähemärgid peidetud"
+
+#: html/options_edit_form.inc.php:131
+msgid "Single check box."
+msgstr "Linnukesega üksiku valiku väli"
+
+#: html/options_edit_form.inc.php:132
+msgid "Radio selection buttons.  Enter one per line in the field value."
+msgstr "Täpiga valiku väli. Sisestada iga valiku väärtus erinevale reale."
+
+#: html/options_edit_form.inc.php:133
+msgid "Dropdown box.  Enter one value per line in the field value."
+msgstr "Noolega nimekiri. Sisestada iga valiku väärtus erinevale reale."
+
+#: html/options_edit_form.inc.php:134
+msgid "A hidden field on the form.  The data will appear in the email."
+msgstr "Kasutajale varjatud väli. Väljundis/e-postis on nähtav."
+
+#: html/options_edit_form.inc.php:135
+msgid "Special field just for text on the form.  Put the text in the field value."
+msgstr "Väli vormile tavateksti lisamiseks. Tekst/kommentaar lisada väljale."
+
+#: html/options_edit_form.inc.php:136
+msgid "Special field just for indicating a followup url, once the form has been submitted.  Put the url you want people to be redirected to in the field value."
+msgstr "Veebi aadress kuhu suunatakse vormi täitnud kasutaja. URL lisada väljale."
+
+#: html/options_edit_form.inc.php:137
+msgid "A special selection dropdown allowing the visitor to specify an alternate form recipient.  Enter values in the form of email@domain.com|Destination Name."
+msgstr "Vormi tulemuste saajate e-postide nimekiri. Väärtused kirjeldada vormis:  epost@server.ee|Saaja nimi"
+
+#: html/options_edit_form.inc.php:138
+msgid "Special field on the form for displaying CAPTCHAs.  Field name is used for identifying the field.  Field label is used to give the visitor further instruction on what to fill out."
+msgstr "Välja eriline nähtamatu väli CAPTCHA jaoks.  Vajab välja nime . Märgistus annab kasutajale lisajuhtnööre."
+
+#: html/options_edit_form.inc.php:139
+msgid "Special field on the form.  Read more on the FormBuilder admin page.  Only needs a field name."
+msgstr "Välja eriline nähtamatu väli . Lisainfo FormBuilderi halduse pealehel. Vajab ainult välja nime."
+
+#: html/options_edit_form.inc.php:140
+msgid "Allows you to break your form into multiple pages.  Needs field name and field label."
+msgstr "Lubab vormi jagada mitmele lehele. Vajab välja nime ja märgistust."
+
+#: html/options_edit_form.inc.php:141
+msgid "Allows you to put a customized submit button anywhere on the form.  Needs field name and field label."
+msgstr "Lubab lisada omatehtud saatmise nuppu vormi piiresse. Vajab välja nime ja märgistust."
+
+#: html/options_edit_form.inc.php:142
+msgid "Allows you to put a customized submit image anywhere on the form.  Needs field name and field label.  Field label must be the PATH TO THE IMAGE to be used for the submit button."
+msgstr "Lubab lisada omatehtud saatmise nuppu vormi piiresse. Vajab välja nime ja märgistust. Välja märgistus PEAB olema KATALOOGI TEEGA kasutatava pildifaili juurde."
+
+#: html/options_edit_form.inc.php:170
+msgid "Enter a name for this field.  Should be only letters and underscores."
+msgstr "Sisestage välja nimi. Moodustada ainult tähtedest ja alljoontest."
+
+#: html/options_edit_form.inc.php:171
+msgid "Enter a name for this field.  Should be only letters and underscores.  This field will come through in the email something like this:"
+msgstr "Sisestage välja nimi. Moodustada ainult tähtedest ja alljoontest. Välja näeb e-postis enam-vähem taolisena:"
+
+#: html/options_edit_form.inc.php:172
+msgid "FIELD NAME: The data entered by the user would be here."
+msgstr "Sisestage välja nimi. Moodustada ainult tähtedest ja alljoontest."
+
+#: html/options_edit_form.inc.php:176
+msgid "If necessary, enter a predefined value for the field."
+msgstr "Vajadusel määrake väljale väärtus."
+
+#: html/options_edit_form.inc.php:177
+msgid "If necessary, enter a predefined value for the fiel.  Most field types do not require a value.  Only Radio Buttons, Selection Dropdowns and Comments."
+msgstr "Vajadusel määrake väljale väärtus. Suurem osa välju seda ei vaja. Kasutatakse täpiga valikutes, noolega nimekirjades ja kommentaariväljadel.."
+
+#: html/options_edit_form.inc.php:178
+msgid "Radio Buttons and Selection Dropdowns:"
+msgstr "Täpiga valikud ja noolega nimekirjad:"
+
+#: html/options_edit_form.inc.php:179
+msgid "Each option should be put in the field value, one per line.  These options will be used as the values for users to choose from on the form."
+msgstr "Iga valik tuleb asetada välja väärtusena eraldi reale. Neid väärtused on kasutajatele vormis ühe valikuvõimalusena."
+
+#: html/options_edit_form.inc.php:180
+msgid "Comments Fields:"
+msgstr "Kommentaaride  väljad:"
+
+#: html/options_edit_form.inc.php:181
+msgid "The information in the field value will be displayed as a comment on the form."
+msgstr "Teavet välja väärtuses kuvatakse vormi piires kommentaarina."
+
+#: html/options_edit_form.inc.php:185
+msgid "The label you want to have in front of this field."
+msgstr "Märgistus välja ette."
+
+#: html/options_edit_form.inc.php:186
+msgid "The label you want to have in front of this field.  When shown on the form, it will appear something like:"
+msgstr "Märgistus välja ette. Vormil näeb välja enam-vähem nii:"
+
+#: html/options_edit_form.inc.php:187
+msgid "FIELD LABEL: [input box]"
+msgstr "VÄLJA MÄRGISTUS: [sisestuse väli ]"
+
+#: html/options_edit_form.inc.php:188
+msgid "For submit images, this must be the path to the image to be used."
+msgstr "Pildifaili saatmiseks peab siin olema kataloogitee tolleni."
+
+#: html/options_edit_form.inc.php:193
+#: html/options_edit_form.inc.php:194
+msgid "If you want this field to be required, select the type of data it should look for."
+msgstr "Kui soovite seda välja kohustuslikuna, valige sisestuse nõutud omadus."
+
+#: html/options_edit_form.inc.php:209
+#: html/options_edit_form.inc.php:210
+msgid "The error message to be displayed if the required field is not filled in."
+msgstr "Veateade kasutajale kui väli jäetakse tühjaks."
+
+#: html/options_edit_response.inc.php:4
+msgid "You may use these controls to modify an autoresponse on your blog.  When linked to a form, the autoresponse you create here will be emailed to the first email address listed on the form in question.  In other words, you must specify at least one field on the form as requiring an email address."
+msgstr "Võite neid seadistusi kasutada võimaliku automaatvastusena ajaveebis. Vormiga seostatuna saadetakse see esimesele vormis küsitud e-posti aadressile . Seega peab vähemalt üks vormi väli nõudma e-posti aadressi."
+
+#: html/options_edit_response.inc.php:9
+msgid "Autoresponse Controls"
+msgstr "Automaatvastuse seaded"
+
+#: html/options_edit_response.inc.php:17
+msgid "What do you want to call this autoresponse?"
+msgstr "Millise nime määrate sellele automaatvastusele?"
+
+#: html/options_edit_response.inc.php:18
+msgid "What do you want to call this autoresponse?  This will appear on the main FormContact Management page, as well as in a dropdown list of related autoresponses when editing the forms."
+msgstr "Millise nime määrate sellele automaatvastusele? Nimi ilmub vormi kontaktide haldamise põhilehel ja ka vormi moodustamise lehel, automaatvastuste nimekirjas."
+
+#: html/options_edit_response.inc.php:23
+#: html/options_edit_response.inc.php:24
+msgid "What do you want the subject line of this autoresponse email to be?"
+msgstr "Mis oleks automaatvastuse e-posti  teema väljal ?"
+
+#: html/options_edit_response.inc.php:29
+#: html/options_edit_response.inc.php:30
+msgid "What email address should the data from this contact form be mailed from?"
+msgstr "Milliselt e-posti aadressilt peaks selle vormi andmed saatma?"
+
+#: html/options_edit_response.inc.php:35
+#: html/options_edit_response.inc.php:36
+msgid "What name should the data from this contact form be mailed from?"
+msgstr "Kelle nimelt automaatvastus tuleb?"
+
+#: html/options_edit_response.inc.php:41
+#: html/options_edit_response.inc.php:42
+msgid "What should the autoresponse email say?"
+msgstr "Mida automaatvastus teatab?"
+
+#: html/options_edit_response.inc.php:53
+msgid "Save Autoresponse"
+msgstr "Salvesta automaavastus"
+
+#: modules/alternate_action.php:42
+msgid "Alternate Form Action does NOT look like a valid URL.  Please contact the website administrator."
+msgstr "Valikuline vormi töötlemise aadress ei paista olevat töötav URL. Teatage palun lehe haldajale."
+
+#: modules/alternate_action.php:97
+msgid "Only HTTP request are supported !"
+msgstr "Selleks sobib ainult HTTP päring!"
+
+#. Plugin URI of an extension
+msgid "http://truthmedia.com/wordpress/formbuilder"
+msgstr "http://truthmedia.com/wordpress/formbuilder"
+
+#. Description of an extension
+msgid "The FormBuilder plugin allows the administrator to create contact forms of a variety of types for use on their WordPress blog.  The FormBuilder has built-in spam protection and can be further protected by installing the Akismet anti-spam plugin.  Uninstall instructions can be found <a href=\"http://truthmedia.com/wordpress/formbuilder/documentation/uninstall/\">here</a>.  Forms can be included on your pages and posts either by selecting the appropriate form in the dropdown below the content editing box, or by adding them directly to the content with [formbuilder:#] where # is the ID number of the form to be included."
+msgstr "FormBuilder plugin võimaldab Wordpressis administraatoril luua tagasiside vorme oma ajaveebile. FormBuilder sisaldab spämmimise vastast kaitset ja lisaks toetab veel Akismet pluginat. Eemaldamise juhend on <a href=\"http://truthmedia.com/wordpress/formbuilder/documentation/uninstall/\">siin</a>. Vorme saab lisada lehtede ja postituste töötlemisel sisu all olevas valikus või otse sisu sisse [formbuilder:#] tähisega, kus #-märk on vormi ID number."
+
+#. Author of an extension
+msgid "TruthMedia Internet Group"
+msgstr "TruthMedia Internet Group"
+
+#. Author URI of an extension
+msgid "http://truthmedia.com/"
+msgstr "http://truthmedia.com/"
+
