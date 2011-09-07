@@ -10,7 +10,7 @@
  * </script>
  */
 fb_calendar = {
-	month_names: ["January","February","March","April","May","June","July","Augest","September","October","November","December"],
+	month_names: ["January","February","March","April","May","June","July","August","September","October","November","December"],
 	weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 	month_days: [31,28,31,30,31,30,31,31,30,31,30,31],
 	//Get today's date - year, month, day and date

@@ -7,7 +7,6 @@ Author: TruthMedia Internet Group
 Version: 0.87
 Author URI: http://truthmedia.com/
 
-
 Created by the TruthMedia Internet Group
 (website: truthmedia.com       email : editor@truthmedia.com)
 
