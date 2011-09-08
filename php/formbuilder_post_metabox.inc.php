@@ -115,6 +115,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		}
 		echo "</select>";
 		
+		if(isset($pageDetails) AND $pageDetails['form_id'] > 0)
+		{
+			$url = get_admin_url(null, '/tools.php?page=formbuilder.php&fbaction=editForm&fbid=' . $form_data['id']);
+			echo "<br/><br/><strong>Edit This Form: <a href='{$url}'>" . $form_data['name'] . "</a></strong>";
+		}
+		
 		echo "</div>\n";
 		
 
