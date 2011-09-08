@@ -36,7 +36,7 @@
 			}
 		
 			// Build the list of current forms:
-			if($_GET['fbtag'])
+			if(isset($_GET['fbtag']) AND $_GET['fbtag'] != "")
 			{
 				$tag = $_GET['fbtag'];
 				$tag = preg_replace("/[^A-Za-z0-9 _-]/isU", "", $tag);
@@ -60,7 +60,11 @@
 					
 				$nav = __('Page', 'formbuilder') . ': ' . fb_get_paged_nav($numForms, $itemLimit, false);
 				
-				$page = $_GET['pageNumber'];
+				if(isset($_GET['pageNumber']))
+					$page = $_GET['pageNumber'];
+				else
+					$page = "";
+					
 				if(!is_numeric($page))
 					$page = 0;
 				else

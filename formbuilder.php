@@ -168,7 +168,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	function formbuilder_admin_menu()
 	{
 		// Add admin management pages
-		add_management_page(__('FormBuilder Management', 'formbuilder'), __('FormBuilder', 'formbuilder'), 2, FORMBUILDER_FILENAME, 'formbuilder_options_page');
+		add_management_page(__('FormBuilder Management', 'formbuilder'), __('FormBuilder', 'formbuilder'), 'publish_posts', FORMBUILDER_FILENAME, 'formbuilder_options_page');
 
 		// Additional Filters and Actions
 		add_filter('admin_head', 'formbuilder_admin_head');
@@ -715,11 +715,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			update_option('formbuilder_permissions', $fb_permissions);
 		}
 	
-		if(current_user_can('level_10'))
+		if(current_user_can('create_users'))
 			$level = 'level_10';
-		elseif(current_user_can('level_7'))
+		elseif(current_user_can('publish_pages'))
 			$level = 'level_7';
-		elseif(current_user_can('level_2'))
+		elseif(current_user_can('publish_posts'))
 			$level = 'level_2';
 		else
 			$level = 'level_0';

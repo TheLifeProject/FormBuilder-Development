@@ -164,7 +164,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	{
 		global $formbuilder_admin_nav_options;
 		?>
-		<?php if($_GET['fbmsg']) formbuilder_admin_alert(stripslashes($_GET['fbmsg'])); ?>
+		<?php if(isset($_GET['fbmsg']) AND $_GET['fbmsg'] != "") formbuilder_admin_alert(stripslashes($_GET['fbmsg'])); ?>
 <div class="formbuilder-subnav">
 	<ul class="subsubsub">
 		<?php foreach( $formbuilder_admin_nav_options as $key=>$value ) { ?>
