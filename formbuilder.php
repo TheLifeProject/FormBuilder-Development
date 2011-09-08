@@ -62,8 +62,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	// Check to see if we have an accurate Request URI.  
 	// Can help with certain apache configurations.
-	if($_SERVER['REQUEST_URI'] != $GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI']
-		AND isset($GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI']) )
+	if( isset($GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI']) 
+	AND $_SERVER['REQUEST_URI'] != $GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI'])
 	{
 		$_SERVER['REQUEST_URI'] = $GLOBALS['HTTP_SERVER_VARS']['REQUEST_URI'];
 	}
@@ -163,6 +163,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	// Admin Specific Filters and Actions
 	add_action('admin_menu', 'formbuilder_admin_menu');
 	add_action('admin_menu', 'formbuilder_add_custom_box');
+	add_action('admin_bar_init', 'formbuilder_admin_bar_init');
 
 	function formbuilder_admin_menu()
 	{
@@ -294,6 +295,29 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		}
 		
 		return(false);
+	}
+	
+	/**
+	 * Determine if the current post has an attached form.
+	 * @return int id of the form or false on no form.
+	 * 
+	 */
+	function formbuilder_page_has_form()
+	{
+		global $post, $wpdb;
+		
+		$post_id = $post->ID;
+		$sql = "SELECT * FROM " . FORMBUILDER_TABLE_PAGES . " " 
+			 . "LEFT JOIN " . FORMBUILDER_TABLE_FORMS . " ON " . FORMBUILDER_TABLE_PAGES . ".form_id = " . FORMBUILDER_TABLE_FORMS . ".id "
+			 . "WHERE post_id = '$post_id';";
+			 
+		$results = $wpdb->get_results($sql, ARRAY_A);
+		if($results) return($results[0]);
+		
+		$form_ids = formbuilder_check_content($post);
+		if(count($form_ids) > 0) return($form_id[0]);
+		
+		return false;
 	}
 
 	function formbuilder_main($content = '') {
@@ -840,3 +864,46 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		
 		return($new_url);
 	}
+	
+	/**
+	 * Admin bar link.  Code from:
+	 * http://www.problogdesign.com/wordpress/add-useful-links-to-wordpress-admin-bar/
+	 */
+	
+	/**
+	 * Adds links to the bar.
+	 */
+	function formbuilder_admin_bar_links() {
+		global $wp_admin_bar;
+		
+		// Only show if there is a form attached to the page.
+		$form = formbuilder_page_has_form();
+		
+		if(!$form) return;
+		
+
+		// Add the Parent link.
+		$url = get_admin_url(null, '/tools.php?page=formbuilder.php&fbaction=editForm&fbid=' . $form['id']);
+		$wp_admin_bar->add_menu( array(
+			'title' => 'Edit Form',
+			'href' => $url,
+			'id' => 'formbuilder_forms'
+		));
+	}	
+
+	
+	/**
+	 * Checks if we should add links to the bar.
+	 */
+	function formbuilder_admin_bar_init() {
+		// Is the user sufficiently leveled, or has the bar been disabled?
+		if (!is_super_admin() || !is_admin_bar_showing() )
+			return;
+	 
+		// Good to go, lets do this!
+		add_action('admin_bar_menu', 'formbuilder_admin_bar_links', 500);
+	}
+	
+	
+	
+	

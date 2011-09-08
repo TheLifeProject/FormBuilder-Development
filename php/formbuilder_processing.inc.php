@@ -279,7 +279,7 @@ function toggleVisOff(boxid)
 					}
 					
 
-
+					// Display any necessary error msgs.
 					if($error_msg) {
 						$formError = "<div class='formBuilderError'>$error_msg</div>";
 					}
