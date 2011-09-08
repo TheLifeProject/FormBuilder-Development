@@ -253,7 +253,31 @@ function toggleVisOff(boxid)
 							
 						}
 					}
-
+					
+					
+					
+					// Prepopulate fields with user details if available
+					if($field['value'] == "")
+					{
+						$wpuser = wp_get_current_user();
+						if($wpuser->id != 0)
+						{
+							// User is logged in.  Prepopulate with data.
+							if(preg_match('#^yourname|name|your_name|display_name$#i', $field['field_name'], $regs))
+								$field['value'] = $wpuser->display_name;
+							
+							if(preg_match('#^firstname|first_name$#i', $field['field_name'], $regs))
+								$field['value'] = $wpuser->first_name;
+							
+							if(preg_match('#^lastname|last_name$#i', $field['field_name'], $regs))
+								$field['value'] = $wpuser->last_name;
+							
+							if((preg_match('#^email$#i', $field['field_name'], $regs)))
+								$field['value'] = $wpuser->user_email;
+						}
+						$wpuser = null;
+					}
+					
 
 
 					if($error_msg) {
