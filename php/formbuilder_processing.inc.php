@@ -167,12 +167,23 @@ function toggleVisOff(boxid)
 					
 					// Fill unset POST vars with empty strings. 
 					if(!isset($_POST['formBuilderForm'][$field['field_name']])) $_POST['formBuilderForm'][$field['field_name']] = "";
-
+				
 					// Determine what submitted value to give to the field values. 
 					if($field['field_type'] == 'system field')
 					{
 						// Manually assign value to system fields before anything else.
 						$field['value'] = $field['field_value'];
+					}
+					// Determine what submitted value to give to the field values. 
+					elseif($field['field_type'] == 'wp user id')
+					{
+						// Manually assign value to system fields before anything else.
+						$wpuser = wp_get_current_user();
+						if($wpuser->id != 0)
+						{
+							$field['value'] = $wpuser->user_login;
+						}
+						$wpuser = null;
 					}
 					elseif(isset($_POST['formBuilderForm']['FormBuilderID']) AND $_POST['formBuilderForm']['FormBuilderID'] == $form_id)
 					{
@@ -556,6 +567,11 @@ function toggleVisOff(boxid)
 							$formInput = "";
 						break;
 
+						case "wp user id":
+							$formLabel = "";
+							$formInput = "";
+						break;
+
 						default:
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
 							$formInput = "<div class='formBuilderInput'><input type='text' "
@@ -566,7 +582,7 @@ function toggleVisOff(boxid)
 						break;
 					}
 					
-					if($field['field_type'] != 'system field')
+					if($field['field_type'] != 'system field' && $field['field_type'] != 'wp user id')
 					{
 						$formDisplay .= "\n<div class='$divClass' id='$divID' title='" . $field['error_message'] . "' $visibility><a name='$divID'></a>";
 
