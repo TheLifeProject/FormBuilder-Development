@@ -970,12 +970,33 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				update_option('formbuilder_version', "0.87");
 			}
 			
+		
+			
+			// Upgrade to version 0.88
+			if(get_option('formbuilder_version') < 0.88)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.88",  
+					"Feature: Ability to search for forms.<br/>\n" .
+					"Feature: New field type: required checkbox.<br/>\n" .
+					"Feature: New field type: required password.<br/>\n" .
+					"Feature: Special field to capture logged in WordPress usernames.<br/>\n" .
+					"Feature: Ability to edit the form from the live site using a link in the admin bar.<br/>\n" .
+					"Feature: Ability to detect logged in WordPress users and pre-fill things like name and email.<br/>\n" .
+					"Bug Fix: Datestamp field typo fixed.<br/>\n" .
+					"Bug Fix: Repaired problem with showing thankyou text after XML email sending.<br/>\n" .
+				"");
+					
+				update_option('formbuilder_version', "0.88");
+			}
+			
 			
 			
 			
 			
 			/* For a future version
 			 */
+			// TODO: Marker.
+			
 			
 		}
 		else

@@ -71,6 +71,16 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 
 == Changelog ==
 
+= 0.880 =  
+Feature: Ability to search for forms.
+Feature: New field type: required checkbox.
+Feature: New field type: required password.
+Feature: Special field to capture logged in WordPress usernames.
+Feature: Ability to edit the form from the live site using a link in the admin bar.
+Feature: Ability to detect logged in WordPress users and pre-fill things like name and email.
+Bug Fix: Datestamp field typo fixed.
+Bug Fix: Repaired problem with showing thankyou text after XML email sending.
+
 = 0.870 =
 * Feature: New help text field added.
 * Feature: Tags for forms.
