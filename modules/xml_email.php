@@ -36,7 +36,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	function formbuilder_process_xml_email($form, $fields)
 	{
-		global $_POST, $wpdb;
+		global $_POST, $wpdb, $formBuilderTextStrings;
 
 		$xml_container = "form";
 
@@ -98,7 +98,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		}
 
 		if(!$source_email) $source_email = get_option('admin_email');
-		return(formbuilder_send_email($form['recipient'], $form['subject'], $email_msg, "From: " . $source_email . "\n"));
+		$sendResult = formbuilder_send_email($form['recipient'], $form['subject'], $email_msg, "From: " . $source_email . "\n");
+		
+		if(!$sendResult)
+		{
+			if(!$form['thankyoutext']) $form['thankyoutext'] = "<h4>" . $formBuilderTextStrings['success'] . "</h4><p>" . $formBuilderTextStrings['send_success'] . "</p>";
+			echo "\n<div class='formBuilderSuccess'>" . decode_html_entities($form['thankyoutext'], ENT_NOQUOTES, get_option('blog_charset')) . "</div>";
+		}
+		
+		return($sendResult);
 	}
 
 ?>
