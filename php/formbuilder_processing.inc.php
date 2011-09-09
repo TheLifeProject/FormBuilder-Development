@@ -201,8 +201,16 @@ function toggleVisOff(boxid)
 					}
 					else
 					{
-						// In this case, there is neither a POST nor a GET value, therefore we assign the field value to be whatever the default value was for the field.
-						$field['value'] = $field['field_value'];
+						// Required passwords should not display the default field value.
+						if($field['field_type'] != 'required password')
+						{
+							// In this case, there is neither a POST nor a GET value, therefore we assign the field value to be whatever the default value was for the field.
+							$field['value'] = $field['field_value'];
+						}
+						else
+						{
+							$field['value'] = "";
+						}
 					}
 
 
@@ -254,6 +262,19 @@ function toggleVisOff(boxid)
 									$error_msg = $field['error_message'];
 									$missing_post_fields[$divID] = $field['field_label'];
 								}
+							}
+						}
+						
+						elseif($field['field_type'] == 'required password')
+						{
+							if($field['value'] != $field['field_value'])
+							{
+								$post_errors = true;
+								if(!$field['error_message'])
+									$field['error_message'] = __("The password you entered is incorrect.", 'formbuilder');
+									
+								$error_msg = $field['error_message'];
+								$missing_post_fields[$divID] = $field['field_label'];
 							}
 						}
 						
@@ -360,6 +381,11 @@ function toggleVisOff(boxid)
 						case "password box":
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
 							$formInput = "<div class='formBuilderInput'><input type='password' name='" . $field['name'] . "' value='" . $field['value'] . "' id='field$divID' onblur=\"fb_ajaxRequest('" . $page_path . "php/formbuilder_parser.php', 'formid=" . $form['id'] . "&amp;fieldid=" . $field['id'] . "&amp;val='+document.getElementById('field$divID').value, 'formBuilderErrorSpace$divID')\" /> $formHelpJava</div>";
+						break;
+
+						case "required password":
+							$formLabel = "<div class='formBuilderLabelRequired'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
+							$formInput = "<div class='formBuilderInput'><input type='password' name='" . $field['name'] . "' value='' id='field$divID' /> $formHelpJava</div>";
 						break;
 
 						case "checkbox":
@@ -872,7 +898,6 @@ function toggleVisOff(boxid)
 		{
 			$field['required_data'] = 'any text';
 		}
-
 
 		switch($field['required_data']) 
 		{

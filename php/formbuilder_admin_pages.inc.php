@@ -607,7 +607,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			'submit image'=>__("Allows you to put a customized submit image anywhere on the form.  Needs field name and field label.  Field label must be the PATH TO THE IMAGE to be used for the submit button.", 'formbuilder'),
 			'system field'=>__("Allows assigning variables to the form without having them displayed on the form itself.  Like hidden fields, but not shown even in the HTML code.", 'formbuilder'),
 			'required checkbox'=>__("The same as a normal checkbox, but must be checked in order to submit the form.", 'formbuilder'),
-			'required password'=>__("Forces the visitor to enter a predetermined required password in order to submit the form.", 'formbuilder'),
+			'required password'=>__("Forces the visitor to enter a predetermined required password in order to submit the form.  Enter the password they should use into the FIELD VALUE", 'formbuilder'),
 			'wp user id'=>__("A hidden system field that automatically captures the visitor's WordPress username if they are logged in.", 'formbuilder'),
 		);
 		
