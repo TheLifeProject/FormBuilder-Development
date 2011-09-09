@@ -4,6 +4,36 @@
 	<div class="info-box-formbuilder postbox">
 		<h3 class="info-box-title hndle"><?php _e('Current Forms', 'formbuilder'); ?></h3>
 		<div class="inside">
+		<style>
+			.formSearch {
+			 	display: block;
+			 	width: 200px;
+			 	float: right;
+			 	text-align: right;
+			 	padding: 6px;
+			}
+			.formSearch input {
+				width: 120px;
+			}
+			.formSearch input.searchButton {
+				width: auto;
+			}
+		</style>
+		<?php 
+			if(isset($_POST['formSearch']) && $_POST['formSearch'] != "")
+			{
+				$formSearch = preg_replace("#[^a-z0-9 _-]#i", "", $_POST['formSearch']);
+			}
+			else
+			{
+				$formSearch = "";
+			}
+		?>
+		<form class='formSearch' name="formSearch" method="POST" action="<?php echo FB_ADMIN_PLUGIN_PATH; ?>">
+			<input name='formSearch' type="text" size="10" value="<?php echo $formSearch; ?>" />
+			<input class='searchButton' name='Search' type="submit" value="Search" />
+		</form>
+		
 		<p><?php _e('These are the forms that you currently have running on your blog.', 'formbuilder'); ?>
 		<a href="<?php echo FB_ADMIN_PLUGIN_PATH; ?>&fbaction=newForm"><?php printf(__('Click here%s to create a new form', 'formbuilder'), '</a>'); ?>.</p>
 		
@@ -36,19 +66,35 @@
 			}
 		
 			// Build the list of current forms:
+			if($formSearch)
+			{
+				$formSearchInsert = " AND ("
+					. FORMBUILDER_TABLE_FORMS . ".name LIKE '%$formSearch%'"
+					. " OR " . FORMBUILDER_TABLE_FORMS . ".subject LIKE '%$formSearch%'"
+					. " OR " . FORMBUILDER_TABLE_FORMS . ".recipient LIKE '%$formSearch%'"
+					. ") ";
+			}
+			else
+			{
+				$formSearchInsert = "";
+			}
+			
 			if(isset($_GET['fbtag']) AND $_GET['fbtag'] != "")
 			{
+				
 				$tag = $_GET['fbtag'];
 				$tag = preg_replace("/[^A-Za-z0-9 _-]/isU", "", $tag);
 				$sql = "SELECT " . FORMBUILDER_TABLE_FORMS . ".id,name,subject,recipient  FROM " . FORMBUILDER_TABLE_FORMS . " "
 				. " LEFT JOIN " . FORMBUILDER_TABLE_TAGS . " ON " . FORMBUILDER_TABLE_FORMS . ".id = " . FORMBUILDER_TABLE_TAGS . ".form_id "
 				. " WHERE " . FORMBUILDER_TABLE_TAGS . ".tag LIKE '{$tag}' "
+				. $formSearchInsert
 				. " ORDER BY " . FORMBUILDER_TABLE_FORMS . ".name ASC";
 			}
 			else
 			{
-				$sql = "SELECT " . FORMBUILDER_TABLE_FORMS . ".id,name,subject,recipient FROM " . FORMBUILDER_TABLE_FORMS . " ORDER BY `name` ASC";
+				$sql = "SELECT " . FORMBUILDER_TABLE_FORMS . ".id,name,subject,recipient FROM " . FORMBUILDER_TABLE_FORMS . " WHERE 1=1 " . $formSearchInsert . " ORDER BY `name` ASC";
 			}
+			echo $sql;
 			
 			$objForms = $wpdb->get_results($sql);
 			$alt = false;
