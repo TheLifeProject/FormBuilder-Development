@@ -94,7 +94,6 @@
 			{
 				$sql = "SELECT " . FORMBUILDER_TABLE_FORMS . ".id,name,subject,recipient FROM " . FORMBUILDER_TABLE_FORMS . " WHERE 1=1 " . $formSearchInsert . " ORDER BY `name` ASC";
 			}
-			echo $sql;
 			
 			$objForms = $wpdb->get_results($sql);
 			$alt = false;
