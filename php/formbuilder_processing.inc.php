@@ -164,6 +164,10 @@ function toggleVisOff(boxid)
 					{
 						$field['field_value'] = "checked";
 					}
+					if($field['field_type'] == "required checkbox" AND $field['field_value'] == "")
+					{
+						$field['field_value'] = "checked";
+					}
 					
 					// Fill unset POST vars with empty strings. 
 					if(!isset($_POST['formBuilderForm'][$field['field_name']])) $_POST['formBuilderForm'][$field['field_name']] = "";
@@ -362,6 +366,22 @@ function toggleVisOff(boxid)
 							if(isset($_POST['formBuilderForm'][$field['field_name']]) AND htmlentities(stripslashes($_POST['formBuilderForm'][$field['field_name']]), ENT_NOQUOTES, get_option('blog_charset')) == $field['field_value']) $selected = "checked";
 								else $selected = "";
 							$formLabel = "<div class='$formLabelCSS'><label for='field$divID'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </label></div>";
+							$formInput = "<div class='formBuilderInput'><input type='checkbox' name='" . $field['name'] . "' id='field$divID' value='" . $field['field_value'] . "' $selected /> <span class='formBuilderCheckboxDescription'>";
+
+							if($field['field_value'] != "checked") 
+							{
+								$formInput .= "<label for='field$divID'>"
+								 . decode_html_entities($field['field_value'], ENT_NOQUOTES, get_option('blog_charset'))
+								 . "</label>";
+							}
+
+							$formInput .= "</span> $formHelpJava</div>";
+						break;
+
+						case "required checkbox":
+							if(isset($_POST['formBuilderForm'][$field['field_name']]) AND htmlentities(stripslashes($_POST['formBuilderForm'][$field['field_name']]), ENT_NOQUOTES, get_option('blog_charset')) == $field['field_value']) $selected = "checked";
+								else $selected = "";
+							$formLabel = "<div class='formBuilderLabelRequired'><label for='field$divID'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </label></div>";
 							$formInput = "<div class='formBuilderInput'><input type='checkbox' name='" . $field['name'] . "' id='field$divID' value='" . $field['field_value'] . "' $selected /> <span class='formBuilderCheckboxDescription'>";
 
 							if($field['field_value'] != "checked") 
@@ -846,6 +866,11 @@ function toggleVisOff(boxid)
 			}
 			
 			$field['value'] = trim($option_value);
+		}
+		
+		if($field['field_type'] == 'required checkbox')
+		{
+			$field['required_data'] = 'any text';
 		}
 
 
