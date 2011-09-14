@@ -44,28 +44,62 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		
 		_e("Creating new form.  Please wait...", 'formbuilder'); flush();
 		
-		$sql =  "INSERT INTO " . FORMBUILDER_TABLE_FORMS . "(" .
-					"`name`," .
-					"`subject`," .
-					"`recipient`," .
-					"`thankyoutext`" .
-				") VALUES (" .
-					"'" . __('A New Form', 'formbuilder') . "', " .
-					"'" . __("Generic Website Feedback Form", 'formbuilder') . "', " .
-					"'" . get_option('admin_email') . "', " .
-					"''" .
-				");";
+		$insertData = array();
+		$insertData['name'] = __('A New Form', 'formbuilder');
+		$insertData['subject'] = __('Generic Website Feedback Form', 'formbuilder');
+		$insertData['recipient'] = get_option('admin_email');
+		$insertData['thankyoutext'] = '';
 		
-		if($wpdb->query($sql) !== false)
+		$result = $wpdb->insert(FORMBUILDER_TABLE_FORMS, $insertData);
+		$insert_id = $wpdb->insert_id;
+		
+		if($result !== false)
 		{
-			$insert_id = $wpdb->insert_id;
+			$errorString = '';
+			// Insert Name Field
+			$insertData = array();
+			$insertData['form_id'] = $insert_id;
+			$insertData['display_order'] = 1;
+			$insertData['field_type'] = 'single line text box';
+			$insertData['field_name'] = 'Name';
+			$insertData['field_value'] = '';
+			$insertData['field_label'] = 'Name';
+			$insertData['required_data'] = 'any text';
+			$insertData['error_message'] = 'You must enter your name.';
+			$result = $wpdb->insert(FORMBUILDER_TABLE_FIELDS, $insertData);
+			if($result === false) $errorString .= "\nError inserting Name field: " . $wpdb->last_error;
 			
-			$sql = 	"INSERT INTO `" . FORMBUILDER_TABLE_FIELDS . "` (`form_id`, `display_order`, `field_type`, `field_name`, `field_value`, `field_label`, `required_data`, `error_message`) VALUES " .
-					"($insert_id, 1, 'single line text box', 'Name', '', 'Name', 'any text', 'You must enter your name.'), " .
-					"($insert_id, 2, 'single line text box', 'Email', '', 'Email', 'email address', 'You must enter your email address.'), " .
-					"($insert_id, 3, 'large text area', 'Comments', '', 'Comments', '', '');";
-			if($wpdb->query($sql) === false)
-				formbuilder_admin_alert(__("Unable to create new form fields.  Attempted to run the following SQL: ", 'formbuilder'), $sql);
+			// Insert Email Field
+			$insertData = array();
+			$insertData['form_id'] = $insert_id;
+			$insertData['display_order'] = 2;
+			$insertData['field_type'] = 'single line text box';
+			$insertData['field_name'] = 'Email';
+			$insertData['field_value'] = '';
+			$insertData['field_label'] = 'Email';
+			$insertData['required_data'] = 'email address';
+			$insertData['error_message'] = 'You must enter your email address.';
+			$result = $wpdb->insert(FORMBUILDER_TABLE_FIELDS, $insertData);
+			if($result === false) $errorString .= "\nError inserting Email field: " . $wpdb->last_error;
+			
+			// Insert Comments Field
+			$insertData = array();
+			$insertData['form_id'] = $insert_id;
+			$insertData['display_order'] = 3;
+			$insertData['field_type'] = 'large text area';
+			$insertData['field_name'] = 'Comments';
+			$insertData['field_value'] = '';
+			$insertData['field_label'] = 'Comments';
+			$insertData['required_data'] = '';
+			$insertData['error_message'] = '';
+			$result = $wpdb->insert(FORMBUILDER_TABLE_FIELDS, $insertData);
+			if($result === false) $errorString .= "\nError inserting Comments field: " . $wpdb->last_error;
+				
+			
+			if($errorString != '')
+			{
+				formbuilder_admin_alert(__("Unable to create new form fields.  These are the errors: ", 'formbuilder'), $errorString);
+			}
 			else
 			{
 				$editURL = formbuilder_build_url( array('fbaction'=>'editForm', 'fbid'=>$insert_id), array('page', 'pageNumber', 'fbtag') );
