@@ -1020,10 +1020,14 @@ function toggleVisOff(boxid)
 		
 		global $wpdb;
 		
-		$sql = "INSERT INTO " . FORMBUILDER_TABLE_RESULTS . " (`form_id`, `timestamp`, `xmldata`) " .
-				"VALUES ('" . $form['id'] . "', '" . time() . "', '" . addslashes($xml) . "');";
+		$insertData = array();
+		$insertData['form_id'] = $form['id'];
+		$insertData['timestamp'] = time();
+		$insertData['xmldata'] = addslashes($xml);
 		
-		if($wpdb->query($sql) === false) 
+		$result = $wpdb->insert(FORMBUILDER_TABLE_RESULTS, $insertData);
+		
+		if($result === false) 
 			return($formBuilderTextStrings['storage_error']);
 	}
 
