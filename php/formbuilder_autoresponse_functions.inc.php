@@ -33,6 +33,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		$data['name'] = __("New AutoResponse", 'formbuilder');
 		$data['subject'] = __("This is a new, empty autoresponse that you can now modify to suit your needs.", 'formbuilder');
 		$data['from_email'] = get_option('admin_email');
+		$data['message'] = '';
 
 		$wpdb->insert(FORMBUILDER_TABLE_RESPONSES, $data);
 

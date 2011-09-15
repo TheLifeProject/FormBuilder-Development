@@ -66,6 +66,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			$insertData['field_label'] = 'Name';
 			$insertData['required_data'] = 'any text';
 			$insertData['error_message'] = 'You must enter your name.';
+			$insertData['help_text'] = '';
 			$result = $wpdb->insert(FORMBUILDER_TABLE_FIELDS, $insertData);
 			if($result === false) $errorString .= "\nError inserting Name field: " . $wpdb->last_error;
 			
@@ -79,6 +80,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			$insertData['field_label'] = 'Email';
 			$insertData['required_data'] = 'email address';
 			$insertData['error_message'] = 'You must enter your email address.';
+			$insertData['help_text'] = '';
 			$result = $wpdb->insert(FORMBUILDER_TABLE_FIELDS, $insertData);
 			if($result === false) $errorString .= "\nError inserting Email field: " . $wpdb->last_error;
 			
@@ -92,6 +94,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			$insertData['field_label'] = 'Comments';
 			$insertData['required_data'] = '';
 			$insertData['error_message'] = '';
+			$insertData['help_text'] = '';
 			$result = $wpdb->insert(FORMBUILDER_TABLE_FIELDS, $insertData);
 			if($result === false) $errorString .= "\nError inserting Comments field: " . $wpdb->last_error;
 				
@@ -303,7 +306,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 						$actionRow = $relatedRows[0];
 						$display_order = $actionRow['display_order'] + 1;
 
-						$wpdb->insert(FORMBUILDER_TABLE_FIELDS, array("form_id"=>"$form_id", "display_order"=>$display_order), array('%d', '%d'));
+						$wpdb->insert(FORMBUILDER_TABLE_FIELDS, array(
+							'form_id' => $form_id, 
+							'display_order' => $display_order,
+							'field_value' => '',
+							'field_label' => '',
+							'error_message' => '',
+							'help_text' => ''
+						));
 						$rowID = $wpdb->insert_id;
 #						$tableFields->save_row($rowID, array("form_id"=>"$form_id", "display_order"=>$display_order));
 					}
@@ -333,7 +343,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 						}
 					}
 
-					$wpdb->insert(FORMBUILDER_TABLE_FIELDS, array("form_id"=>"$form_id", "display_order"=>$actionRow['display_order']), array('%d', '%d'));
+					$wpdb->insert(FORMBUILDER_TABLE_FIELDS, array(
+						'form_id' => $form_id, 
+						'display_order' => $actionRow['display_order'],
+						'field_value' => '',
+						'field_label' => '',
+						'error_message' => '',
+						'help_text' => ''
+					));
 					$rowID = $wpdb->insert_id;
 
 					#$rowID = $tableFields->create_row();
