@@ -829,7 +829,7 @@ function toggleVisOff(boxid)
 					if(!$msg)
 					{
 						if(!$form['thankyoutext']) $form['thankyoutext'] = "<h4>" . $formBuilderTextStrings['success'] . "</h4><p>" . $formBuilderTextStrings['send_success'] . "</p>";
-						$formDisplay = "\n<div class='formBuilderSuccess'>" . decode_html_entities($form['thankyoutext'], ENT_NOQUOTES, get_option('blog_charset')) . "</div>";
+						$formDisplay = "\n<div class='formBuilderSuccess'>" . decode_html_entities($form['thankyoutext'], ENT_QUOTES, get_option('blog_charset')) . "</div>";
 					}
 					else
 						$formDisplay = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>" . $formBuilderTextStrings['send_failed'] . "<br/>$msg</p></div>";
