@@ -834,7 +834,8 @@ function toggleVisOff(boxid)
 							. $formBuilderTextStrings['send_success'] 
 							. "</p>";
 						
-						// Populate ~variable~ tags in the autoresponse with values submitted by the user. 
+						// Populate ~variable~ tags in the autoresponse with values submitted by the user.
+						$txtAllFields = ""; 
 						foreach($allFields as $theField)
 						{
 							if(
@@ -850,9 +851,14 @@ function toggleVisOff(boxid)
 								$field['field_type'] != "captcha field"
 								)
 							{
-								$form['thankyoutext'] = str_replace("~" . $theField['field_name'] . "~", decode_html_entities($theField['value'], ENT_QUOTES, get_option('blog_charset')), $form['thankyoutext']);
+								$key = $theField['field_name'];
+								$value = decode_html_entities($theField['value'], ENT_QUOTES, get_option('blog_charset'));
+								
+								$form['thankyoutext'] = str_replace("~" . $key . "~", $value, $form['thankyoutext']);
+								$txtAllFields .= $key . ": " . $value . "\n";
 							}
 						}
+						$form['thankyoutext'] = str_replace("~FullForm~", nl2br(trim($txtAllFields)), $form['thankyoutext']);
 									
 						$formDisplay = "\n<div class='formBuilderSuccess'>" 
 							. decode_html_entities($form['thankyoutext'], ENT_QUOTES, get_option('blog_charset')) 
@@ -1146,12 +1152,16 @@ function toggleVisOff(boxid)
 					$response_details['from_email'] = '"' . $response_details['from_name'] . '"<' . $response_details['from_email'] . '>';
 			}
 			
-			// Populate ~variable~ tags in the autoresponse with values submitted by the user. 
+			// Populate ~variable~ tags in the autoresponse with values submitted by the user.
+			$txtAllFields = ""; 
 			foreach($field_values as $key=>$value)
 			{
 				$response_details['subject'] = str_replace("~" . $key . "~", $value, $response_details['subject']);
 				$response_details['message'] = str_replace("~" . $key . "~", $value, $response_details['message']);
+				$txtAllFields .= $key . ": " . $value . "\n";
 			}
+			$response_details['subject'] = str_replace("~FullForm~", trim($txtAllFields), $response_details['subject']);
+			$response_details['message'] = str_replace("~FullForm~", trim($txtAllFields), $response_details['message']);
 			
 			$result = formbuilder_send_email($response_details['destination_email'], 
 				decode_html_entities($response_details['subject'], ENT_QUOTES, get_option('blog_charset')), 
