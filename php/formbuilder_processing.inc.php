@@ -836,7 +836,7 @@ function toggleVisOff(boxid)
 						
 						// Populate ~variable~ tags in the autoresponse with values submitted by the user.
 						$txtAllFields = ""; 
-						foreach($allFields as $theField)
+						foreach($allFields as $field)
 						{
 							if(
 								trim($field['field_name']) != "" AND
@@ -851,8 +851,8 @@ function toggleVisOff(boxid)
 								$field['field_type'] != "captcha field"
 								)
 							{
-								$key = $theField['field_name'];
-								$value = decode_html_entities($theField['value'], ENT_QUOTES, get_option('blog_charset'));
+								$key = $field['field_name'];
+								$value = $field['value'];
 								
 								$form['thankyoutext'] = str_replace("~" . $key . "~", $value, $form['thankyoutext']);
 								$txtAllFields .= $key . ": " . $value . "\n";
