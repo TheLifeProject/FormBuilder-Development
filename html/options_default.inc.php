@@ -20,16 +20,18 @@
 			}
 		</style>
 		<?php 
-			if(isset($_POST['formSearch']) && $_POST['formSearch'] != "")
+			if(isset($_GET['formSearch']) && $_GET['formSearch'] != "")
 			{
-				$formSearch = preg_replace("#[^a-z0-9 _-]#i", "", $_POST['formSearch']);
+				$formSearch = preg_replace("#[^a-z0-9 _-]#i", "", $_GET['formSearch']);
 			}
 			else
 			{
 				$formSearch = "";
 			}
 		?>
-		<form class='formSearch' name="formSearch" method="POST" action="<?php echo FB_ADMIN_PLUGIN_PATH; ?>">
+		<form class='formSearch' name="formSearch" method="GET" action="<?php echo FB_ADMIN_PLUGIN_PATH; ?>">
+			<input name='page' type="hidden" value="<?php echo $_GET['page']; ?>" />
+			<input name='pageNumber' type="hidden" value="<?php echo $_GET['pageNumber']; ?>" />
 			<input name='formSearch' type="text" size="10" value="<?php echo $formSearch; ?>" />
 			<input class='searchButton' name='Search' type="submit" value="Search" />
 		</form>
