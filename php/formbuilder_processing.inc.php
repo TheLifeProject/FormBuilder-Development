@@ -828,8 +828,35 @@ function toggleVisOff(boxid)
 				{
 					if(!$msg)
 					{
-						if(!$form['thankyoutext']) $form['thankyoutext'] = "<h4>" . $formBuilderTextStrings['success'] . "</h4><p>" . $formBuilderTextStrings['send_success'] . "</p>";
-						$formDisplay = "\n<div class='formBuilderSuccess'>" . decode_html_entities($form['thankyoutext'], ENT_QUOTES, get_option('blog_charset')) . "</div>";
+						if(!$form['thankyoutext']) $form['thankyoutext'] = "<h4>" 
+							. $formBuilderTextStrings['success'] 
+							. "</h4><p>" 
+							. $formBuilderTextStrings['send_success'] 
+							. "</p>";
+						
+						// Populate ~variable~ tags in the autoresponse with values submitted by the user. 
+						foreach($allFields as $theField)
+						{
+							if(
+								trim($field['field_name']) != "" AND
+								$field['field_type'] != "recipient selection" AND
+								$field['field_type'] != "comments area" AND
+								$field['field_type'] != "followup page" AND
+								$field['field_type'] != "spam blocker" AND
+								$field['field_type'] != "page break" AND
+								$field['field_type'] != "reset button" AND
+								$field['field_type'] != "submit button" AND
+								$field['field_type'] != "submit image" AND
+								$field['field_type'] != "captcha field"
+								)
+							{
+								$form['thankyoutext'] = str_replace("~" . $theField['field_name'] . "~", decode_html_entities($theField['value'], ENT_QUOTES, get_option('blog_charset')), $form['thankyoutext']);
+							}
+						}
+									
+						$formDisplay = "\n<div class='formBuilderSuccess'>" 
+							. decode_html_entities($form['thankyoutext'], ENT_QUOTES, get_option('blog_charset')) 
+							. "</div>";
 					}
 					else
 						$formDisplay = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>" . $formBuilderTextStrings['send_failed'] . "<br/>$msg</p></div>";
