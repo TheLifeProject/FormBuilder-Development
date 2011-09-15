@@ -299,17 +299,20 @@ function toggleVisOff(boxid)
 						if($wpuser->id != 0)
 						{
 							// User is logged in.  Prepopulate with data.
-							if(preg_match('#^yourname|name|your_name|display_name$#i', $field['field_name'], $regs))
+							if(preg_match('#^(yourname|name|your_name|display_name|nickname)$#i', $field['field_name'], $regs))
 								$field['value'] = $wpuser->display_name;
 							
-							if(preg_match('#^firstname|first_name$#i', $field['field_name'], $regs))
+							if(preg_match('#^(firstname|first_name)$#i', $field['field_name'], $regs))
 								$field['value'] = $wpuser->first_name;
 							
-							if(preg_match('#^lastname|last_name$#i', $field['field_name'], $regs))
+							if(preg_match('#^(lastname|last_name)$#i', $field['field_name'], $regs))
 								$field['value'] = $wpuser->last_name;
 							
-							if((preg_match('#^email$#i', $field['field_name'], $regs)))
+							if((preg_match('#^(email)$#i', $field['field_name'], $regs)))
 								$field['value'] = $wpuser->user_email;
+							
+							if((preg_match('#^(full_name|fullname)$#i', $field['field_name'], $regs)))
+								$field['value'] = trim($wpuser->first_name . " " . $wpuser->last_name);
 						}
 						$wpuser = null;
 					}
