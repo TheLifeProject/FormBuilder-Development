@@ -31,7 +31,7 @@ enough to use for the most difficult job.
 * Permissions control
 * and LOTS more...
 
-Created by the [TruthMedia Internet Group](http://truthmedia.com)
+Created by [TruthMedia](http://truthmedia.com)
 
 Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 
