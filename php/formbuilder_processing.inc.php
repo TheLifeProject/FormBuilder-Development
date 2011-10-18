@@ -941,6 +941,9 @@ function toggleVisOff(boxid)
 				}
 				else
 					$msg = formbuilder_process_email($form, $allFields);
+					
+				// Check for and process any redirections at this point.
+				formbuilder_check_redirection($form, $allFields);
 
 				if(!isset($func_run))
 				{
@@ -1017,6 +1020,27 @@ function toggleVisOff(boxid)
 		}
 		else
 			return($formBuilderTextStrings['display_error']);
+	}
+	
+
+	/**
+	 * Process form redirections if necessary.
+	 * @param unknown_type $form
+	 * @param unknown_type $fields
+	 */
+	function formbuilder_check_redirection($form, $fields)
+	{
+		// Iterate through the form fields to add values to the email sent to the recipient.
+		foreach($fields as $field)
+		{
+			// Add the followup page redirect, if it exists.
+			if($field['field_type'] == "followup page" AND trim($field['field_value']) != "")
+			{
+				//echo "<meta HTTP-EQUIV='REFRESH' content='0; url=" . $field['field_value'] . "'>";
+				header("Location: " . $field['field_value']);
+			}
+
+		}
 	}
 
 
@@ -1234,11 +1258,6 @@ function toggleVisOff(boxid)
 			{
 				$source_email = $field['value'];
 			}
-
-			// Add the followup page redirect, if it exists.
-			if($field['field_type'] == "followup page" AND trim($field['field_value']) != "")
-				echo "<meta HTTP-EQUIV='REFRESH' content='0; url=" . $field['field_value'] . "'>";
-
 
 		}
 
