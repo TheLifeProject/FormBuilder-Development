@@ -1,5 +1,123 @@
 <?php
 
+	/**
+	 * This is run before the template is shown in order to process any form post data
+	 * and define what the form should look like on the page.
+	 */
+	function formbuilder_checkPOSTData()
+	{
+		global $wp_query, $_SERVER, $wpdb, $formbuilder_formDisplayArray;
+		
+		$formbuilder_formDisplayArray = array();
+
+		$version = get_option('formbuilder_version');
+		if(!$version) return;
+		
+	
+		
+		foreach($wp_query->posts as $post)
+		{
+		
+			$content = $post->post_content;
+	
+			if($post->post_password != '' AND strpos($content, 'wp-pass.php')) return($content);
+	
+			// Check to determine whether or not we have a form manually entered into the content of the post
+			// Manual entries in the form of [formbuilder:5] where 5 is the ID of the form to be displayed.
+			$content_form_ids = formbuilder_check_content($content);
+	
+			// Go through the content and process the form data for the tag.
+			foreach($content_form_ids as $form_id)
+			{
+				if(!isset($formbuilder_formDisplayArray[$form_id['id']]))
+					$formbuilder_formDisplayArray[$form_id['id']] = formbuilder_process_form($form_id['id']);
+			}
+	
+	
+			$excerpt = strpos($post->post_content, "<!--more-->");
+			$show = false;
+			if(is_single() OR is_page() OR !$excerpt) $show = true;
+	
+			if($show)
+			{
+				$post_id = $post->ID;
+				
+				$sql = "SELECT form_id FROM " . FORMBUILDER_TABLE_PAGES . " WHERE post_id = '$post_id';";
+				$results = $wpdb->get_results($sql, ARRAY_A);
+				
+				if($results)
+				{
+					$page = $results[0];
+	
+					if(!isset($formbuilder_formDisplayArray[$page['form_id']]))
+						$formbuilder_formDisplayArray[$page['form_id']] = formbuilder_process_form($page['form_id']);
+				}
+			}
+			
+			
+			
+		}
+		
+	}
+	
+	
+	/**
+	 * Main action on the_content()
+	 * @param unknown_type $content
+	 */
+	function formbuilder_main($content = '') {
+		global $post, $_SERVER, $wpdb, $formbuilder_formDisplayArray;
+
+		$version = get_option('formbuilder_version');
+		if(!$version) return($content);
+
+		$module_status = false;
+
+		if($post->post_password != '' AND strpos($content, 'wp-pass.php')) return($content);
+
+
+		// Check to determine whether or not we have a form manually entered into the content of the post
+		// Manual entries in the form of [formbuilder:5] where 5 is the ID of the form to be displayed.
+		$content_form_ids = formbuilder_check_content($content);
+
+		foreach($content_form_ids as $form_id)
+		{
+			$formDisplay = $formbuilder_formDisplayArray[$form_id['id']];
+			$content = str_replace($form_id['tag'], $formDisplay, $content);
+		}
+
+
+		$excerpt = strpos($post->post_content, "<!--more-->");
+		$show = false;
+		if(is_single() OR is_page() OR !$excerpt) $show = true;
+
+		if($show)
+		{
+			$post_id = $post->ID;
+			
+			$sql = "SELECT form_id FROM " . FORMBUILDER_TABLE_PAGES . " WHERE post_id = '$post_id';";
+			$results = $wpdb->get_results($sql, ARRAY_A);
+			
+			if($results)
+			{
+				$page = $results[0];
+
+				$formDisplay = $formbuilder_formDisplayArray[$page['form_id']];
+			
+				// Do not show the post content if FORMBUILDER_HIDE_POST_AFTER is true.
+				if(FORMBUILDER_HIDE_POST_AFTER)
+				{
+					if(stripos($formDisplay, '<form') === false)
+						$content = '';
+				}
+				
+				
+				$content = $content . "$formDisplay\n";
+			}
+		}
+		return($content);
+	}
+
 	// Function to display and process the actual form.
 	function formbuilder_process_form($form_id, $data=false)
 	{
@@ -586,14 +704,14 @@ function toggleVisOff(boxid)
 
 						case "datestamp":
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-							if(!$calendar_loaded) 
+							if(isset($calendar_loaded) AND $calendar_loaded == true) 
 							{
-								$calendar_loading_code = "<script src=\"" . $page_path . "js/calendar.js\" type=\"text/javascript\"></script>";
-								$calendar_loaded = true;
+								$calendar_loading_code = "";
 							}
 							else
 							{
-								$calendar_loading_code = "";
+								$calendar_loading_code = "<script src=\"" . $page_path . "js/calendar.js\" type=\"text/javascript\"></script>";
+								$calendar_loaded = true;
 							}
 							$formInput = "<div class='formBuilderDateStamp'><input type='text' name='" . $field['name'] . "' value='" . $field['value'] . "' id='field$divID' />
 								$calendar_loading_code

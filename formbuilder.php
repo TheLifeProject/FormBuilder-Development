@@ -256,6 +256,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			}
 	
 			session_start();
+			
+			// Check to see if we have POST data to process.
+			formbuilder_checkPOSTData();
 		}
 
 	}
@@ -318,59 +321,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		if(count($form_ids) > 0) return($form_id[0]);
 		
 		return false;
-	}
-
-	function formbuilder_main($content = '') {
-		global $post, $_SERVER, $wpdb;
-
-		$version = get_option('formbuilder_version');
-		if(!$version) return($content);
-
-		$module_status = false;
-
-		if($post->post_password != '' AND strpos($content, 'wp-pass.php')) return($content);
-
-
-		// Check to determine whether or not we have a form manually entered into the content of the post
-		// Manual entries in the form of [formbuilder:5] where 5 is the ID of the form to be displayed.
-		$content_form_ids = formbuilder_check_content($content);
-
-		foreach($content_form_ids as $form_id)
-		{
-			$formDisplay = formbuilder_process_form($form_id['id']);
-			$content = str_replace($form_id['tag'], $formDisplay, $content);
-		}
-
-
-		$excerpt = strpos($post->post_content, "<!--more-->");
-		$show = false;
-		if(is_single() OR is_page() OR !$excerpt) $show = true;
-
-		if($show)
-		{
-			$post_id = $post->ID;
-			
-			$sql = "SELECT form_id FROM " . FORMBUILDER_TABLE_PAGES . " WHERE post_id = '$post_id';";
-			$results = $wpdb->get_results($sql, ARRAY_A);
-			
-			if($results)
-			{
-				$page = $results[0];
-
-				$formDisplay = formbuilder_process_form($page['form_id']);
-			
-				// Do not show the post content if FORMBUILDER_HIDE_POST_AFTER is true.
-				if(FORMBUILDER_HIDE_POST_AFTER)
-				{
-					if(stripos($formDisplay, '<form') === false)
-						$content = '';
-				}
-				
-				
-				$content = $content . "$formDisplay\n";
-			}
-		}
-		return($content);
 	}
 
 	function formbuilder_get_hash()
@@ -851,10 +801,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		// Initialize a new array for storage of the query variables.
 		$tmp = array();
 		foreach($qvars as $key)
-			$tmp[] = "$key=" . urlencode($q[$key]);
+			@$tmp[] = "$key=" . urlencode($q[$key]);
 		
 		foreach($add as $key=>$value)
-			$tmp[] = "$key=" . urlencode($value);
+			@$tmp[] = "$key=" . urlencode($value);
 		
 		// Create a new query string for the URL of the page to look at.
 		$qvars = implode("&", $tmp);
