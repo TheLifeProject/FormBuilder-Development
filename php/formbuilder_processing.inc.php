@@ -13,8 +13,6 @@
 		$version = get_option('formbuilder_version');
 		if(!$version) return;
 		
-	
-		
 		foreach($wp_query->posts as $post)
 		{
 		
@@ -53,9 +51,6 @@
 						$formbuilder_formDisplayArray[$page['form_id']] = formbuilder_process_form($page['form_id']);
 				}
 			}
-			
-			
-			
 		}
 		
 	}
@@ -287,8 +282,8 @@ function toggleVisOff(boxid)
 						$field['field_value'] = "checked";
 					}
 					
-					// Fill unset POST vars with empty strings. 
-					if(!isset($_POST['formBuilderForm'][$field['field_name']])) $_POST['formBuilderForm'][$field['field_name']] = "";
+					// Fill unset POST vars with empty strings.  Not sure what this was used for, but it is now disabled so as not to mess with other plugins that may also check _POST data. (James: Oct. 19, 2011)
+					//if(!isset($_POST['formBuilderForm'][$field['field_name']])) $_POST['formBuilderForm'][$field['field_name']] = "";
 				
 					// Determine what submitted value to give to the field values. 
 					if($field['field_type'] == 'system field')
