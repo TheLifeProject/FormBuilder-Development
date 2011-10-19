@@ -997,6 +997,7 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				formbuilder_admin_alert("Upgraded FormBuilder to version 0.89", nl2br("
 * Feature: Allow ~variable~ fields in thankyou text.
 * Feature: Option to show all fields in autoresponder.
+* Feature: Allow admin bar to show all forms on the current page/index.
 * Bug Fix: Quotes in ThankYou text remain encoded which breaks HTML
 * Bug Fix: Name/Email matching was too broad.
 * Bug Fix: Fixed ability to create new forms.
@@ -1005,7 +1006,7 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 * Bug Fix: Forms with followup_url fields now bounce straight to the followup url without re-showing the original page first.
 					"));
 					
-			//	update_option('formbuilder_version', "0.89");
+				update_option('formbuilder_version', "0.89");
 			}
 			
 			

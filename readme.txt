@@ -74,6 +74,7 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 = 0.89 =  
 * Feature: Allow ~variable~ fields in thankyou text.
 * Feature: Option to show all fields in autoresponder.
+* Feature: Allow admin bar to show all forms on the current page/index.
 * Bug Fix: Quotes in ThankYou text remain encoded which breaks HTML
 * Bug Fix: Name/Email matching was too broad.
 * Bug Fix: Fixed ability to create new forms.
