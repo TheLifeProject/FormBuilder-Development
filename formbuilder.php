@@ -4,7 +4,7 @@ Plugin Name: FormBuilder
 Plugin URI: http://truthmedia.com/wordpress/formbuilder
 Description: The FormBuilder plugin allows the administrator to create contact forms of a variety of types for use on their WordPress blog.  The FormBuilder has built-in spam protection and can be further protected by installing the Akismet anti-spam plugin.  Uninstall instructions can be found <a href="http://truthmedia.com/wordpress/formbuilder/documentation/uninstall/">here</a>.  Forms can be included on your pages and posts either by selecting the appropriate form in the dropdown below the content editing box, or by adding them directly to the content with [formbuilder:#] where # is the ID number of the form to be included.
 Author: TruthMedia Internet Group
-Version: 0.881
+Version: 0.89
 Author URI: http://truthmedia.com/
 
 Created by the TruthMedia Internet Group
@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 	
-	define("FORMBUILDER_VERSION_NUM", "0.881");
+	define("FORMBUILDER_VERSION_NUM", "0.89");
 
 	// Define FormBuilder Related Tables
 	global $table_prefix;
@@ -816,6 +816,57 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	}
 	
 	/**
+	 * Get a list of all forms on this page.
+	 */
+	function formbuilder_get_all_forms()
+	{
+		global $wp_query, $wpdb;
+		
+		$formIDs = array();
+		
+		if(isset($wp_query))
+		{
+		
+			echo "TESTING FOR FORMS..";
+			foreach($wp_query->posts as $post)
+			{
+				$content = $post->post_content;
+				$content_form_ids = formbuilder_check_content($content);
+			
+				foreach($content_form_ids as $form_id)
+				{
+					$formIDs[] = $form_id['id'];
+				}
+				
+				$post_id = $post->ID;
+				
+				$sql = "SELECT form_id FROM " . FORMBUILDER_TABLE_PAGES . " WHERE post_id = '$post_id';";
+				$results = $wpdb->get_results($sql, ARRAY_A);
+				
+				if($results)
+				{
+					$page = $results[0];
+					$formIDs[] = $page['form_id'];
+				}
+			}
+		}
+		
+		var_dump($formIDs);
+		
+		if(count($formIDs) > 0)
+		{
+			$insert = implode(',', $formIDs);
+			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " WHERE id IN ({$insert});";
+			$results = $wpdb->get_results($sql, ARRAY_A);
+			return($results);
+		}
+		else
+		{
+			return(array());
+		}
+	}
+	
+	/**
 	 * Admin bar link.  Code from:
 	 * http://www.problogdesign.com/wordpress/add-useful-links-to-wordpress-admin-bar/
 	 */
@@ -824,21 +875,44 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	 * Adds links to the bar.
 	 */
 	function formbuilder_admin_bar_links() {
-		global $wp_admin_bar;
+		global $wp_admin_bar, $formbuilder_formDisplayArray, $wpdb;
 		
 		// Only show if there is a form attached to the page.
-		$form = formbuilder_page_has_form();
+		$formIDs = array();
+		foreach($formbuilder_formDisplayArray as $formID=>$result)
+		{
+			$formIDs[] = $formID;
+		}
 		
-		if(!$form) return;
-		
+		if(count($formIDs) > 0)
+		{
+			$insert = implode(',', $formIDs);
+			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " WHERE id IN ({$insert});";
+			$forms = $wpdb->get_results($sql, ARRAY_A);
 
-		// Add the Parent link.
-		$url = get_admin_url(null, '/tools.php?page=formbuilder.php&fbaction=editForm&fbid=' . $form['id']);
-		$wp_admin_bar->add_menu( array(
-			'title' => 'Edit Form',
-			'href' => $url,
-			'id' => 'formbuilder_forms'
-		));
+			// Add the Parent link.
+			$url = get_admin_url(null, '/tools.php?page=formbuilder.php&fbaction=editForm&fbid=' . $form['id']);
+			$wp_admin_bar->add_menu( array(
+				'title' => 'Edit Form',
+				'id' => 'formbuilder_forms'
+			));
+			
+			foreach($formIDs as $id)
+			{
+				foreach($forms as $form)
+				{
+					if($form['id'] != $id) continue;
+					$url = get_admin_url(null, '/tools.php?page=formbuilder.php&fbaction=editForm&fbid=' . $form['id']);
+					$wp_admin_bar->add_menu( array(
+						'parent' => 'formbuilder_forms',
+						'title' => $form['name'],
+						'href' => $url,
+						'id' => 'formbuilder_form_' . $form['id']
+					));
+				}
+			}
+		}
+		
 	}	
 
 	
@@ -851,7 +925,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			return;
 	 
 		// Good to go, lets do this!
-		add_action('admin_bar_menu', 'formbuilder_admin_bar_links', 500);
+		add_action('admin_bar_menu', 'formbuilder_admin_bar_links', 35);
 	}
 	
 	

@@ -989,6 +989,25 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				update_option('formbuilder_version', "0.88");
 			}
 			
+		
+			
+			// Upgrade to version 0.89
+			if(get_option('formbuilder_version') < 0.89)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.89", nl2br("
+* Feature: Allow ~variable~ fields in thankyou text.
+* Feature: Option to show all fields in autoresponder.
+* Bug Fix: Quotes in ThankYou text remain encoded which breaks HTML
+* Bug Fix: Name/Email matching was too broad.
+* Bug Fix: Fixed ability to create new forms.
+* Bug Fix: Form search lost when switching pages.
+* Bug Fix: Fixed forms not displaying / processing properly on some themes due to the_content being processed multiple times.
+* Bug Fix: Forms with followup_url fields now bounce straight to the followup url without re-showing the original page first.
+					"));
+					
+			//	update_option('formbuilder_version', "0.89");
+			}
+			
 			
 			
 			

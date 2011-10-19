@@ -4,7 +4,7 @@ Donate link: http://truthmedia.com/engage/giving
 Tags: form, forms, email, comments, contact, input, spam, form to email, email form, contact form
 Requires at least: 2.7
 Tested up to: 3.2.1
-Stable tag: 0.881
+Stable tag: 0.89
 
 Allows WordPress bloggers to easily create customised forms for use on pages or posts.
 
@@ -70,6 +70,17 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 3. Adding new form fields.
 
 == Changelog ==
+
+= 0.89 =  
+* Feature: Allow ~variable~ fields in thankyou text.
+* Feature: Option to show all fields in autoresponder.
+* Bug Fix: Quotes in ThankYou text remain encoded which breaks HTML
+* Bug Fix: Name/Email matching was too broad.
+* Bug Fix: Fixed ability to create new forms.
+* Bug Fix: Form search lost when switching pages.
+* Bug Fix: Fixed forms not displaying / processing properly on some themes due to the_content being processed multiple times.
+* Bug Fix: Forms with followup_url fields now bounce straight to the followup url without re-showing the original page first.
+
 
 = 0.881 =  
 * Bug Fix: Catchable fatal error in FormBuilder repaired.
