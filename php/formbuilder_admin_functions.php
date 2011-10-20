@@ -77,7 +77,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		<?php
 		
 		$problemThemes = array(
-			'Thesis',
+			'Thesis-disabled',
 		);
 		$theme_name = get_current_theme();
 		if(array_search($theme_name, $problemThemes) !== false)
