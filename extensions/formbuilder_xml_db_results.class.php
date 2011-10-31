@@ -173,6 +173,19 @@ class formbuilder_xml_db_results
 				$specific_form = true;
 				$where .= " AND form_id = '" . $form_id . "'";
 			}
+	
+			if(isset($_POST['form_id']) AND $_POST['form_id'] == "orphaned")
+			{
+				$sql = 'SELECT id FROM ' . FORMBUILDER_TABLE_FORMS . ' ORDER BY name ASC;';
+				$forms = $wpdb->get_results($sql, ARRAY_A);
+				$allFormIDs = array();
+				foreach($forms as $form)
+				{
+					$allFormIDs[] = $form['id'];
+				}
+				$specific_form = true;
+				$where .= " AND form_id NOT IN (" . implode(',', $allFormIDs) . ") ";
+			}
 			
 			$sql = "DELETE FROM " . FORMBUILDER_TABLE_RESULTS . " $where;";
 			$result = $wpdb->query($sql);
@@ -206,9 +219,10 @@ class formbuilder_xml_db_results
 							<?php 
 								$sql = 'SELECT * FROM ' . FORMBUILDER_TABLE_FORMS . ' ORDER BY name ASC;';
 								$forms = $wpdb->get_results($sql, ARRAY_A);
+								$allFormIDs = array();
 								foreach($forms as $form)
 								{
-		
+									$allFormIDs[] = $form['id'];
 									$selected = "";
 									if(isset($_GET['form_id']) AND $_GET['form_id'] == $form['id'])
 									{
@@ -220,7 +234,19 @@ class formbuilder_xml_db_results
 							
 									echo "<option value='" . $form['id'] . "' {$selected}>" . $form['name'] . "(" . $total_rows . ")</option>";
 								}
+								
+								// Figure out how many orphaned forms there are.
+								$selected = "";
+								if(isset($_GET['form_id']) AND $_GET['form_id'] == "orphaned")
+								{
+									$selected = "selected='selected'";
+								}
+								$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE form_id NOT IN (" . implode(',', $allFormIDs) . ");";
+								$result = $wpdb->get_col($sql, ARRAY_A);
+								$total_rows = count($result);
+								
 							?>
+							<option value='orphaned' <?php echo $selected; ?>><?php _e('Orphaned Forms', 'formbuilder'); ?> (<?php echo $total_rows; ?>)</option>
 						</select><br/><br/>
 						<input type="checkbox" name="confirm_mass_delete" value="yes" /> <font color="red"><strong><?php _e('Check the box to confirm you wish to mass delete the messages indicated above.'); ?></strong></font><br/><br/>
 						<input type='submit' name='Submit' value='<?php _e('Mass Delete', 'formbuilder'); ?>' />
@@ -663,6 +689,7 @@ class formbuilder_xml_db_results
 						if($_GET['formFilterID'] == 'orphaned')
 						{
 							$sql_where[] = "form_id NOT IN (" . implode(',', $allFormIDs) . ")";
+							$formFilterID = "&form_id=orphaned";
 						}
 					}
 				?>
