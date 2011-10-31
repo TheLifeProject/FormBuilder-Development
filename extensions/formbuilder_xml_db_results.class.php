@@ -126,11 +126,16 @@ class formbuilder_xml_db_results
 								$forms = $wpdb->get_results($sql, ARRAY_A);
 								foreach($forms as $form)
 								{
+									$selected = "";
+									if(isset($_GET['form_id']) AND $_GET['form_id'] == $form['id'])
+									{
+										$selected = "selected='selected'";
+									}
 									$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE form_id = '" . $form['id'] . "';";
 									$result = $wpdb->get_col($sql, ARRAY_A);
 									$total_rows = count($result);
 							
-									echo "<option value='" . $form['id'] . "'>" . $form['name'] . "(" . $total_rows . ")</option>";
+									echo "<option value='" . $form['id'] . "' {$selected}>" . $form['name'] . "(" . $total_rows . ")</option>";
 								}
 							?>
 						</select><br/><br/>
@@ -590,6 +595,7 @@ class formbuilder_xml_db_results
 		global $wpdb;
 		global $current_user;
 		get_currentuserinfo();
+		$formFilterID = '';
 		
 		$sql_where = array('1=1');
 
@@ -649,23 +655,24 @@ class formbuilder_xml_db_results
 						if(is_numeric($_GET['formFilterID']) AND isset($forms[$_GET['formFilterID']]))
 						{
 							$sql_where[] = "form_id = " . $_GET['formFilterID'];
+							$formFilterID = "&form_id=" . $_GET['formFilterID'];
 						}
 					}
 				?>
 				<div class='formHeadBox'>
 					<form name='formFilterBox' method='get' action=''>
 						<select name='formFilterID'>
-							<option value=''>Filter by form...</option>
+							<option value=''><?php if($formFilterID) { ?>Show all forms...<?php  } else { ?>Filter by form...<?php } ?></option>
 							<?php 
 								foreach($forms as $formData)
 								{
 									$selected = '';
-									if($formData['id'] == $_GET['formFilterID']) $selected = "selected='selected'";
+									if(isset($_GET['formFilterID']) AND $formData['id'] == $_GET['formFilterID']) $selected = "selected='selected'";
 									$name = $formData['name'];
 									if(strlen($name) > 20) $name = substr($name, 0, 20) . '...';
 									echo "\n<option value='{$formData['id']}' {$selected}>"
 									 . $name
-									 . " [{$formData['id']}]</option>";
+									 . "</option>";
 								}
 							?>
 						</select>
@@ -801,7 +808,7 @@ class formbuilder_xml_db_results
 					}
 					</script>
 						<?php
-		
+					
 				// Iterate through the results and display them line by line.
 				echo "<form action='' method='POST' name='formResultsList'><table class='widefat'>";
 				echo "<tr class='fbexporttable'>" .
@@ -809,8 +816,8 @@ class formbuilder_xml_db_results
 						"<td><strong>" . __("Date:", 'formbuilder') . "</strong></td>" .
 						"<td>" .
 						"<span class='fbexport'>" .
-						"<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=massdelete'><strong>" . __("Mass Delete", 'formbuilder') . "</strong></a>" .
-						"&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=showexport'><strong>" . __("Full Export", 'formbuilder') . "</strong></a>" .
+						"<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=massdelete{$formFilterID}'><strong>" . __("Mass Delete", 'formbuilder') . "</strong></a>" .
+						"&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=showexport{$formFilterID}'><strong>" . __("Full Export", 'formbuilder') . "</strong></a>" .
 						"&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" . __('Page:', 'formbuilder') . " $paged_nav" . 
 						"</span>" .
 						"<strong>" . __("Message:", 'formbuilder') . "</strong>" .
@@ -824,7 +831,7 @@ class formbuilder_xml_db_results
 							WHERE $sql_where 
 							ORDER BY timestamp 
 							DESC LIMIT $sql_offset," . $this->result_limit . ";";
-					echo "\n<br/>" . $sql;
+					//echo "\n<br/>" . $sql;
 					$result = $wpdb->get_row($sql, ARRAY_A, $i);
 					if($result == false) break;
 					$form_data = $this->xmltoarray($result['xmldata']);
