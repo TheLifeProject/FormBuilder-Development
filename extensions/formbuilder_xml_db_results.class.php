@@ -645,9 +645,11 @@ class formbuilder_xml_db_results
 					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " ORDER BY name ASC;";
 					$results = $wpdb->get_results($sql, ARRAY_A);
 					$forms = array();
+					$allFormIDs = array();
 					foreach($results as $formData)
 					{
 						$forms[$formData['id']] = $formData;
+						$allFormIDs[] = $formData['id'];
 					}
 					
 					if(isset($_GET['formFilterID']))
@@ -656,6 +658,11 @@ class formbuilder_xml_db_results
 						{
 							$sql_where[] = "form_id = " . $_GET['formFilterID'];
 							$formFilterID = "&form_id=" . $_GET['formFilterID'];
+						}
+						
+						if($_GET['formFilterID'] == 'orphaned')
+						{
+							$sql_where[] = "form_id NOT IN (" . implode(',', $allFormIDs) . ")";
 						}
 					}
 				?>
@@ -675,6 +682,7 @@ class formbuilder_xml_db_results
 									 . "</option>";
 								}
 							?>
+							<option value='orphaned' <?php if(isset($_GET['formFilterID']) AND $_GET['formFilterID'] == 'orphaned') { ?>selected='selected'<?php  } ?>>Show Orphaned Forms</option>
 						</select>
 						<?php if(isset($_GET['page'])) { ?><input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" /><?php } ?>
 						<?php if(isset($_GET['fbaction'])) { ?><input type="hidden" name="fbaction" value="<?php echo $_GET['fbaction']; ?>" /><?php } ?>
@@ -780,6 +788,7 @@ class formbuilder_xml_db_results
 		$sql_where = implode(" AND ", $sql_where);
 		
 		$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE $sql_where;";
+		echo "\n<br/>$sql";
 		$result = $wpdb->get_col($sql, ARRAY_A);
 		$total_rows = count($result);
 
