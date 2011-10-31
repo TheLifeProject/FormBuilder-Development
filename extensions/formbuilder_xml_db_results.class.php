@@ -153,7 +153,7 @@ class formbuilder_xml_db_results
 	{
 		global $wpdb;
 		
-		if($_POST['confirm_mass_delete'] == 'yes')
+		if(isset($_POST['confirm_mass_delete']) AND $_POST['confirm_mass_delete'] == 'yes')
 		{
 			$specific_form = false;
 			$where = "WHERE 1";
@@ -788,7 +788,7 @@ class formbuilder_xml_db_results
 		$sql_where = implode(" AND ", $sql_where);
 		
 		$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE $sql_where;";
-		echo "\n<br/>$sql";
+//		echo "\n<br/>$sql";
 		$result = $wpdb->get_col($sql, ARRAY_A);
 		$total_rows = count($result);
 
