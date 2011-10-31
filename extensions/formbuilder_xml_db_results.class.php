@@ -203,11 +203,17 @@ class formbuilder_xml_db_results
 								$forms = $wpdb->get_results($sql, ARRAY_A);
 								foreach($forms as $form)
 								{
+		
+									$selected = "";
+									if(isset($_GET['form_id']) AND $_GET['form_id'] == $form['id'])
+									{
+										$selected = "selected='selected'";
+									}
 									$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE form_id = '" . $form['id'] . "';";
 									$result = $wpdb->get_col($sql, ARRAY_A);
 									$total_rows = count($result);
 							
-									echo "<option value='" . $form['id'] . "'>" . $form['name'] . "(" . $total_rows . ")</option>";
+									echo "<option value='" . $form['id'] . "' {$selected}>" . $form['name'] . "(" . $total_rows . ")</option>";
 								}
 							?>
 						</select><br/><br/>
@@ -593,6 +599,17 @@ class formbuilder_xml_db_results
 		<fieldset class="options metabox-holder">
 			<div class="info-box-formbuilder postbox">
 			
+				<style>
+					.formHeadBox {
+						float: right;
+						margin-top: 2px;
+						padding-left: 14px;
+					}
+					em {
+						color: #FF0000;
+					}
+				</style>
+				
 				<?php 
 					// Process form search query if necessary.
 					if(isset($_GET['formSearchQuery']) AND $_GET['formSearchQuery'] != "")
@@ -607,22 +624,56 @@ class formbuilder_xml_db_results
 						$searchQuery = '';
 					}
 				?>
-				<style>
-					.formSearchBox {
-						float: right;
-						margin-top: 2px;
-					}
-					em {
-						color: #FF0000;
-					}
-				</style>
-				<div class='formSearchBox'>
+				<div class='formHeadBox'>
 					<form name='formSearchBox' method='get' action=''>
 						<?php if(isset($_GET['page'])) { ?><input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" /><?php } ?>
 						<?php if(isset($_GET['fbaction'])) { ?><input type="hidden" name="fbaction" value="<?php echo $_GET['fbaction']; ?>" /><?php } ?>
 						<?php if(isset($_GET['pageNumber'])) { ?><input type="hidden" name="pageNumber" value="<?php echo $_GET['pageNumber']; ?>" /><?php } ?>
+						<?php if(isset($_GET['formFilterID'])) { ?><input type="hidden" name="formFilterID" value="<?php echo $_GET['formFilterID']; ?>" /><?php } ?>
 						<input type="text" name="formSearchQuery" value="<?php echo $searchQuery; ?>" helptext="Search..." />
-						<input type="submit" name="submit" value="Search" />
+						<input type="submit" name="submit" value="Find" />
+					</form>
+				</div>
+				
+				<?php 
+					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " ORDER BY name ASC;";
+					$results = $wpdb->get_results($sql, ARRAY_A);
+					$forms = array();
+					foreach($results as $formData)
+					{
+						$forms[$formData['id']] = $formData;
+					}
+					
+					if(isset($_GET['formFilterID']))
+					{
+						if(is_numeric($_GET['formFilterID']) AND isset($forms[$_GET['formFilterID']]))
+						{
+							$sql_where[] = "form_id = " . $_GET['formFilterID'];
+						}
+					}
+				?>
+				<div class='formHeadBox'>
+					<form name='formFilterBox' method='get' action=''>
+						<select name='formFilterID'>
+							<option value=''>Filter by form...</option>
+							<?php 
+								foreach($forms as $formData)
+								{
+									$selected = '';
+									if($formData['id'] == $_GET['formFilterID']) $selected = "selected='selected'";
+									$name = $formData['name'];
+									if(strlen($name) > 20) $name = substr($name, 0, 20) . '...';
+									echo "\n<option value='{$formData['id']}' {$selected}>"
+									 . $name
+									 . " [{$formData['id']}]</option>";
+								}
+							?>
+						</select>
+						<?php if(isset($_GET['page'])) { ?><input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" /><?php } ?>
+						<?php if(isset($_GET['fbaction'])) { ?><input type="hidden" name="fbaction" value="<?php echo $_GET['fbaction']; ?>" /><?php } ?>
+						<?php if(isset($_GET['pageNumber'])) { ?><input type="hidden" name="pageNumber" value="<?php echo $_GET['pageNumber']; ?>" /><?php } ?>
+						<?php if(isset($_GET['formSearchQuery'])) { ?><input type="hidden" name="formSearchQuery" value="<?php echo $_GET['formSearchQuery']; ?>" /><?php } ?>
+						<input type="submit" name="submit" value="Go" />
 					</form>
 				</div>
 		
@@ -769,7 +820,11 @@ class formbuilder_xml_db_results
 				for($i=0; $i<$this->result_limit; $i++)
 				{
 					$sql_offset = $this->result_limit * ($result_page-1);
-					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE $sql_where ORDER BY timestamp DESC LIMIT $sql_offset," . $this->result_limit . ";";
+					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " 
+							WHERE $sql_where 
+							ORDER BY timestamp 
+							DESC LIMIT $sql_offset," . $this->result_limit . ";";
+					echo "\n<br/>" . $sql;
 					$result = $wpdb->get_row($sql, ARRAY_A, $i);
 					if($result == false) break;
 					$form_data = $this->xmltoarray($result['xmldata']);
