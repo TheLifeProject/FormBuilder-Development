@@ -515,6 +515,12 @@ class formbuilder_xml_db_results
 		global $wpdb;
 		if(!eregi('^[0-9]+$', $email_id)) $error = "Invalid email ID";
 		
+		$searchQuery = '';
+		if(isset($_GET['searchQuery']))
+		{
+			$searchQuery = $_GET['searchQuery'];
+		}
+		
 		if(!isset($error))
 		{
 			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE id='$email_id' ORDER BY timestamp DESC LIMIT 0," . $this->result_limit . ";";
@@ -525,6 +531,15 @@ class formbuilder_xml_db_results
 		?>
 		<?php formbuilder_admin_nav('formResults'); ?>
 		
+				<style>
+					.formSearchBox {
+						float: right;
+						margin-top: 2px;
+					}
+					em {
+						color: #FF0000;
+					}
+				</style>
 		<fieldset class="options metabox-holder">
 			<div class="info-box-formbuilder postbox">
 				<h3 class="info-box-title hndle"><?php _e('Form Details', 'formbuilder'); ?>: </h3>
@@ -539,7 +554,15 @@ class formbuilder_xml_db_results
 					else
 					{
 						foreach($form_data['form'] as $key=>$value) 
+						{
+							// Highlight any/all search query results.
+							if($searchQuery)
+							{
+								$key = str_ireplace($searchQuery, "<em>$searchQuery</em>", $key);
+								$value = str_ireplace($searchQuery, "<em>$searchQuery</em>", $value);
+							}
 							echo strtoupper($key) . ": " . nl2br($value . "\n\n");
+						}
 					}
 				?>
 				</div>
@@ -561,12 +584,48 @@ class formbuilder_xml_db_results
 		global $wpdb;
 		global $current_user;
 		get_currentuserinfo();
+		
+		$sql_where = array('1=1');
 
 		
 		?>
 		<?php formbuilder_admin_nav('formResults'); ?>
 		<fieldset class="options metabox-holder">
 			<div class="info-box-formbuilder postbox">
+			
+				<?php 
+					// Process form search query if necessary.
+					if(isset($_GET['formSearchQuery']) AND $_GET['formSearchQuery'] != "")
+					{
+						$searchQuery = $_GET['formSearchQuery'];
+						$searchQuery = str_replace("\'", "", $searchQuery);
+						$searchQuery = str_replace("'", "", $searchQuery);
+						$sql_where[] = "xmldata LIKE '%$searchQuery%'";
+					}
+					else
+					{
+						$searchQuery = '';
+					}
+				?>
+				<style>
+					.formSearchBox {
+						float: right;
+						margin-top: 2px;
+					}
+					em {
+						color: #FF0000;
+					}
+				</style>
+				<div class='formSearchBox'>
+					<form name='formSearchBox' method='get' action=''>
+						<?php if(isset($_GET['page'])) { ?><input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" /><?php } ?>
+						<?php if(isset($_GET['fbaction'])) { ?><input type="hidden" name="fbaction" value="<?php echo $_GET['fbaction']; ?>" /><?php } ?>
+						<?php if(isset($_GET['pageNumber'])) { ?><input type="hidden" name="pageNumber" value="<?php echo $_GET['pageNumber']; ?>" /><?php } ?>
+						<input type="text" name="formSearchQuery" value="<?php echo $searchQuery; ?>" helptext="Search..." />
+						<input type="submit" name="submit" value="Search" />
+					</form>
+				</div>
+		
 				<h3 class="info-box-title hndle"><?php _e('Recent Form Results:', 'formbuilder'); ?></h3>
 		
 		<?php
@@ -658,8 +717,11 @@ class formbuilder_xml_db_results
 			$result_page = $_GET['pageNumber'];
 		else 
 			$result_page = 1;
+
+		// Turn the sql_where array into an actual sql statement.
+		$sql_where = implode(" AND ", $sql_where);
 		
-		$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . ";";
+		$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE $sql_where;";
 		$result = $wpdb->get_col($sql, ARRAY_A);
 		$total_rows = count($result);
 
@@ -707,7 +769,7 @@ class formbuilder_xml_db_results
 				for($i=0; $i<$this->result_limit; $i++)
 				{
 					$sql_offset = $this->result_limit * ($result_page-1);
-					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " ORDER BY timestamp DESC LIMIT $sql_offset," . $this->result_limit . ";";
+					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE $sql_where ORDER BY timestamp DESC LIMIT $sql_offset," . $this->result_limit . ";";
 					$result = $wpdb->get_row($sql, ARRAY_A, $i);
 					if($result == false) break;
 					$form_data = $this->xmltoarray($result['xmldata']);
@@ -717,12 +779,38 @@ class formbuilder_xml_db_results
 						if($key != 'FormRecipient')
 							$message .= strtoupper($key) . ": " . $value . "\n";
 					}
-					if(strlen($message) > 80) $message = substr($message, 0, 80) . "...";
+					
+					// Highlight any/all search query results.
+					if($searchQuery)
+					{
+						$message = str_ireplace($searchQuery, "<em>$searchQuery</em>", $message);
+					}
+					
+					$searchQueryVar = "";
+					if(strlen($message) > 80) 
+					{
+						if($searchQuery)
+						{
+							$p1 = strpos($message, '<em>');
+							if($p1 !== false)
+							{
+								$message = "..." . substr($message, $p1 - 20, 85) . "...";
+								$searchQueryVar = "&searchQuery=$searchQuery";
+							}
+							else
+							{
+								$message = substr($message, 0, 80) . "...";
+							}
+						}
+						else 
+						{
+							$message = substr($message, 0, 80) . "...";
+						}
+					}
 		
 					echo "<tr class='hoverlite'>" .
 							"<td><input type='checkbox' class='fb_stored_messages' name='formResultSelected[]' value='" . $result['id'] . "'/></td>" .
-							"<td><a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults" .
-							"&fbxmlaction=showemail&fbxmlid=" . $result['id'] . "'>" . 
+							"<td><a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=showemail&fbxmlid=" . $result['id'] . $searchQueryVar . "'>" . 
 							date("F j, Y, g:i a", $result['timestamp']) . "</a></td>" .
 							"<td>" . $message . "</td>" .
 						"</tr>";
