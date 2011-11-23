@@ -451,11 +451,22 @@ function toggleVisOff(boxid)
 					// Determine if we need to show help text.
 					if($field['help_text'])
 					{
-						$formHelp = "<div class='formBuilderHelpText' id='formBuilderHelpText$divID'>" . $field['help_text'] . "</div>";
-						$formHelpJava = "<a href='javascript:;' "
-							. "class='formBuilderHelpTextToggle' "
-							. "onClick='toggleVis(\"formBuilderHelpText$divID\");' "
-							. ">?</a>$formHelp";
+						if(DEFINED('FORMBUILDER_HELPTEXT_LABEL'))
+						{
+							$formHelp = "<div class='formBuilderHelpText' id='formBuilderHelpText$divID'>" . $field['help_text'] . "</div>";
+							$formHelpJava = "<a href='javascript:;' "
+								. "class='formBuilderHelpTextToggle' "
+								. "onClick='toggleVis(\"formBuilderHelpText$divID\");' "
+								. ">" . FORMBUILDER_HELPTEXT_LABEL . "</a>$formHelp";
+						}
+						else
+						{
+							$formHelp = "<div class='formBuilderHelpText' id='formBuilderHelpText$divID'>" . $field['help_text'] . "</div>";
+							$formHelpJava = "<a href='javascript:;' "
+								. "class='formBuilderHelpTextToggle' "
+								. "onClick='toggleVis(\"formBuilderHelpText$divID\");' "
+								. ">?</a>$formHelp";
+						}
 					}
 					else
 					{
