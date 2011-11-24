@@ -878,9 +878,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		
 		// Only show if there is a form attached to the page.
 		$formIDs = array();
-		foreach($formbuilder_formDisplayArray as $formID=>$result)
+		if(isset($formbuilder_formDisplayArray) AND is_array($formbuilder_formDisplayArray))
 		{
-			$formIDs[] = $formID;
+			foreach($formbuilder_formDisplayArray as $formID=>$result)
+			{
+				$formIDs[] = $formID;
+			}
 		}
 		
 		if(count($formIDs) > 0)
