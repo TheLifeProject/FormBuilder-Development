@@ -6,17 +6,17 @@ Requires at least: 2.7
 Tested up to: 3.2.1
 Stable tag: 0.89
 
-Allows WordPress bloggers to easily create customised forms for use on pages or posts.
+Allows WordPress bloggers to easily create customised contact forms for use on pages or posts.
 
 == Description ==
-The Form Builder Plugin for WordPress allows you to build complex forms in
+The Form Builder Plugin for WordPress allows you to build contact forms in
 the WordPress administrative interface without needing to know PHP or HTML.
 We've tried to make it simple enough for anyone to make them, yet customisable
-enough to use for the most difficult job.
+enough to satisfy the needs of experienced web developers.
 
 ** Features: **
 
-* Easily build complex forms without any HTML or coding.
+* Easily build complex contact forms without any HTML or coding.
 * Pre-made contact forms for quick and easy setup.
 * Put forms anywhere on your site.
 * Put multiple forms on a single page.
