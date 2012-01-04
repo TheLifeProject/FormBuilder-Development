@@ -36,7 +36,35 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	function formbuilder_process_form_redirect($form, $fields)
 	{
-		global $_POST;
+		global $_POST, $wpdb;
+		$autoresponse_required = false;
+		$source_email = "";
+		
+		foreach($fields as $field)
+		{
+			// Get source email address, if exists.  Will use the first email address listed in the form results, as the source email address.
+			if($field['required_data'] == "email address" AND !$source_email)
+			{
+				$source_email = $field['value'];
+			}
+		}
+		
+		// Set autoresponse information if required and send it out.
+		if($source_email AND $form['autoresponse'] != false AND $autoresponse_required == false)
+		{
+			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESPONSES . " WHERE id = '" . $form['autoresponse'] . "';";
+			$results = $wpdb->get_results($sql, ARRAY_A);
+			$response_details = $results[0];
+
+			$response_details['destination_email'] = $source_email;
+
+			if($response_details['from_email'] AND $response_details['subject'] AND $response_details['message'] AND $response_details['destination_email'])
+			{
+				if($response_details['from_name']) $response_details['from_email'] = "\"" . $response_details['from_name'] . "\"<" . $response_details['from_email'] . ">";
+			}
+			$result = formbuilder_send_email($response_details['destination_email'], decode_html_entities($response_details['subject'], ENT_QUOTES, get_option('blog_charset')), $response_details['message'], "From: " . $response_details['from_email']);
+			if($result) die($result);
+		}
 
 		foreach($fields as $field)
 		{
