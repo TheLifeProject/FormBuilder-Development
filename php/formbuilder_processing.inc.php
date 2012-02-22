@@ -122,6 +122,10 @@
 	{
 		global $wpdb;
 		
+		if (! defined('SID')) {
+			define('SID', '');
+		}
+
 		$formBuilderTextStrings = formbuilder_load_strings();
 		
 		$siteurl = get_option('siteurl');
