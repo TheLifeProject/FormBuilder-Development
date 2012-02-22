@@ -18,7 +18,9 @@
 		
 			$content = $post->post_content;
 	
-			if($post->post_password != '' AND strpos($content, 'wp-pass.php')) return($content);
+			if ($post->post_password != '' AND strpos($content, 'wp-pass.php') !== FALSE) {
+				return $content;
+			}
 	
 			// Check to determine whether or not we have a form manually entered into the content of the post
 			// Manual entries in the form of [formbuilder:5] where 5 is the ID of the form to be displayed.
@@ -68,7 +70,9 @@
 
 		$module_status = false;
 
-		if($post->post_password != '' AND strpos($content, 'wp-pass.php')) return($content);
+		if ($post->post_password != '' AND strpos($content, 'wp-pass.php') !== FALSE) {
+			return $content;
+		}
 
 
 		// Check to determine whether or not we have a form manually entered into the content of the post
@@ -554,10 +558,11 @@ function toggleVisOff(boxid)
 							foreach($options as $option_value=>$roption)
 							{
 								// Check for a pipe, and if it exists, split the value into value, label.
-								if(strpos($roption, "|")) 
+								if (strpos($roption, "|") !== FALSE) {
 									list($option_original_value, $option_label) = explode("|", $roption, 2);
-								else 
+								} else {
 									$option_label = $roption;
+								}
 
 								$option_label = trim(stripslashes($option_label));
 								$option_label = str_replace("<", "&lt;", $option_label);
@@ -578,12 +583,9 @@ function toggleVisOff(boxid)
 							foreach($options as $option_value=>$roption)
 							{
 								// Check for a pipe, and if it exists, split the value into value|label.
-								if(strpos($roption, "|")) 
-								{
+								if(strpos($roption, "|") !== FALSE) {
 									list($option_original_value, $option_label) = explode("|", $roption, 2);
-								}
-								else 
-								{
+								} else {
 									$option_label = $roption;
 								}
 								
@@ -638,12 +640,9 @@ function toggleVisOff(boxid)
 							foreach($options as $option_value=>$roption)
 							{
 								// Check for a pipe, and if it exists, split the value into value|label.
-								if(strpos($roption, "|")) 
-								{
+								if (strpos($roption, "|") !== FALSE) {
 									list($option_original_value, $option_label) = explode("|", $roption, 2);
-								}
-								else 
-								{
+								} else {
 									$option_label = $roption;
 								}
 								
@@ -911,12 +910,9 @@ function toggleVisOff(boxid)
 						$options = explode("\n", $field['field_value']);
 						$roption = $options[$field['value']];
 						// Check for a pipe, and if it exists, split the value into value|label.
-						if(strpos($roption, "|")) 
-						{
+						if(strpos($roption, "|") !== FALSE) {
 							list($option_value, $option_label) = explode("|", $roption, 2);
-						}
-						else 
-						{
+						} else {
 							$option_value = $option_label = $roption;
 						}
 						
@@ -1066,12 +1062,9 @@ function toggleVisOff(boxid)
 			$options = explode("\n", $field['field_value']);
 			$roption = trim($options[$field['value']])	;
 			
-			if(strpos($roption, "|")) 
-			{
+			if (strpos($roption, "|") !== FALSE) {
 				list($option_value, $option_label) = explode("|", $roption, 2);
-			}
-			else 
-			{
+			} else {
 				$option_label = $option_value = $roption;
 			}
 			

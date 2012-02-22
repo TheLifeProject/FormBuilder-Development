@@ -384,18 +384,12 @@ class formbuilder_xml_db_results
 		
 		foreach($vals as $val)
 		{
-			if(strpos($val, ':'))
-			{
+			if (strpos($val, ':') !== FALSE) {
 				list($key, $value) = explode(':', $val);
 				$params[$key] = $value;
-			}
-			elseif(is_numeric($val))
-			{
+			} elseif (is_numeric($val)) {
 				$email_ids[] = $val;
-			}
-			else
-			{
-			}
+			} else {}
 		}
 		
 		if(!is_array($email_ids))
