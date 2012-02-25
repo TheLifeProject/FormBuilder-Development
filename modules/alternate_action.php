@@ -43,13 +43,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		if (isset($parts['path']) && $parts['path'][0] !== '/') {
 			$parts['path'] = dirname($_SERVER['REQUEST_URI']) . '/' . $parts['path'];
 		}
-		$defaults = array(
-			'scheme' => isset($_SERVER['HTTPS']) ? 'https' : 'http',
-			'host' => $_SERVER['HTTP_HOST'],
-			'port' => $_SERVER['SERVER_PORT'],
-			'path' => preg_replace('/\?.*/', $_SERVER['REQUEST_URI']),
-			);
-		$url = http_build_url($defaults, $parts);
+		$url = build_url($parts);
 
 		// Create data array to be sent to the alternate form processing system.
 		$data['name'] = $form['name'];
