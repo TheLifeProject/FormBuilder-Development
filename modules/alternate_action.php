@@ -36,12 +36,21 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	{
 		// Ensure that the post location in the thankyoutext looks like a valid url.
 		$url = trim($form['thankyoutext']);
-		$urlregex = '@^[a-z]{3,5}\://([a-z0-9\.\-\:]+)([a-z0-9/=]*)([a-z0-9/\?=]*)@i';
-		if(!preg_match($urlregex, $url, $regs)) {
+		if(!($parts = parse_url($url))) {
 			// Post location does NOT look like a valid url, return an error.
 			return(__("Alternate Form Action does NOT look like a valid URL.  Please contact the website administrator.", 'formbuilder'));
 		}
-		
+		if (isset($parts['path']) && $parts['path'][0] !== '/') {
+			$parts['path'] = dirname($_SERVER['REQUEST_URI']) . '/' . $parts['path'];
+		}
+		$defaults = array(
+			'scheme' => isset($_SERVER['HTTPS']) ? 'https' : 'http',
+			'host' => $_SERVER['HTTP_HOST'],
+			'port' => $_SERVER['SERVER_PORT'],
+			'path' => preg_replace('/\?.*/', $_SERVER['REQUEST_URI']),
+			);
+		$url = http_build_url($defaults, $parts);
+
 		// Create data array to be sent to the alternate form processing system.
 		$data['name'] = $form['name'];
 		$data['subject'] = $form['subject'];
