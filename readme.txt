@@ -71,7 +71,13 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 
 == Changelog ==
 
-= 0.89 =  
+= 0.892 =
+* Bug Fix: Additional minor bug fixes
+
+= 0.891 =
+* Bug Fix: Fixed warning that was appearing on pages.
+
+= 0.89 =
 * Feature: Allow ~variable~ fields in thankyou text.
 * Feature: Option to show all fields in autoresponder.
 * Feature: Allow admin bar to show all forms on the current page/index.
@@ -84,10 +90,10 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 * Bug Fix: Forms with followup_url fields now bounce straight to the followup url without re-showing the original page first.
 
 
-= 0.881 =  
+= 0.881 =
 * Bug Fix: Catchable fatal error in FormBuilder repaired.
 
-= 0.880 =  
+= 0.880 =
 * Feature: Ability to search for forms.
 * Feature: New field type: required checkbox.
 * Feature: New field type: required password.

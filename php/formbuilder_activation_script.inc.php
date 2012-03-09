@@ -1009,6 +1009,30 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				update_option('formbuilder_version', "0.89");
 			}
 			
+		
+			
+			// Upgrade to version 0.891
+			if(get_option('formbuilder_version') < 0.891)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.891", nl2br("
+* Bug Fix: Fixed warning that was appearing on pages.
+					"));
+					
+				update_option('formbuilder_version', "0.891");
+			}
+			
+		
+			
+			// Upgrade to version 0.892
+			if(get_option('formbuilder_version') < 0.892)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.892", nl2br("
+* Bug Fix: Additional minor bug fixes
+					"));
+					
+				update_option('formbuilder_version', "0.892");
+			}
+			
 			
 			
 			
