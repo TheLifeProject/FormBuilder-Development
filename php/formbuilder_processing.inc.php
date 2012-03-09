@@ -129,7 +129,7 @@
 		$results = $wpdb->get_results($sql, ARRAY_A);
 		if($results) $form = $results[0];
 		
-		if(!$form) return("");
+		if(!isset($form) OR !$form) return("");
 		
 		// Pass the form through a filter that converts all fields to proper htmlentities.
 		$form = formbuilder_array_htmlentities($form);
