@@ -892,12 +892,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " WHERE id IN ({$insert});";
 			$forms = $wpdb->get_results($sql, ARRAY_A);
 
-			// Add the Parent link.
-			$url = get_admin_url(null, '/tools.php?page=formbuilder.php&fbaction=editForm&fbid=' . $form['id']);
-			$wp_admin_bar->add_menu( array(
-				'title' => 'Edit Form',
-				'id' => 'formbuilder_forms'
-			));
+			if(count($forms) > 0)
+			{
+				// Add the Parent link.
+				$wp_admin_bar->add_menu( array(
+					'title' => 'Edit Form',
+					'id' => 'formbuilder_forms'
+				));
+			}
 			
 			foreach($formIDs as $id)
 			{
