@@ -109,6 +109,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		curl_setopt($ch, CURLOPT_REFERER, $referer);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
+		// Pass cookies through if on the same host
+		if ($_COOKIE && parse_url($url, PHP_URL_HOST) === parse_url(home_url(), PHP_URL_HOST)) {
+			$cookies = http_build_query($_COOKIE, '', '; ');
+			curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+		}
+
 		$data = curl_exec($ch);
 		
 		curl_close($ch);
@@ -158,6 +164,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	    fputs($fp, "Host: $host\r\n");
 	    fputs($fp, "Referer: $referer\r\n");
 	    fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+		// Pass cookies through if on the same host
+		if ($_COOKIE && parse_url($url, PHP_URL_HOST) === parse_url(home_url(), PHP_URL_HOST)) {
+			$cookies = http_build_query($_COOKIE, '', '; ');
+			fputs($fp, "Cookie: $cookies\r\n");
+		}
 	    fputs($fp, "Content-length: ". strlen($data) ."\r\n");
 	    fputs($fp, "Connection: close\r\n\r\n");
 	    fputs($fp, $data);
