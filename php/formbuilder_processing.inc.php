@@ -1311,6 +1311,9 @@ function toggleVisOff(boxid)
 				"From: " . $response_details['from_email'] . "\nReply-To: " . $response_details['from_email'] . "\n");
 			if($result) die($result);
 		}
+		
+		// James' addition to ensure no hacking is allowed.
+		$email_sub = preg_replace('#[^a-z0-9_- ]#isU', '', $email_sub);
 
 		if(!$source_email) $source_email = get_option('admin_email');
 		return(formbuilder_send_email(
