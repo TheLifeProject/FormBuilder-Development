@@ -72,6 +72,8 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 == Changelog ==
 
 = 0.90 =
+* Feature: Allow ~variable~ fields in email subject lines.  Generously contributed by maihde in github.
+* Clean Up: Quite a few bug fixes and tidying changes generously contributed by outis in github.
 * Bug Fix: Allow showing of thankyou text when using modules.
 
 = 0.892 =

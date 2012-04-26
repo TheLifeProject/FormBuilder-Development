@@ -1034,6 +1034,20 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				update_option('formbuilder_version', "0.892");
 			}
 			
+		
+			
+			// Upgrade to version 0.90
+			if(get_option('formbuilder_version') < 0.90)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.90", nl2br("
+* Feature: Allow ~variable~ fields in email subject lines.  Generously contributed by maihde in github.
+* Clean Up: Quite a few bug fixes and tidying changes generously contributed by outis in github.
+* Bug Fix: Allow showing of thankyou text when using modules.
+					"));
+					
+				update_option('formbuilder_version', "0.90");
+			}
+			
 			
 			
 			
