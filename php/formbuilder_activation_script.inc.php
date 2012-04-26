@@ -31,6 +31,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	function formbuilder_activation() {
 		
 		global $wpdb;
+		$error_status = FALSE;
 		$charset_collate = formbuilder_getCharSet();
 		
 		// Run this in the event that no previous or current version of formBuilder is installed.

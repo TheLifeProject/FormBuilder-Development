@@ -276,7 +276,7 @@ function formbuilder_find_card_type($cardnumber, $cards)
 				foreach($possible_prefixes as $prefix)
 				{
 					$prefix = trim($prefix);
-					if(strpos(" $cardnumber", $prefix) === 1)
+					if(strpos($cardnumber, $prefix) === 0)
 					{
 						// We found a match.  Set the card name and break.
 						return($card['name']);
