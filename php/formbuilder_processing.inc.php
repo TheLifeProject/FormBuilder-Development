@@ -1319,7 +1319,7 @@ function toggleVisOff(boxid)
 		}
 		
 		// James' addition to ensure no hacking is allowed.
-		$email_sub = preg_replace('#[^a-z0-9_- ]#isU', '', $email_sub);
+		$email_sub = preg_replace('#[^a-z0-9_ -]#isU', '', $email_sub);
 
 		if(!$source_email) $source_email = get_option('admin_email');
 		return(formbuilder_send_email(
