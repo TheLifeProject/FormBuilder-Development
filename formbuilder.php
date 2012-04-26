@@ -640,22 +640,22 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	function formbuilder_user_can($capability)
 	{
 		$fb_permissions = get_option('formbuilder_permissions');
-		
+		$_GET += array('fbaction' => NULL);
 		if(!$fb_permissions AND $_GET['fbaction'] != 'uninstall') 
 		{
-			$fb_permissions[level_10] = array(
+			$fb_permissions['level_10'] = array(
 				'connect' => 'yes',
 				'create' => 'yes',
 				'manage' => 'yes'
 			);
 			
-			$fb_permissions[level_7] = array(
+			$fb_permissions['level_7'] = array(
 				'connect' => 'yes',
 				'create' => 'yes',
 				'manage' => 'no'
 			);
 			
-			$fb_permissions[level_2] = array(
+			$fb_permissions['level_2'] = array(
 				'connect' => 'yes',
 				'create' => 'no',
 				'manage' => 'no'
@@ -878,9 +878,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		
 		// Only show if there is a form attached to the page.
 		$formIDs = array();
-		foreach($formbuilder_formDisplayArray as $formID=>$result)
-		{
-			$formIDs[] = $formID;
+		if (isset($formbuilder_formDisplayArray)) {
+			foreach($formbuilder_formDisplayArray as $formID=>$result) {
+				$formIDs[] = $formID;
+			}
 		}
 		
 		if(count($formIDs) > 0)
