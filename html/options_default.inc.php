@@ -1,4 +1,7 @@
-<?php formbuilder_admin_nav('forms'); ?>
+<?php
+formbuilder_admin_nav('forms');
+$_GET += array('pageNumber' => '');
+?>
 <fieldset class="options metabox-holder">
 
 	<div class="info-box-formbuilder postbox">

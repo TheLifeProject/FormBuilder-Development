@@ -36,12 +36,15 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	{
 		// Ensure that the post location in the thankyoutext looks like a valid url.
 		$url = trim($form['thankyoutext']);
-		$urlregex = '@^[a-z]{3,5}\://([a-z0-9\.\-\:]+)([a-z0-9/=]*)([a-z0-9/\?=]*)@i';
-		if(!preg_match($urlregex, $url, $regs)) {
+		if(!($parts = parse_url($url))) {
 			// Post location does NOT look like a valid url, return an error.
 			return(__("Alternate Form Action does NOT look like a valid URL.  Please contact the website administrator.", 'formbuilder'));
 		}
-		
+		if (isset($parts['path']) && $parts['path'][0] !== '/') {
+			$parts['path'] = dirname($_SERVER['REQUEST_URI']) . '/' . $parts['path'];
+		}
+		$url = build_url($parts);
+
 		// Create data array to be sent to the alternate form processing system.
 		$data['name'] = $form['name'];
 		$data['subject'] = $form['subject'];
@@ -106,6 +109,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		curl_setopt($ch, CURLOPT_REFERER, $referer);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		
+		// Pass cookies through if on the same host
+		if ($_COOKIE && parse_url($url, PHP_URL_HOST) === parse_url(home_url(), PHP_URL_HOST)) {
+			$cookies = http_build_query($_COOKIE, '', '; ');
+			curl_setopt($ch, CURLOPT_COOKIE, $cookies);
+		}
+
 		$data = curl_exec($ch);
 		
 		curl_close($ch);
@@ -155,6 +164,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	    fputs($fp, "Host: $host\r\n");
 	    fputs($fp, "Referer: $referer\r\n");
 	    fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
+		// Pass cookies through if on the same host
+		if ($_COOKIE && parse_url($url, PHP_URL_HOST) === parse_url(home_url(), PHP_URL_HOST)) {
+			$cookies = http_build_query($_COOKIE, '', '; ');
+			fputs($fp, "Cookie: $cookies\r\n");
+		}
 	    fputs($fp, "Content-length: ". strlen($data) ."\r\n");
 	    fputs($fp, "Connection: close\r\n\r\n");
 	    fputs($fp, $data);
