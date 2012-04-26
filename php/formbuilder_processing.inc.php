@@ -1220,7 +1220,7 @@ function toggleVisOff(boxid)
 
 		$formBuilderTextStrings = formbuilder_load_strings();
 		
-
+                $email_sub = $form['subject']; // mai - added
 		$email_msg = "";
 		$autoresponse_required = false;
 		$source_email = "";
@@ -1244,6 +1244,8 @@ function toggleVisOff(boxid)
 			{
 				$email_msg .= strtoupper(decode_html_entities($field['field_name'], ENT_QUOTES, get_option('blog_charset'))) . ": " . decode_html_entities($field['value'], ENT_QUOTES, get_option('blog_charset')) . "\r\n\r\n";
 				$field_values[$field['field_name']] = decode_html_entities($field['value'], ENT_QUOTES, get_option('blog_charset'));
+				// Populate ~variable~ tags in the form subject with values submitted by the user 
+				$email_sub = str_replace("~" . $field['field_name'] . "~", $field_values[$field['field_name']], $email_sub); // mai - added
 			}
 			elseif($field['field_type'] == "recipient selection")
 			{
@@ -1313,7 +1315,7 @@ function toggleVisOff(boxid)
 		if(!$source_email) $source_email = get_option('admin_email');
 		return(formbuilder_send_email(
 			$form['recipient'], 
-			decode_html_entities($form['subject'], ENT_QUOTES, get_option('blog_charset')), 
+			decode_html_entities($email_sub, ENT_QUOTES, get_option('blog_charset')), 
 			$email_msg, 
 			"From: " . $source_email . "\nReply-To: " . $source_email . "\n"));
 
