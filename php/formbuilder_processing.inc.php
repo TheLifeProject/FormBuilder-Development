@@ -137,7 +137,7 @@
 		$results = $wpdb->get_results($sql, ARRAY_A);
 		if($results) $form = $results[0];
 		
-		if(!$form) return("");
+		if(!isset($form) OR !$form) return("");
 		
 		// Pass the form through a filter that converts all fields to proper htmlentities.
 		$form = formbuilder_array_htmlentities($form);
@@ -995,9 +995,15 @@ function toggleVisOff(boxid)
 						$formDisplay = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>" . $formBuilderTextStrings['send_failed'] . "<br/>$msg</p></div>";
 				}
 				elseif($msg)
+				{	// Only shown if the function returned some sort of failure.
 					$formDisplay = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>$msg</p></div>$formDisplay";
+				}
 				else
-					$formDisplay = $msg;
+				{
+					$formDisplay = "\n<div class='formBuilderSuccess moduleSuccess'>" 
+						. decode_html_entities($form['thankyoutext'], ENT_QUOTES, get_option('blog_charset')) 
+						. "</div>";
+				}
 			}
 			else
 			{
@@ -1313,7 +1319,7 @@ function toggleVisOff(boxid)
 		}
 		
 		// James' addition to ensure no hacking is allowed.
-		$email_sub = preg_replace('#[^a-z0-9_- ]#isU', '', $email_sub);
+		$email_sub = preg_replace('#[^a-z0-9_ -]#isU', '', $email_sub);
 
 		if(!$source_email) $source_email = get_option('admin_email');
 		return(formbuilder_send_email(

@@ -4,7 +4,7 @@ Plugin Name: FormBuilder
 Plugin URI: http://truthmedia.com/wordpress/formbuilder
 Description: The FormBuilder plugin allows the administrator to create contact forms of a variety of types for use on their WordPress blog.  The FormBuilder has built-in spam protection and can be further protected by installing the Akismet anti-spam plugin.  Uninstall instructions can be found <a href="http://truthmedia.com/wordpress/formbuilder/documentation/uninstall/">here</a>.  Forms can be included on your pages and posts either by selecting the appropriate form in the dropdown below the content editing box, or by adding them directly to the content with [formbuilder:#] where # is the ID number of the form to be included.
 Author: TruthMedia Internet Group
-Version: 0.89
+Version: 0.90
 Author URI: http://truthmedia.com/
 
 Created by the TruthMedia Internet Group
@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 	
-	define("FORMBUILDER_VERSION_NUM", "0.89");
+	define("FORMBUILDER_VERSION_NUM", "0.90");
 
 	// Define FormBuilder Related Tables
 	global $table_prefix;
@@ -878,8 +878,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		
 		// Only show if there is a form attached to the page.
 		$formIDs = array();
-		if (isset($formbuilder_formDisplayArray)) {
-			foreach($formbuilder_formDisplayArray as $formID=>$result) {
+		if(isset($formbuilder_formDisplayArray) AND is_array($formbuilder_formDisplayArray))
+		{
+			foreach($formbuilder_formDisplayArray as $formID=>$result)
+			{
 				$formIDs[] = $formID;
 			}
 		}
@@ -890,12 +892,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " WHERE id IN ({$insert});";
 			$forms = $wpdb->get_results($sql, ARRAY_A);
 
-			// Add the Parent link.
-			$url = get_admin_url(null, '/tools.php?page=formbuilder.php&fbaction=editForm&fbid=' . $form['id']);
-			$wp_admin_bar->add_menu( array(
-				'title' => 'Edit Form',
-				'id' => 'formbuilder_forms'
-			));
+			if(count($forms) > 0)
+			{
+				// Add the Parent link.
+				$wp_admin_bar->add_menu( array(
+					'title' => 'Edit Form',
+					'id' => 'formbuilder_forms'
+				));
+			}
 			
 			foreach($formIDs as $id)
 			{

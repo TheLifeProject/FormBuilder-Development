@@ -124,15 +124,34 @@ class formbuilder_xml_db_results
 							<?php 
 								$sql = 'SELECT * FROM ' . FORMBUILDER_TABLE_FORMS . ' ORDER BY name ASC;';
 								$forms = $wpdb->get_results($sql, ARRAY_A);
+								$allFormIDs = array();
 								foreach($forms as $form)
 								{
+									$allFormIDs[] = $form['id'];
+									$selected = "";
+									if(isset($_GET['form_id']) AND $_GET['form_id'] == $form['id'])
+									{
+										$selected = "selected='selected'";
+									}
 									$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE form_id = '" . $form['id'] . "';";
 									$result = $wpdb->get_col($sql, ARRAY_A);
 									$total_rows = count($result);
 							
-									echo "<option value='" . $form['id'] . "'>" . $form['name'] . "(" . $total_rows . ")</option>";
+									echo "<option value='" . $form['id'] . "' {$selected}>" . $form['name'] . "(" . $total_rows . ")</option>";
 								}
+								
+								
+								// Figure out how many orphaned forms there are.
+								$selected = "";
+								if(isset($_GET['form_id']) AND $_GET['form_id'] == "orphaned")
+								{
+									$selected = "selected='selected'";
+								}
+								$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE form_id NOT IN (" . implode(',', $allFormIDs) . ");";
+								$result = $wpdb->get_col($sql, ARRAY_A);
+								$total_rows = count($result);
 							?>
+							<option value='orphaned' <?php echo $selected; ?>><?php _e('Orphaned Forms (non-standard CSV format)', 'formbuilder'); ?></option>
 						</select><br/><br/>
 						<input type='submit' name='Submit' value='<?php _e('Export', 'formbuilder'); ?>' />
 					</form>
@@ -148,7 +167,7 @@ class formbuilder_xml_db_results
 	{
 		global $wpdb;
 		
-		if($_POST['confirm_mass_delete'] == 'yes')
+		if(isset($_POST['confirm_mass_delete']) AND $_POST['confirm_mass_delete'] == 'yes')
 		{
 			$specific_form = false;
 			$where = "WHERE 1";
@@ -167,6 +186,19 @@ class formbuilder_xml_db_results
 				$form_id = addslashes(trim($_POST['form_id']));
 				$specific_form = true;
 				$where .= " AND form_id = '" . $form_id . "'";
+			}
+	
+			if(isset($_POST['form_id']) AND $_POST['form_id'] == "orphaned")
+			{
+				$sql = 'SELECT id FROM ' . FORMBUILDER_TABLE_FORMS . ' ORDER BY name ASC;';
+				$forms = $wpdb->get_results($sql, ARRAY_A);
+				$allFormIDs = array();
+				foreach($forms as $form)
+				{
+					$allFormIDs[] = $form['id'];
+				}
+				$specific_form = true;
+				$where .= " AND form_id NOT IN (" . implode(',', $allFormIDs) . ") ";
 			}
 			
 			$sql = "DELETE FROM " . FORMBUILDER_TABLE_RESULTS . " $where;";
@@ -201,15 +233,34 @@ class formbuilder_xml_db_results
 							<?php 
 								$sql = 'SELECT * FROM ' . FORMBUILDER_TABLE_FORMS . ' ORDER BY name ASC;';
 								$forms = $wpdb->get_results($sql, ARRAY_A);
+								$allFormIDs = array();
 								foreach($forms as $form)
 								{
+									$allFormIDs[] = $form['id'];
+									$selected = "";
+									if(isset($_GET['form_id']) AND $_GET['form_id'] == $form['id'])
+									{
+										$selected = "selected='selected'";
+									}
 									$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE form_id = '" . $form['id'] . "';";
 									$result = $wpdb->get_col($sql, ARRAY_A);
 									$total_rows = count($result);
 							
-									echo "<option value='" . $form['id'] . "'>" . $form['name'] . "(" . $total_rows . ")</option>";
+									echo "<option value='" . $form['id'] . "' {$selected}>" . $form['name'] . "(" . $total_rows . ")</option>";
 								}
+								
+								// Figure out how many orphaned forms there are.
+								$selected = "";
+								if(isset($_GET['form_id']) AND $_GET['form_id'] == "orphaned")
+								{
+									$selected = "selected='selected'";
+								}
+								$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE form_id NOT IN (" . implode(',', $allFormIDs) . ");";
+								$result = $wpdb->get_col($sql, ARRAY_A);
+								$total_rows = count($result);
+								
 							?>
+							<option value='orphaned' <?php echo $selected; ?>><?php _e('Orphaned Forms', 'formbuilder'); ?> (<?php echo $total_rows; ?>)</option>
 						</select><br/><br/>
 						<input type="checkbox" name="confirm_mass_delete" value="yes" /> <font color="red"><strong><?php _e('Check the box to confirm you wish to mass delete the messages indicated above.'); ?></strong></font><br/><br/>
 						<input type='submit' name='Submit' value='<?php _e('Mass Delete', 'formbuilder'); ?>' />
@@ -509,6 +560,12 @@ class formbuilder_xml_db_results
 		global $wpdb;
 		if(!eregi('^[0-9]+$', $email_id)) $error = "Invalid email ID";
 		
+		$searchQuery = '';
+		if(isset($_GET['searchQuery']))
+		{
+			$searchQuery = $_GET['searchQuery'];
+		}
+		
 		if(!isset($error))
 		{
 			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE id='$email_id' ORDER BY timestamp DESC LIMIT 0," . $this->result_limit . ";";
@@ -519,6 +576,15 @@ class formbuilder_xml_db_results
 		?>
 		<?php formbuilder_admin_nav('formResults'); ?>
 		
+				<style>
+					.formSearchBox {
+						float: right;
+						margin-top: 2px;
+					}
+					em {
+						color: #FF0000;
+					}
+				</style>
 		<fieldset class="options metabox-holder">
 			<div class="info-box-formbuilder postbox">
 				<h3 class="info-box-title hndle"><?php _e('Form Details', 'formbuilder'); ?>: </h3>
@@ -533,7 +599,15 @@ class formbuilder_xml_db_results
 					else
 					{
 						foreach($form_data['form'] as $key=>$value) 
+						{
+							// Highlight any/all search query results.
+							if($searchQuery)
+							{
+								$key = str_ireplace($searchQuery, "<em>$searchQuery</em>", $key);
+								$value = str_ireplace($searchQuery, "<em>$searchQuery</em>", $value);
+							}
 							echo strtoupper($key) . ": " . nl2br($value . "\n\n");
+						}
 					}
 				?>
 				</div>
@@ -555,12 +629,104 @@ class formbuilder_xml_db_results
 		global $wpdb;
 		global $current_user;
 		get_currentuserinfo();
+		$formFilterID = '';
+		
+		$sql_where = array('1=1');
 
 		
 		?>
 		<?php formbuilder_admin_nav('formResults'); ?>
 		<fieldset class="options metabox-holder">
 			<div class="info-box-formbuilder postbox">
+			
+				<style>
+					.formHeadBox {
+						float: right;
+						margin-top: 2px;
+						padding-left: 14px;
+					}
+					em {
+						color: #FF0000;
+					}
+				</style>
+				
+				<?php 
+					// Process form search query if necessary.
+					if(isset($_GET['formSearchQuery']) AND $_GET['formSearchQuery'] != "")
+					{
+						$searchQuery = $_GET['formSearchQuery'];
+						$searchQuery = str_replace("\'", "", $searchQuery);
+						$searchQuery = str_replace("'", "", $searchQuery);
+						$sql_where[] = "xmldata LIKE '%$searchQuery%'";
+					}
+					else
+					{
+						$searchQuery = '';
+					}
+				?>
+				<div class='formHeadBox'>
+					<form name='formSearchBox' method='get' action=''>
+						<?php if(isset($_GET['page'])) { ?><input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" /><?php } ?>
+						<?php if(isset($_GET['fbaction'])) { ?><input type="hidden" name="fbaction" value="<?php echo $_GET['fbaction']; ?>" /><?php } ?>
+						<?php if(isset($_GET['pageNumber'])) { ?><input type="hidden" name="pageNumber" value="<?php echo $_GET['pageNumber']; ?>" /><?php } ?>
+						<?php if(isset($_GET['formFilterID'])) { ?><input type="hidden" name="formFilterID" value="<?php echo $_GET['formFilterID']; ?>" /><?php } ?>
+						<input type="text" name="formSearchQuery" value="<?php echo $searchQuery; ?>" helptext="Search..." />
+						<input type="submit" name="submit" value="Find" />
+					</form>
+				</div>
+				
+				<?php 
+					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " ORDER BY name ASC;";
+					$results = $wpdb->get_results($sql, ARRAY_A);
+					$forms = array();
+					$allFormIDs = array();
+					foreach($results as $formData)
+					{
+						$forms[$formData['id']] = $formData;
+						$allFormIDs[] = $formData['id'];
+					}
+					
+					if(isset($_GET['formFilterID']))
+					{
+						if(is_numeric($_GET['formFilterID']) AND isset($forms[$_GET['formFilterID']]))
+						{
+							$sql_where[] = "form_id = " . $_GET['formFilterID'];
+							$formFilterID = "&form_id=" . $_GET['formFilterID'];
+						}
+						
+						if($_GET['formFilterID'] == 'orphaned')
+						{
+							$sql_where[] = "form_id NOT IN (" . implode(',', $allFormIDs) . ")";
+							$formFilterID = "&form_id=orphaned";
+						}
+					}
+				?>
+				<div class='formHeadBox'>
+					<form name='formFilterBox' method='get' action=''>
+						<select name='formFilterID'>
+							<option value=''><?php if($formFilterID) { ?>Show all forms...<?php  } else { ?>Filter by form...<?php } ?></option>
+							<?php 
+								foreach($forms as $formData)
+								{
+									$selected = '';
+									if(isset($_GET['formFilterID']) AND $formData['id'] == $_GET['formFilterID']) $selected = "selected='selected'";
+									$name = $formData['name'];
+									if(strlen($name) > 20) $name = substr($name, 0, 20) . '...';
+									echo "\n<option value='{$formData['id']}' {$selected}>"
+									 . $name
+									 . "</option>";
+								}
+							?>
+							<option value='orphaned' <?php if(isset($_GET['formFilterID']) AND $_GET['formFilterID'] == 'orphaned') { ?>selected='selected'<?php  } ?>>Show Orphaned Forms</option>
+						</select>
+						<?php if(isset($_GET['page'])) { ?><input type="hidden" name="page" value="<?php echo $_GET['page']; ?>" /><?php } ?>
+						<?php if(isset($_GET['fbaction'])) { ?><input type="hidden" name="fbaction" value="<?php echo $_GET['fbaction']; ?>" /><?php } ?>
+						<?php if(isset($_GET['pageNumber'])) { ?><input type="hidden" name="pageNumber" value="<?php echo $_GET['pageNumber']; ?>" /><?php } ?>
+						<?php if(isset($_GET['formSearchQuery'])) { ?><input type="hidden" name="formSearchQuery" value="<?php echo $_GET['formSearchQuery']; ?>" /><?php } ?>
+						<input type="submit" name="submit" value="Go" />
+					</form>
+				</div>
+		
 				<h3 class="info-box-title hndle"><?php _e('Recent Form Results:', 'formbuilder'); ?></h3>
 		
 		<?php
@@ -652,8 +818,12 @@ class formbuilder_xml_db_results
 			$result_page = $_GET['pageNumber'];
 		else 
 			$result_page = 1;
+
+		// Turn the sql_where array into an actual sql statement.
+		$sql_where = implode(" AND ", $sql_where);
 		
-		$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . ";";
+		$sql = "SELECT id FROM " . FORMBUILDER_TABLE_RESULTS . " WHERE $sql_where;";
+//		echo "\n<br/>$sql";
 		$result = $wpdb->get_col($sql, ARRAY_A);
 		$total_rows = count($result);
 
@@ -682,7 +852,7 @@ class formbuilder_xml_db_results
 					}
 					</script>
 						<?php
-		
+					
 				// Iterate through the results and display them line by line.
 				echo "<form action='' method='POST' name='formResultsList'><table class='widefat'>";
 				echo "<tr class='fbexporttable'>" .
@@ -690,8 +860,8 @@ class formbuilder_xml_db_results
 						"<td><strong>" . __("Date:", 'formbuilder') . "</strong></td>" .
 						"<td>" .
 						"<span class='fbexport'>" .
-						"<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=massdelete'><strong>" . __("Mass Delete", 'formbuilder') . "</strong></a>" .
-						"&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=showexport'><strong>" . __("Full Export", 'formbuilder') . "</strong></a>" .
+						"<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=massdelete{$formFilterID}'><strong>" . __("Mass Delete", 'formbuilder') . "</strong></a>" .
+						"&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=showexport{$formFilterID}'><strong>" . __("Full Export", 'formbuilder') . "</strong></a>" .
 						"&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;" . __('Page:', 'formbuilder') . " $paged_nav" . 
 						"</span>" .
 						"<strong>" . __("Message:", 'formbuilder') . "</strong>" .
@@ -701,7 +871,11 @@ class formbuilder_xml_db_results
 				for($i=0; $i<$this->result_limit; $i++)
 				{
 					$sql_offset = $this->result_limit * ($result_page-1);
-					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " ORDER BY timestamp DESC LIMIT $sql_offset," . $this->result_limit . ";";
+					$sql = "SELECT * FROM " . FORMBUILDER_TABLE_RESULTS . " 
+							WHERE $sql_where 
+							ORDER BY timestamp 
+							DESC LIMIT $sql_offset," . $this->result_limit . ";";
+					//echo "\n<br/>" . $sql;
 					$result = $wpdb->get_row($sql, ARRAY_A, $i);
 					if($result == false) break;
 					$form_data = $this->xmltoarray($result['xmldata']);
@@ -711,12 +885,38 @@ class formbuilder_xml_db_results
 						if($key != 'FormRecipient')
 							$message .= strtoupper($key) . ": " . $value . "\n";
 					}
-					if(strlen($message) > 80) $message = substr($message, 0, 80) . "...";
+					
+					// Highlight any/all search query results.
+					if($searchQuery)
+					{
+						$message = str_ireplace($searchQuery, "<em>$searchQuery</em>", $message);
+					}
+					
+					$searchQueryVar = "";
+					if(strlen($message) > 80) 
+					{
+						if($searchQuery)
+						{
+							$p1 = strpos($message, '<em>');
+							if($p1 !== false)
+							{
+								$message = "..." . substr($message, $p1 - 20, 85) . "...";
+								$searchQueryVar = "&searchQuery=$searchQuery";
+							}
+							else
+							{
+								$message = substr($message, 0, 80) . "...";
+							}
+						}
+						else 
+						{
+							$message = substr($message, 0, 80) . "...";
+						}
+					}
 		
 					echo "<tr class='hoverlite'>" .
 							"<td><input type='checkbox' class='fb_stored_messages' name='formResultSelected[]' value='" . $result['id'] . "'/></td>" .
-							"<td><a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults" .
-							"&fbxmlaction=showemail&fbxmlid=" . $result['id'] . "'>" . 
+							"<td><a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=showemail&fbxmlid=" . $result['id'] . $searchQueryVar . "'>" . 
 							date("F j, Y, g:i a", $result['timestamp']) . "</a></td>" .
 							"<td>" . $message . "</td>" .
 						"</tr>";
@@ -762,7 +962,19 @@ class formbuilder_xml_db_results
 			$specific_form = true;
 			$where .= " AND form_id = '" . $form_id . "'";
 		}
-		
+
+		if(isset($_POST['form_id']) AND $_POST['form_id'] == "orphaned")
+		{
+			$sql = 'SELECT id FROM ' . FORMBUILDER_TABLE_FORMS . ' ORDER BY name ASC;';
+			$forms = $wpdb->get_results($sql, ARRAY_A);
+			$allFormIDs = array();
+			foreach($forms as $form)
+			{
+				$allFormIDs[] = $form['id'];
+			}
+			$where .= " AND form_id NOT IN (" . implode(',', $allFormIDs) . ") ";
+		}
+	
 		if(isset($_GET['h']))
 		{
 			$formResults = get_option('formbuilder_db_export_ids');
