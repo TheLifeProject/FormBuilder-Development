@@ -4,7 +4,7 @@ Donate link: http://truthmedia.com/engage/giving
 Tags: form, forms, email, comments, contact, input, spam, form to email, email form, contact form
 Requires at least: 2.7
 Tested up to: 3.2.1
-Stable tag: 0.90
+Stable tag: 0.91
 
 Allows WordPress bloggers to easily create customised contact forms for use on pages or posts.
 

@@ -1048,6 +1048,18 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				update_option('formbuilder_version', "0.90");
 			}
 			
+		
+			
+			// Upgrade to version 0.91
+			if(get_option('formbuilder_version') < 0.91)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.91", nl2br("
+* Security Fix: Resolved XSS vulnerability with the referer functionality.
+					"));
+					
+				update_option('formbuilder_version', "0.91");
+			}
+			
 			
 			
 			
