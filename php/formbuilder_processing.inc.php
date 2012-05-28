@@ -791,7 +791,7 @@ function toggleVisOff(boxid)
 			if($referrer_info == 'Enabled')
 			{
 				// Hidden fields to include referer, and page uri
-				if(isset($_SERVER['HTTP_REFERER'])) $formDisplay .= "<input type='hidden' name='REFERER' value='" . $_SERVER['HTTP_REFERER'] . "' />";
+				if(isset($_SERVER['HTTP_REFERER'])) $formDisplay .= "<input type='hidden' name='REFERER' value='" . htmlspecialchars($_SERVER['HTTP_REFERER']) . "' />";
 				if(isset($_SERVER['HTTP_HOST']) AND isset($_SERVER['REQUEST_URI'])) $formDisplay .= "<input type='hidden' name='PAGE' value='http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "' />";
 			}
 			
