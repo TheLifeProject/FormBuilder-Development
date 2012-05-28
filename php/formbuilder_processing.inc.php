@@ -791,7 +791,7 @@ function toggleVisOff(boxid)
 			if($referrer_info == 'Enabled')
 			{
 				// Hidden fields to include referer, and page uri
-				if(isset($_SERVER['HTTP_REFERER'])) $formDisplay .= "<input type='hidden' name='REFERER' value='" . $_SERVER['HTTP_REFERER'] . "' />";
+				if(isset($_SERVER['HTTP_REFERER'])) $formDisplay .= "<input type='hidden' name='REFERER' value='" . htmlspecialchars($_SERVER['HTTP_REFERER']) . "' />";
 				if(isset($_SERVER['HTTP_HOST']) AND isset($_SERVER['REQUEST_URI'])) $formDisplay .= "<input type='hidden' name='PAGE' value='http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . "' />";
 			}
 			
@@ -1194,7 +1194,7 @@ function toggleVisOff(boxid)
 		{
 			// Add Page and Referer urls to the bottom of the email.
 			if(isset($_POST['PAGE'])) $xml .= "\r\n<Page>" . $_POST['PAGE'] . "</Page>";
-			if(isset($_POST['REFERER'])) $xml .= "\r\n<Referrer>" . $_POST['REFERER'] . "</Referrer>";
+			if(isset($_POST['REFERER'])) $xml .= "\r\n<Referrer>" . htmlspecialchars($_POST['REFERER']) . "</Referrer>";
 		}
 
 		$xml .= "\r\n</$xml_container>";
