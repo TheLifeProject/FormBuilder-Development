@@ -1,0 +1,76 @@
+/*
+	Sample Right-To-Left Styles
+	
+	This file contains the styles you would use to have your forms display
+	properly on a right-to-left aligned blog.  In order to use these styles
+	simply place this file in your /wp-content/ folder and rename it to
+	additional_styles.css.  Once it is uploaded to your blog, the FormBuilder
+	forms should all function from right-to-left.
+	
+*/
+
+/* Generic FormBuilder Display Configuration */
+form.formBuilderForm, div.formBuilderSuccess {
+	text-align: right;
+}
+/* Generic Display Controls */
+.formBuilderForm div.formBuilderComment {
+	float: right;
+}
+.formBuilderForm .formBuilderSubmit {
+	text-align: left;
+}
+
+/* Generic Label Controls */
+.formBuilderForm .formBuilderLabel, .formBuilderForm .formBuilderLabelRequired {
+	clear: right;
+	float: right;
+	margin-left: 10px;
+}
+.formBuilderForm input, 
+.formBuilderForm select,
+.formBuilderForm textarea {
+	text-align: right;
+}
+
+.formBuilderForm .checkbox
+{
+	float: right;
+}
+.formBuilderForm .radio_buttons .formBuilderRadio
+{
+	margin-right: 200px;
+	padding-right: 0;
+}
+div.formBuilderFailure {
+	text-align: right;
+}
+div.formBuilderCaptcha {
+	float: right;
+}
+div.formBuilderPageBreak {
+	text-align: left;
+}
+.calendar-box .today a {
+	margin-right:-5px;
+} 
+.calendar-box .selected a {
+	margin-right:-5px;
+}
+
+.formBuilderForm input {
+    float: right;
+    margin-left: 10px;
+}
+.formBuilderForm div.formBuilderHelpTextVisible {
+	text-align: right;
+}
+
+.formBuilderRadio label input {
+	position: absolute;
+	right: -20px;
+}
+.selection_dropdown select {
+	text-align: right;
+}
+	

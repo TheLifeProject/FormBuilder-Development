@@ -1,0 +1,154 @@
+/* Generic FormBuilder Display Configuration */
+form.formBuilderForm {
+	text-align: left;
+	padding: 10px;
+ 	clear: both;
+}
+
+span.formbuilderLabel {
+	padding-bottom: 4px;
+	display: block;
+	width: 150px;
+	float: left;
+}
+
+div.info-box-formbuilder div.inside {
+	padding: 6px;
+}
+
+.formBuilderAdminForm table textarea {
+	height: 300px;
+}
+
+.formBuilderForm table.widefat span.formbuilderField textarea, 
+.formBuilderForm table.widefat span.formbuilderField input, 
+.formBuilderForm table.widefat span.formbuilderField select
+{
+	width: 435px;
+}
+
+table.widefat tr.hoverlite:hover {
+	background-color: #ffff99;
+}
+ 
+
+span.fbexport {
+	display: block;
+	position: relative;
+	float: right;
+}
+
+#formbuilder-admin-left, #formbuilder-admin-right {
+	width: 49%;
+	float: left;
+}
+
+#formbuilder-admin-right {
+	padding-left: 2%;
+}
+
+.clear {
+	clear: both;
+}
+
+div.formbuilder-subnav ul.subsubsub {
+	display: block;
+	clear: both;
+	float: none;
+}
+
+.formbuilder-plugin-update {
+	padding: 10px;
+	font-weight: bold;
+	color: #FF0000;
+}
+
+.fbxml-message {
+	margin: 4px;
+	padding: 10px;
+	border: 1px solid black;
+	background-color: #ffff99;
+}
+
+.fbxml-warning {
+	margin: 4px;
+	padding: 10px;
+	border: 1px solid red;
+	background-color: #FFEEEE;
+}
+
+.fbxml-control, .fbxml-control-confirm, .fbxml-control-deny {
+	margin: 4px;
+	padding: 6px;
+	font-weight: bold;
+	color: #FFFFFF;
+	display: inline;
+	float: left;
+	text-decoration: none;
+}
+
+.fbxml-control {
+	border: 1px solid #000088;
+	background-color: #000088;
+}
+.fbxml-control-confirm {
+	border: 1px solid #008800;
+	background-color: #008800;
+}
+.fbxml-control-deny {
+	border: 1px solid #880000;
+	background-color: #880000;
+}
+
+.fbxml-control:hover {
+	border: 1px solid #000088;
+	background-color: #FFFFFF;
+	color: #000088;
+}
+.fbxml-control-confirm:hover {
+	border: 1px solid #008800;
+	background-color: #FFFFFF;
+	color: #008800;
+}
+.fbxml-control-deny:hover {
+	border: 1px solid #880000;
+	background-color: #FFFFFF;
+	color: #880000;
+}
+
+
+.formBuilderHelpTextToggle {
+	position: relative;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background:none repeat scroll 0 0 #F9F9F9;
+	border:1px solid #CCCCCC;
+	padding:2px 6px;
+	color:#000000 !important;
+	text-decoration: none;
+	font-weight:normal;
+}
+
+.formBuilderForm div.formBuilderHelpText {
+	position: absolute;
+	visibility: hidden;
+}
+
+.formBuilderForm div.formBuilderHelpTextHidden {
+	visibility: hidden;
+	position: absolute;
+}
+
+.formBuilderForm div.formBuilderHelpTextVisible {
+	visibility: visible;
+	position: relative;
+	background-color: #FFFFEE;
+	border-style: dotted;
+	border-width: thin;
+	padding: 10px;
+	margin-bottom: 20px;
+	font-weight:normal;
+	text-align: left;
+	width: 590px;
+	font-size: 12px;
+}

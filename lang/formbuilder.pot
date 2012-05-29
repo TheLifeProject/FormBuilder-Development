@@ -1,0 +1,1441 @@
+# Copyright (C) 2010 FormBuilder
+# This file is distributed under the same license as the FormBuilder package.
+msgid ""
+msgstr ""
+"Project-Id-Version: FormBuilder 0.88\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/formbuilder\n"
+"POT-Creation-Date: 2011-09-09 21:59:11+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: formbuilder.php:171 php/formbuilder_admin_functions.php:76
+msgid "FormBuilder Management"
+msgstr ""
+
+#. #-#-#-#-#  plugin.pot (FormBuilder 0.88)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: formbuilder.php:171 php/formbuilder_post_metabox.inc.php:35
+#: php/formbuilder_post_metabox.inc.php:38
+msgid "FormBuilder"
+msgstr ""
+
+#: formbuilder.php:207
+msgid "Manage"
+msgstr ""
+
+#: formbuilder.php:667 html/options_strings.inc.php:19
+msgid "Form Problem:"
+msgstr ""
+
+#: formbuilder.php:668 html/options_strings.inc.php:24
+msgid "You have already submitted this form data once."
+msgstr ""
+
+#: formbuilder.php:669 html/options_strings.inc.php:29
+msgid ""
+"The CAPTCHA field below may not work due to cookies being disabled in your "
+"browser.  Please turn on cookies in order to fill out this form."
+msgstr ""
+
+#: formbuilder.php:670 html/options_strings.inc.php:34
+msgid ""
+"Captcha functionality unavailable.  Please inform the website administrator."
+msgstr ""
+
+#: formbuilder.php:671 html/options_strings.inc.php:39
+msgid "Previous"
+msgstr ""
+
+#: formbuilder.php:672 html/options_strings.inc.php:44
+msgid "Next"
+msgstr ""
+
+#: formbuilder.php:673 html/options_strings.inc.php:49
+msgid "Send!"
+msgstr ""
+
+#: formbuilder.php:674 html/options_strings.inc.php:54
+msgid "Success!"
+msgstr ""
+
+#: formbuilder.php:675 html/options_strings.inc.php:59
+msgid "Failed!"
+msgstr ""
+
+#: formbuilder.php:676 html/options_strings.inc.php:64
+msgid "Your message has been sent successfully."
+msgstr ""
+
+#: formbuilder.php:677 html/options_strings.inc.php:69
+msgid "Your message has NOT been sent successfully."
+msgstr ""
+
+#: formbuilder.php:678 html/options_strings.inc.php:74
+msgid ""
+"You seem to have missed or had mistakes in the following required field(s)."
+msgstr ""
+
+#: formbuilder.php:679 html/options_strings.inc.php:79
+msgid "ERROR!  Unable to display form!"
+msgstr ""
+
+#: formbuilder.php:680 html/options_strings.inc.php:84
+msgid ""
+"Error: Form processing failure.  Unable to store the form data in the "
+"database."
+msgstr ""
+
+#: formbuilder.php:681 html/options_strings.inc.php:89
+msgid ""
+"* It looks like an alternate destination_email field was defined for this "
+"form, but the email address it contained was invalid"
+msgstr ""
+
+#: formbuilder.php:682 html/options_strings.inc.php:94
+msgid "TO Header Injection Detected!"
+msgstr ""
+
+#: formbuilder.php:683 html/options_strings.inc.php:99
+msgid "SUBJECT Header Injection Detected!"
+msgstr ""
+
+#: formbuilder.php:684 html/options_strings.inc.php:104
+msgid ""
+"Mail server error.  Unable to send email.  Try switching FormBuilder to use "
+"Alternate Email Handling on the main configuration page."
+msgstr ""
+
+#: formbuilder.php:685 html/options_strings.inc.php:109
+msgid ""
+"Mail server error.  Unable to send email using the built-in WordPress mail "
+"controls.  "
+msgstr ""
+
+#: captcha/CaptchaSecurityImages.php:46
+msgid "Cannot initialize new GD image stream"
+msgstr ""
+
+#: captcha/CaptchaSecurityImages.php:60
+msgid "Error in imagettfbbox function"
+msgstr ""
+
+#: captcha/CaptchaSecurityImages.php:63
+msgid "Error in imagettftext function"
+msgstr ""
+
+#: modules/alternate_action.php:42
+msgid ""
+"Alternate Form Action does NOT look like a valid URL.  Please contact the "
+"website administrator."
+msgstr ""
+
+#: modules/alternate_action.php:143
+msgid "Only HTTP request are supported !"
+msgstr ""
+
+#: class/FBFormEditor.class.php:79 html/options_edit_form.inc.php:502
+#: php/formbuilder_admin_pages.inc.php:262
+msgid "Add New Field"
+msgstr ""
+
+#: class/FBFormEditor.class.php:96 php/formbuilder_admin_pages.inc.php:278
+msgid "Add Another"
+msgstr ""
+
+#: class/FBFormEditor.class.php:112
+#: extensions/formbuilder_xml_db_results.class.php:736
+#: php/formbuilder_admin_pages.inc.php:309
+msgid "Delete"
+msgstr ""
+
+#: class/FBFormEditor.class.php:142 php/formbuilder_admin_pages.inc.php:339
+msgid "Move Up"
+msgstr ""
+
+#: class/FBFormEditor.class.php:185 php/formbuilder_admin_pages.inc.php:382
+msgid "Move Down"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:81
+msgid "Database XML Backup"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:83
+msgid ""
+"FormBuilder is now able to store XML copies of all submitted form data in "
+"the MySQL database.  If you wish to enable this feature, select the checkbox "
+"below and click Save."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:95
+msgid "Save form data in XML format in the database"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:95
+msgid "Yes!"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:96
+#: html/options_settings.inc.php:79 html/options_settings.inc.php:111
+#: html/options_settings.inc.php:141 html/options_settings.inc.php:166
+#: html/options_settings.inc.php:191 html/options_settings.inc.php:223
+#: html/options_settings.inc.php:247 html/options_settings.inc.php:273
+#: html/options_settings.inc.php:298 html/options_settings.inc.php:324
+#: html/options_settings.inc.php:361 html/options_edit_form.inc.php:503
+#: html/options_strings.inc.php:120 html/options_edit_response.inc.php:22
+msgid "Save"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:98
+msgid "Click here to manage the forms currently stored in your database."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:99
+msgid "Click here to export form results to CSV."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:113
+msgid "Export Data:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:117
+msgid "Please select the date range you wish to export data from:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:118
+#: extensions/formbuilder_xml_db_results.class.php:195
+msgid "From:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:119
+#: extensions/formbuilder_xml_db_results.class.php:196
+msgid "To:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:121
+msgid "Select the form(s) you would like to export data from:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:123
+msgid "All Forms (non-standard CSV format)"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:137
+#: extensions/formbuilder_xml_db_results.class.php:735
+msgid "Export"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:190
+msgid "Mass Delete:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:194
+msgid "Please select the date range you wish to delete messages from:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:198
+msgid "Select the form(s) from which you would like to delete messages:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:200
+msgid "All Forms"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:214
+msgid ""
+"Check the box to confirm you wish to mass delete the messages indicated "
+"above."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:215
+#: extensions/formbuilder_xml_db_results.class.php:699
+msgid "Mass Delete"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:295
+msgid "ReSend Form Results"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:307
+#: extensions/formbuilder_xml_db_results.class.php:442
+msgid "Error resending email.  Error message was:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:313
+#: extensions/formbuilder_xml_db_results.class.php:448
+msgid "Sending Email Now."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:323
+msgid "This email has been re-sent."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:329
+msgid ""
+"Are you sure you want to resend the following email?  It will be sent using "
+"the standard FB email controls to"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:338
+#: extensions/formbuilder_xml_db_results.class.php:530
+#: html/options_edit_form.inc.php:4
+msgid "Form Details"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:360
+msgid "Yes.  Resend it to:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:361
+#: extensions/formbuilder_xml_db_results.class.php:506
+msgid "No.  Do not resend it."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:428
+msgid "Mass ReSend Form Results"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:459
+msgid "These emails have been re-sent."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:466
+msgid ""
+"Are you sure you want to resend the following emails?  They will be sent "
+"using the standard FB email controls."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:475
+msgid "Emails to be resent:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:505
+msgid "Yes.  Resend all."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:551
+msgid "Resend This Email"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:552
+msgid "Go Back To Previous Page"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:570
+msgid "Recent Form Results:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:695
+msgid "Click to toggle all ON or OFF."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:695
+msgid "toggle"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:696
+msgid "Date:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:700
+msgid "Full Export"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:701
+#: extensions/formbuilder_xml_db_results.class.php:740
+msgid "Page:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:703
+msgid "Message:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:733
+msgid "With Selected:"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:737
+msgid "Resend"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:739
+msgid "Go"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:778
+msgid "We're sorry, the export seems to have failed.  Please try again."
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:810
+msgid "Result ID"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:810
+msgid "Form ID"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:810
+msgid "Timestamp"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:811
+msgid "FormSubject"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:811
+msgid "FormRecipient"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:829
+#: extensions/formbuilder_xml_db_results.class.php:842
+msgid "Field Values"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:835
+msgid "IP"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:836
+#: html/options_default.inc.php:106
+msgid "Page"
+msgstr ""
+
+#: extensions/formbuilder_xml_db_results.class.php:837
+msgid "Referrer"
+msgstr ""
+
+#: html/options_settings.inc.php:27
+msgid "Saved new permissions settings."
+msgstr ""
+
+#: html/options_settings.inc.php:31
+msgid "Permissions Configuration:"
+msgstr ""
+
+#: html/options_settings.inc.php:33
+msgid ""
+"You can use these controls to determine what user levels are allowed to "
+"access various components of FormBuilder."
+msgstr ""
+
+#: html/options_settings.inc.php:39
+msgid "Administrators:"
+msgstr ""
+
+#: html/options_settings.inc.php:42 html/options_settings.inc.php:55
+#: html/options_settings.inc.php:68
+msgid "Connect Forms"
+msgstr ""
+
+#: html/options_settings.inc.php:45 html/options_settings.inc.php:58
+#: html/options_settings.inc.php:71
+msgid "Create Forms"
+msgstr ""
+
+#: html/options_settings.inc.php:48 html/options_settings.inc.php:61
+#: html/options_settings.inc.php:74
+msgid "Manage Settings"
+msgstr ""
+
+#: html/options_settings.inc.php:52
+msgid "Editors:"
+msgstr ""
+
+#: html/options_settings.inc.php:65
+msgid "Authors:"
+msgstr ""
+
+#: html/options_settings.inc.php:99
+msgid "IP Capture:"
+msgstr ""
+
+#: html/options_settings.inc.php:100 html/options_settings.inc.php:108
+#: html/options_settings.inc.php:130 html/options_settings.inc.php:138
+#: html/options_settings.inc.php:156 html/options_settings.inc.php:164
+#: html/options_settings.inc.php:181 html/options_settings.inc.php:188
+#: html/options_settings.inc.php:237 html/options_settings.inc.php:245
+#: html/options_settings.inc.php:263 html/options_settings.inc.php:271
+#: html/options_settings.inc.php:288 html/options_settings.inc.php:296
+#: html/options_settings.inc.php:314 html/options_settings.inc.php:322
+#: html/options_settings.inc.php:340 html/options_settings.inc.php:359
+msgid "Enabled"
+msgstr ""
+
+#: html/options_settings.inc.php:101 html/options_settings.inc.php:109
+#: html/options_settings.inc.php:131 html/options_settings.inc.php:139
+#: html/options_settings.inc.php:157 html/options_settings.inc.php:163
+#: html/options_settings.inc.php:182 html/options_settings.inc.php:189
+#: html/options_settings.inc.php:238 html/options_settings.inc.php:244
+#: html/options_settings.inc.php:264 html/options_settings.inc.php:270
+#: html/options_settings.inc.php:289 html/options_settings.inc.php:295
+#: html/options_settings.inc.php:315 html/options_settings.inc.php:321
+#: html/options_settings.inc.php:341 html/options_settings.inc.php:358
+msgid "Disabled"
+msgstr ""
+
+#: html/options_settings.inc.php:104
+msgid ""
+"FormBuilder can now attempt to capture the IP address of visitors who fill "
+"in forms on your website.  This information can be used for security "
+"purposes, or to report harassment problems to the appropriate authorities."
+msgstr ""
+
+#: html/options_settings.inc.php:129
+msgid "Referrer Info:"
+msgstr ""
+
+#: html/options_settings.inc.php:134
+msgid ""
+"FormBuilder can now attempt to track the page URL and referrer of visitors "
+"who fill in forms on your website."
+msgstr ""
+
+#: html/options_settings.inc.php:155
+msgid "Alternate Email Handling: "
+msgstr ""
+
+#: html/options_settings.inc.php:160
+msgid ""
+"If you are having difficulty receiving email sent in on your forms, try "
+"setting this to enable Alternate Email Handling."
+msgstr ""
+
+#: html/options_settings.inc.php:180
+msgid "Standard CSS: "
+msgstr ""
+
+#: html/options_settings.inc.php:185
+msgid ""
+"The FormBuilder comes with a standard CSS formatting file which can be used "
+"in the event that your template does not have support for the FormBuilder "
+"fields.  By default, use of this standard CSS is enabled, but in the event "
+"that you wish to use custom CSS, or a template which already supports the "
+"FormBuilder system, you may disable the built-in CSS formatting by selecting "
+"your preference below."
+msgstr ""
+
+#: html/options_settings.inc.php:198
+msgid "Uninstall FormBuilder"
+msgstr ""
+
+#: html/options_settings.inc.php:200
+msgid ""
+"If for some reason you need to uninstall the FormBuilder plugin, you may %"
+"sclick here to uninstall the FormBuilder tables from your database%s."
+msgstr ""
+
+#: html/options_settings.inc.php:210
+msgid "Spam Blocker"
+msgstr ""
+
+#: html/options_settings.inc.php:212
+msgid ""
+"The FormBuilder can employ a %sspam blocking system%s in order to prevent "
+"automated computers from spamming the forms.  To accomplish this we put a "
+"field on the form that has been hidden, so that computers can see it, but "
+"people cannot.  If the field has been filled out when the form is submitted, "
+"the system will assume that a spammer is attempting to use the form, and "
+"will ignore the submission."
+msgstr ""
+
+#: html/options_settings.inc.php:213
+msgid ""
+"In order to help make this spam blocker more effective, you can specify a "
+"name for this spam blocker that will be used when it is displayed in the "
+"code of your form."
+msgstr ""
+
+#: html/options_settings.inc.php:236
+msgid "Blacklist Checking: "
+msgstr ""
+
+#: html/options_settings.inc.php:241
+msgid ""
+"If desired, you can have all submitted form data checked against the "
+"blacklisted words set in the WordPress discussion settings.  If blacklisted "
+"words are used, the form will not be sent and an error will be shown to the "
+"visitor.  You can edit the blacklisted phrases in the WordPress discussion "
+"settings."
+msgstr ""
+
+#: html/options_settings.inc.php:262
+msgid "Greylist Checking: "
+msgstr ""
+
+#: html/options_settings.inc.php:267
+msgid ""
+"If desired, you can have all submitted form data checked against the "
+"greylisted words set in the WordPress discussion settings.  (See \"Comment "
+"Moderation\")  If greylisted words are used, the form will still be sent, "
+"however the subject line will be modified to indicate POSSIBLE SPAM."
+msgstr ""
+
+#: html/options_settings.inc.php:287
+msgid "Excessive Link Checking: "
+msgstr ""
+
+#: html/options_settings.inc.php:292
+msgid ""
+"If desired, you can have all submitted form data checked for excessive "
+"numbers of links, as defined in the WordPress discussion options.  (See "
+"\"Comment Moderation\")  If excessive numbers of links are found the form "
+"will still be sent, however the subject line will be modified to indicate "
+"POSSIBLE SPAM."
+msgstr ""
+
+#: html/options_settings.inc.php:313
+msgid "Spammer IP Checking: "
+msgstr ""
+
+#: html/options_settings.inc.php:318
+msgid ""
+"If desired, you can have the source IP addresses of all form submissions "
+"checked against the Stop Forum Spam API. (http://www.stopforumspam.com/apis) "
+"If the sender IP is verified as a spammer the form will still be sent, "
+"however the subject line will be modified to indicate POSSIBLE SPAM."
+msgstr ""
+
+#: html/options_settings.inc.php:339
+msgid "Akismet Checking: "
+msgstr ""
+
+#: html/options_settings.inc.php:344
+msgid ""
+"If desired, you can have all submitted form data checked against Akismet.  "
+"If Akismet indicates the submission is spam, the form will still be sent, "
+"however the subject line will be modified to indicate POSSIBLE AKISMET SPAM."
+msgstr ""
+
+#: html/options_settings.inc.php:350
+msgid ""
+"In order to use this functionality, the Akismet plugin MUST be installed and "
+"activated, and database backup of the forms must also be enabled."
+msgstr ""
+
+#: html/options_edit_form.inc.php:6
+msgid "You may use these controls to modify a form on your blog."
+msgstr ""
+
+#: html/options_edit_form.inc.php:11
+msgid "Form Controls"
+msgstr ""
+
+#: html/options_edit_form.inc.php:45
+msgid "NAME"
+msgstr ""
+
+#: html/options_edit_form.inc.php:53 html/options_edit_form.inc.php:54
+#: html/options_edit_form.inc.php:59 php/formbuilder_admin_pages.inc.php:477
+#: php/formbuilder_admin_pages.inc.php:478
+msgid "What do you want to call this contact form?"
+msgstr ""
+
+#: html/options_edit_form.inc.php:65
+msgid "SUBJECT"
+msgstr ""
+
+#: html/options_edit_form.inc.php:73 html/options_edit_form.inc.php:74
+#: html/options_edit_form.inc.php:79 php/formbuilder_admin_pages.inc.php:483
+#: php/formbuilder_admin_pages.inc.php:484
+msgid "The subject line for the email you receive from the form."
+msgstr ""
+
+#: html/options_edit_form.inc.php:85
+msgid "RECIPIENT"
+msgstr ""
+
+#: html/options_edit_form.inc.php:93 html/options_edit_form.inc.php:94
+#: html/options_edit_form.inc.php:98 php/formbuilder_admin_pages.inc.php:489
+#: php/formbuilder_admin_pages.inc.php:490
+msgid "What email address should the data from this contact form be mailed to?"
+msgstr ""
+
+#: html/options_edit_form.inc.php:99
+msgid ""
+"You can include more than one email address by separating them with commas.  "
+"Example: address1@domain.com, address2@domain.com, address3@domain.com"
+msgstr ""
+
+#: html/options_edit_form.inc.php:105
+msgid "METHOD"
+msgstr ""
+
+#: html/options_edit_form.inc.php:109 html/options_edit_form.inc.php:110
+#: html/options_edit_form.inc.php:118 php/formbuilder_admin_pages.inc.php:495
+#: php/formbuilder_admin_pages.inc.php:496
+msgid "How should this form post data?  If you are unsure, leave it on POST"
+msgstr ""
+
+#: html/options_edit_form.inc.php:124
+msgid "ACTION"
+msgstr ""
+
+#: html/options_edit_form.inc.php:128 html/options_edit_form.inc.php:129
+#: html/options_edit_form.inc.php:174 php/formbuilder_admin_pages.inc.php:501
+#: php/formbuilder_admin_pages.inc.php:502
+msgid ""
+"You may specify an alternate form processing system if necessary.  If you "
+"are unsure, leave it alone."
+msgstr ""
+
+#: html/options_edit_form.inc.php:175
+msgid ""
+"If you are using the Alternate Action module, you may specify the full URL "
+"of the alternate form processor in the THANKYOUTEXT field of the form.  Once "
+"the submitted data has been verified, it will be re-posted to this alternate "
+"system.  This ability may not be supported on all servers.  Please test "
+"before deploying to production systems."
+msgstr ""
+
+#: html/options_edit_form.inc.php:176
+msgid ""
+"If you are using the Form Redirect module, create a 'followup page' type "
+"form field, and put the url you wish to redirect people to in the field "
+"value."
+msgstr ""
+
+#: html/options_edit_form.inc.php:182
+msgid "THANKYOUTEXT"
+msgstr ""
+
+#: html/options_edit_form.inc.php:187 html/options_edit_form.inc.php:188
+#: php/formbuilder_admin_pages.inc.php:537
+msgid "What message would you like to show your visitors?"
+msgstr ""
+
+#: html/options_edit_form.inc.php:194 php/formbuilder_admin_pages.inc.php:538
+msgid ""
+"What message would you like to show your visitors when the successfully "
+"complete the form?"
+msgstr ""
+
+#: html/options_edit_form.inc.php:200
+msgid "AUTORESPONSE"
+msgstr ""
+
+#: html/options_edit_form.inc.php:204 html/options_edit_form.inc.php:205
+#: php/formbuilder_admin_pages.inc.php:543
+msgid "You may specify an autoresponse to send back if necessary."
+msgstr ""
+
+#: html/options_edit_form.inc.php:225 php/formbuilder_admin_pages.inc.php:544
+msgid ""
+"You may specify an autoresponse to send back if necessary.  You should have "
+"alread created them on the main FormBuilder Management page."
+msgstr ""
+
+#: html/options_edit_form.inc.php:241
+msgid "FORM TAGS"
+msgstr ""
+
+#: html/options_edit_form.inc.php:244 html/options_edit_form.inc.php:245
+msgid "Add optional tags to the form separated by commas."
+msgstr ""
+
+#: html/options_edit_form.inc.php:251
+msgid ""
+"Add optional tags to the form.  Separate by commas.  Example: tag1, tag2, "
+"tag3"
+msgstr ""
+
+#: html/options_edit_form.inc.php:263
+msgid "Save Form"
+msgstr ""
+
+#: html/options_edit_form.inc.php:269
+msgid "Fields"
+msgstr ""
+
+#: html/options_edit_form.inc.php:284
+msgid "Field #%d Options"
+msgstr ""
+
+#: html/options_edit_form.inc.php:285
+msgid "Add another field where this one is now."
+msgstr ""
+
+#: html/options_edit_form.inc.php:286
+msgid "Delete this field."
+msgstr ""
+
+#: html/options_edit_form.inc.php:287
+msgid "Move this field up one."
+msgstr ""
+
+#: html/options_edit_form.inc.php:288
+msgid "Move this field down one."
+msgstr ""
+
+#: html/options_edit_form.inc.php:297
+msgid "FIELD TYPE"
+msgstr ""
+
+#: html/options_edit_form.inc.php:301 html/options_edit_form.inc.php:302
+msgid "Select the type of field that you wish to have shown in this location."
+msgstr ""
+
+#: html/options_edit_form.inc.php:319
+msgid ""
+"Select the type of field that you wish to have shown in this location.  Most "
+"of them require a field name and label.  Field value is optional."
+msgstr ""
+
+#: html/options_edit_form.inc.php:331
+msgid "FIELD NAME"
+msgstr ""
+
+#: html/options_edit_form.inc.php:339 html/options_edit_form.inc.php:340
+msgid "Enter a name for this field.  Should be only letters and underscores."
+msgstr ""
+
+#: html/options_edit_form.inc.php:345
+msgid ""
+"Enter a name for this field.  Should be only letters and underscores.  This "
+"field will come through in the email something like this:"
+msgstr ""
+
+#: html/options_edit_form.inc.php:346
+msgid "FIELD NAME: The data entered by the user would be here."
+msgstr ""
+
+#: html/options_edit_form.inc.php:357
+msgid "FIELD VALUE"
+msgstr ""
+
+#: html/options_edit_form.inc.php:363 html/options_edit_form.inc.php:364
+msgid "If necessary, enter a predefined value for the field."
+msgstr ""
+
+#: html/options_edit_form.inc.php:370
+msgid ""
+"If necessary, enter a predefined value for the fiel.  Most field types do "
+"not require a value.  Only Radio Buttons, Selection Dropdowns and Comments."
+msgstr ""
+
+#: html/options_edit_form.inc.php:371
+msgid "Radio Buttons and Selection Dropdowns:"
+msgstr ""
+
+#: html/options_edit_form.inc.php:372
+msgid ""
+"Each option should be put in the field value, one per line.  These options "
+"will be used as the values for users to choose from on the form."
+msgstr ""
+
+#: html/options_edit_form.inc.php:373
+msgid "Comments Fields:"
+msgstr ""
+
+#: html/options_edit_form.inc.php:374
+msgid ""
+"The information in the field value will be displayed as a comment on the "
+"form."
+msgstr ""
+
+#: html/options_edit_form.inc.php:385
+msgid "FIELD LABEL"
+msgstr ""
+
+#: html/options_edit_form.inc.php:393 html/options_edit_form.inc.php:394
+msgid "The label you want to have in front of this field."
+msgstr ""
+
+#: html/options_edit_form.inc.php:399
+msgid ""
+"The label you want to have in front of this field.  When shown on the form, "
+"it will appear something like:"
+msgstr ""
+
+#: html/options_edit_form.inc.php:400
+msgid "FIELD LABEL: [input box]"
+msgstr ""
+
+#: html/options_edit_form.inc.php:401
+msgid "For submit images, this must be the path to the image to be used."
+msgstr ""
+
+#: html/options_edit_form.inc.php:412
+msgid "REQUIRED DATA"
+msgstr ""
+
+#: html/options_edit_form.inc.php:416 html/options_edit_form.inc.php:417
+#: html/options_edit_form.inc.php:435
+msgid ""
+"If you want this field to be required, select the type of data it should "
+"look for."
+msgstr ""
+
+#: html/options_edit_form.inc.php:447
+msgid "ERROR MESSAGE"
+msgstr ""
+
+#: html/options_edit_form.inc.php:455 html/options_edit_form.inc.php:456
+#: html/options_edit_form.inc.php:461
+msgid ""
+"The error message to be displayed if the required field is not filled in."
+msgstr ""
+
+#: html/options_edit_form.inc.php:472
+msgid "HELP TEXT"
+msgstr ""
+
+#: html/options_edit_form.inc.php:476 html/options_edit_form.inc.php:477
+#: html/options_edit_form.inc.php:483
+msgid ""
+"The message to be shown in case the user needs additional help with filling "
+"out the field."
+msgstr ""
+
+#: html/options_default.inc.php:5
+msgid "Current Forms"
+msgstr ""
+
+#: html/options_default.inc.php:37
+msgid "These are the forms that you currently have running on your blog."
+msgstr ""
+
+#: html/options_default.inc.php:38
+msgid "Click here%s to create a new form"
+msgstr ""
+
+#: html/options_default.inc.php:127
+msgid "ID #"
+msgstr ""
+
+#: html/options_default.inc.php:128 html/options_default.inc.php:189
+msgid "Name"
+msgstr ""
+
+#: html/options_default.inc.php:129 html/options_default.inc.php:190
+msgid "Subject"
+msgstr ""
+
+#: html/options_default.inc.php:130
+msgid "Recipient"
+msgstr ""
+
+#: html/options_default.inc.php:154
+msgid "Manually include this form with %s in the page/post content."
+msgstr ""
+
+#: html/options_default.inc.php:159 html/options_default.inc.php:215
+msgid "Edit"
+msgstr ""
+
+#: html/options_default.inc.php:161 html/options_default.inc.php:217
+msgid "Copy"
+msgstr ""
+
+#: html/options_default.inc.php:163
+msgid "Are you sure you want to delete this form?"
+msgstr ""
+
+#: html/options_default.inc.php:163 html/options_default.inc.php:219
+msgid "Remove"
+msgstr ""
+
+#: html/options_default.inc.php:182 html/options_edit_response.inc.php:3
+msgid "Current Autoresponses"
+msgstr ""
+
+#: html/options_default.inc.php:184
+msgid ""
+"These are the autoresponses that you have available to use with your forms."
+msgstr ""
+
+#: html/options_default.inc.php:185
+msgid "Click here%s to create a new autoresponse."
+msgstr ""
+
+#: html/options_default.inc.php:191
+msgid "Actions"
+msgstr ""
+
+#: html/options_default.inc.php:219
+msgid "Are you sure you want to delete this autoresponse?"
+msgstr ""
+
+#: html/options_strings.inc.php:7
+msgid "Translatable Strings"
+msgstr ""
+
+#: html/options_strings.inc.php:9
+msgid ""
+"In some cases it can be useful to have text strings that appear on the site "
+"show up in another language without having to translate the entire WordPress "
+"interface.  This page allows you to translate or change all text that isn't "
+"form specific displayed to the visitor when filling out forms on the site."
+msgstr ""
+
+#: html/options_strings.inc.php:14
+msgid "Text String"
+msgstr ""
+
+#: html/options_strings.inc.php:15
+msgid "Translated String"
+msgstr ""
+
+#: html/options_strings.inc.php:114
+msgid "Reset all text strings to original English values."
+msgstr ""
+
+#: html/options_edit_response.inc.php:5
+msgid ""
+"You may use these controls to modify an autoresponse on your blog.  When "
+"linked to a form, the autoresponse you create here will be emailed to the "
+"first email address listed on the form in question.  In other words, you "
+"must specify at least one field on the form as requiring an email address."
+msgstr ""
+
+#: html/options_edit_response.inc.php:10
+msgid "Autoresponse Controls"
+msgstr ""
+
+#: php/formbuilder_admin_functions.php:66
+msgid "Settings"
+msgstr ""
+
+#: php/formbuilder_admin_functions.php:67
+msgid "Forms"
+msgstr ""
+
+#: php/formbuilder_admin_functions.php:68
+msgid "Stored Results"
+msgstr ""
+
+#: php/formbuilder_admin_functions.php:69
+msgid "Text Translations"
+msgstr ""
+
+#: php/formbuilder_admin_functions.php:84
+msgid ""
+"WARNING: FormBuilder has known compatibility issues with the '%s' theme."
+msgstr ""
+
+#: php/formbuilder_admin_functions.php:173
+msgid "Blog"
+msgstr ""
+
+#: php/formbuilder_admin_functions.php:174
+msgid "Documentation"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:33
+msgid "New AutoResponse"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:34
+msgid ""
+"This is a new, empty autoresponse that you can now modify to suit your needs."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:63
+msgid "You must enter a name for this autoresponse."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:66
+msgid "You must enter a subject for this autoresponse."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:69
+msgid "You must enter a message for this autoresponse."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:72
+msgid "You must enter a from name for this autoresponse."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:75
+msgid "You must enter a from email address for this autoresponse."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:81
+msgid "ERROR.  Your response failed to save."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:83
+msgid ""
+"Your autoresponse has been saved.  %sYou may click here to return to the "
+"main FormBuilder options page.%s"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:107
+msgid "What do you want to call this autoresponse?"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:108
+msgid ""
+"What do you want to call this autoresponse?  This will appear on the main "
+"FormContact Management page, as well as in a dropdown list of related "
+"autoresponses when editing the forms."
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:113
+#: php/formbuilder_autoresponse_functions.inc.php:114
+msgid "What do you want the subject line of this autoresponse email to be?"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:119
+#: php/formbuilder_autoresponse_functions.inc.php:120
+msgid "What should the autoresponse email say?"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:125
+#: php/formbuilder_autoresponse_functions.inc.php:126
+msgid ""
+"What email address should the data from this contact form be mailed from?"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:131
+#: php/formbuilder_autoresponse_functions.inc.php:132
+msgid "What name should the data from this contact form be mailed from?"
+msgstr ""
+
+#: php/formbuilder_autoresponse_functions.inc.php:158
+#: php/formbuilder_admin_pages.inc.php:693
+msgid " (COPY)"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:45
+msgid "Creating new form.  Please wait..."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:53
+msgid "A New Form"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:54
+msgid "Generic Website Feedback Form"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:68
+msgid "Unable to create new form fields.  Attempted to run the following SQL: "
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:72
+msgid "The form has been created.  You can edit it %shere%s."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:79
+msgid "Unable to create new form.  Attempted to run the following SQL: "
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:111
+#: php/formbuilder_admin_pages.inc.php:429
+msgid ""
+"Your form has been saved.  %sYou may click here to return to the main "
+"FormBuilder options page.%s"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:187
+msgid "ERROR.  Your tags failed to update."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:188
+#: php/formbuilder_admin_pages.inc.php:205
+#: php/formbuilder_admin_pages.inc.php:214
+#: php/formbuilder_admin_pages.inc.php:252
+msgid "The error was: %s"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:204
+msgid "Failed inserting tag '%s'."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:213
+msgid "ERROR.  Your form failed to save."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:232
+msgid ""
+"ERROR.  You have a field on your form with an empty field name.  The field "
+"is a '%s'  All fields MUST have a unique field name."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:251
+msgid "ERROR.  Problems were detected while saving your form fields."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:503
+msgid "Form to Email - Convert the form results to an email."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:572
+msgid "Requires some sort of text in this field."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:573
+msgid "Requires a name."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:574
+msgid "Requires an email address."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:575
+msgid "Requires an email address"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:576
+msgid "Requires a phone number."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:577
+msgid "Requires some sort of number."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:578
+msgid "Requires a valid URL."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:579
+msgid "Requires a single word."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:580
+msgid "Requires a date stamp in the form of (dd/mm/yyyy)"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:581
+msgid ""
+"Requires a valid credit card number.  Will attempt to determine whether the "
+"card number matches a valid pattern.  Does NOT check for card expiry or "
+"ownership."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:590
+msgid "Single check box."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:591
+msgid ""
+"Special field just for text on the form.  Put the text in the field value."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:592
+msgid "Standard single line text box."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:593
+msgid "Small multi-line text box."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:594
+msgid "Large multi-line text box."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:595
+msgid "Used for password entry.  Characters are hidden."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:596
+msgid "Date selection field."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:597
+msgid "Put a unique ID on your forms."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:598
+msgid "Radio selection buttons.  Enter one per line in the field value."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:599
+msgid "Dropdown box.  Enter one value per line in the field value."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:600
+msgid "A hidden field on the form.  The data will appear in the email."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:601
+msgid ""
+"Special field just for indicating a followup url, once the form has been "
+"submitted.  Put the url you want people to be redirected to in the field "
+"value."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:602
+msgid ""
+"A special selection dropdown allowing the visitor to specify an alternate "
+"form recipient.  Enter values in the form of email@domain.com|Destination "
+"Name."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:603
+msgid ""
+"Special field on the form.  Read more on the FormBuilder admin page.  Only "
+"needs a field name."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:604
+msgid ""
+"Allows you to break your form into multiple pages.  Needs field name and "
+"field label."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:605
+msgid ""
+"Allows you to put a customized reset button anywhere on the form.  Needs "
+"field name and field label."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:606
+msgid ""
+"Allows you to put a customized submit button anywhere on the form.  Needs "
+"field name and field label."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:607
+msgid ""
+"Allows you to put a customized submit image anywhere on the form.  Needs "
+"field name and field label.  Field label must be the PATH TO THE IMAGE to be "
+"used for the submit button."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:608
+msgid ""
+"Allows assigning variables to the form without having them displayed on the "
+"form itself.  Like hidden fields, but not shown even in the HTML code."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:609
+msgid ""
+"The same as a normal checkbox, but must be checked in order to submit the "
+"form."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:610
+msgid ""
+"Forces the visitor to enter a predetermined required password in order to "
+"submit the form.  Enter the password they should use into the FIELD VALUE"
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:611
+msgid ""
+"A hidden system field that automatically captures the visitor's WordPress "
+"username if they are logged in."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:615
+msgid ""
+"Special field on the form for displaying CAPTCHAs.  Field name is used for "
+"identifying the field.  Field label is used to give the visitor further "
+"instruction on what to fill out."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:685
+msgid "Copying form. Please wait..."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:718
+msgid "The form has been copied.  You can edit it %shere%s."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:733
+msgid "Deleting form.  Please wait..."
+msgstr ""
+
+#: php/formbuilder_admin_pages.inc.php:754
+msgid "The form has been deleted."
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1243
+#: php/formbuilder_activation_script.inc.php:1296
+msgid "UnInstall FormBuilder"
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1244
+msgid "You must have administrator privilages to uninstall FormBuilder."
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1284
+msgid "FormBuilder UnInstalled!"
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1285
+msgid ""
+"FormBuilder has been uninstalled from your blog.  You should now deactivate "
+"the plugin on your plugins page.  If you do not do so, and instead return to "
+"the FormBuilder administration page, the plugin will be reinstalled with a "
+"fresh set of databases. (ie. if you want to start over with a clean install)"
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1286
+msgid "Click here to go to your plugins page and deactivate FormBuilder"
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1297
+msgid ""
+"Do you really want to completely uninstall the FormBuilder plugin?  This "
+"will completely remove all FormBuilder related data from the database."
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1297
+msgid "BE VERY SURE YOU WANT TO DO THIS!"
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1298
+msgid "No thanks!  Take me away from here."
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1301
+msgid ""
+"Last chance to turn back... Are you sure you want to remove FormBuilder and "
+"all it\\'s data from your blog?"
+msgstr ""
+
+#: php/formbuilder_activation_script.inc.php:1302
+msgid "YES, PLEASE REMOVE FORMBUILDER FROM MY BLOG!"
+msgstr ""
+
+#: php/formbuilder_post_metabox.inc.php:66
+msgid "Description for this field"
+msgstr ""
+
+#: php/formbuilder_post_metabox.inc.php:98
+msgid ""
+"If you wish to display a contact form that you have created using the "
+"FormBuilder plugin, please select it from the following options."
+msgstr ""
+
+#: php/formbuilder_post_metabox.inc.php:100
+msgid "Select Contact Form..."
+msgstr ""
+
+#: php/formbuilder_export_results.php:41
+msgid "You must be logged in as an editor or higher to access this page."
+msgstr ""
+
+#: php/formbuilder_processing.inc.php:274
+msgid "The password you entered is incorrect."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://truthmedia.com/wordpress/formbuilder"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"The FormBuilder plugin allows the administrator to create contact forms of a "
+"variety of types for use on their WordPress blog.  The FormBuilder has built-"
+"in spam protection and can be further protected by installing the Akismet "
+"anti-spam plugin.  Uninstall instructions can be found <a href=\"http://"
+"truthmedia.com/wordpress/formbuilder/documentation/uninstall/\">here</a>.  "
+"Forms can be included on your pages and posts either by selecting the "
+"appropriate form in the dropdown below the content editing box, or by adding "
+"them directly to the content with [formbuilder:#] where # is the ID number "
+"of the form to be included."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "TruthMedia Internet Group"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://truthmedia.com/"
+msgstr ""
