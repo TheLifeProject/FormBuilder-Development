@@ -188,11 +188,11 @@
 			$results = $wpdb->get_results($sql, ARRAY_A);
 			foreach($results as $r)
 			{
-				$formTags[] = preg_replace('/[^a-z0-9]/isU', '', $r['tag']);
+				$formTags[] = preg_replace('/[^a-z0-9_-]/isU', '', $r['tag']);
 			}
-			$formTags = implode(' FormBuilder', $formTags);
+			$formTags = implode(' ', $formTags);
 
-			$formDisplay = "\n<form class='formBuilderForm $formTags' id='formBuilder$formID' " .
+			$formDisplay = "\n<form class='formBuilderForm form-horizontal $formTags' id='formBuilder$formID' " .
 					"action='" . $form['action_target'] . "' method='" . strtolower($form['method']) . "' onsubmit='return fb_disableForm(this);'>" .
 					"<input type='hidden' name='formBuilderForm[FormBuilderID]' value='" . $form_id . "' />";
 
@@ -252,7 +252,7 @@ function toggleVisOff(boxid)
 				if($duplicate_check_hash == $old_hash) {
 					$post_errors = true;
 
-					$tmp_msg = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['form_problem'] . "</h4><p>" . $formBuilderTextStrings['already_submitted'] . "</p>";
+					$tmp_msg = "\n<div class='formBuilderFailure alert alert-error'><h4>" . $formBuilderTextStrings['form_problem'] . "</h4><p>" . $formBuilderTextStrings['already_submitted'] . "</p>";
 					$tmp_msg .= "\n</div>\n" . $formDisplay;
 
 					$formDisplay = $tmp_msg;
@@ -271,7 +271,7 @@ function toggleVisOff(boxid)
 				{
 					$error_msg = "";
 					
-					$divClass = "formBuilderField " . eregi_replace("[^a-z0-9]", "_", $field['field_type']);
+					$divClass = "control-group formBuilderField " . eregi_replace("[^a-z0-9]", "-", $field['field_type']);
 					$divID = "formBuilderField" . clean_field_name($field['field_name']);
 
 					$lb = "<br/>";
@@ -449,11 +449,11 @@ function toggleVisOff(boxid)
 					// Check for required fields, and change the class label details if necessary
 					if(isset($field['required_data']) AND $field['required_data'] != "none" AND $field['required_data'] != "")
 					{
-						$formLabelCSS = "formBuilderLabelRequired";
+						$formLabelCSS = "formBuilderLabelRequired control-label";
 					}
 					else
 					{
-						$formLabelCSS = "formBuilderLabel";
+						$formLabelCSS = "formBuilderLabel control-label";
 					}
 					
 					// Determine if we need to show help text.
@@ -461,7 +461,7 @@ function toggleVisOff(boxid)
 					{
 						if(DEFINED('FORMBUILDER_HELPTEXT_LABEL'))
 						{
-							$formHelp = "<div class='formBuilderHelpText' id='formBuilderHelpText$divID'>" . $field['help_text'] . "</div>";
+							$formHelp = "<div class='formBuilderHelpText help-block' id='formBuilderHelpText$divID'>" . $field['help_text'] . "</div>";
 							$formHelpJava = "<a href='javascript:;' "
 								. "class='formBuilderHelpTextToggle' "
 								. "onClick='toggleVis(\"formBuilderHelpText$divID\");' "
@@ -469,7 +469,7 @@ function toggleVisOff(boxid)
 						}
 						else
 						{
-							$formHelp = "<div class='formBuilderHelpText' id='formBuilderHelpText$divID'>" . $field['help_text'] . "</div>";
+							$formHelp = "<div class='formBuilderHelpText help-block' id='formBuilderHelpText$divID'>" . $field['help_text'] . "</div>";
 							$formHelpJava = "<a href='javascript:;' "
 								. "class='formBuilderHelpTextToggle' "
 								. "onClick='toggleVis(\"formBuilderHelpText$divID\");' "
@@ -487,19 +487,19 @@ function toggleVisOff(boxid)
 					{
 						case "comments area":
 							$formLabel = "";
-							$formInput = "<div class='formBuilderCommentsField'>" . decode_html_entities($field['field_value'], ENT_NOQUOTES, get_option('blog_charset')) . "</div> $formHelpJava";
+							$formInput = "<div class='formBuilderCommentsField controls'>" . decode_html_entities($field['field_value'], ENT_NOQUOTES, get_option('blog_charset')) . "</div> $formHelpJava";
 							$divClass = "formBuilderComment";
 						break;
 
 						case "hidden field":
 							$formLabel = "";
-							$formInput = "<div class='formBuilderHiddenField'><input type='hidden' name='" . $field['name'] . "' value='" . $field['value'] . "' /></div>";
+							$formInput = "<div class='formBuilderHiddenField controls'><input type='hidden' name='" . $field['name'] . "' value='" . $field['value'] . "' /></div>";
 							$divClass = "formBuilderHidden";
 						break;
 
 						case "small text area":
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " $formHelpJava</div>";
-							$formInput = "<div class='formBuilderSmallTextarea'><textarea name='" . $field['name'] . "' rows='4' cols='50' " .
+							$formInput = "<div class='formBuilderSmallTextarea controls'><textarea name='" . $field['name'] . "' rows='4' cols='50' " .
 									"id='field$divID' onblur=\"fb_ajaxRequest('" . $page_path . "php/formbuilder_parser.php', " .
 									"'formid=" . $form['id'] . "&amp;fieldid=" . $field['id'] . "&amp;val='+document.getElementById('field$divID').value, 'formBuilderErrorSpace$divID')\" >" .
 									$field['value'] . "</textarea></div>";
@@ -507,7 +507,7 @@ function toggleVisOff(boxid)
 
 						case "large text area":
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " $formHelpJava</div>";
-							$formInput = "<div class='formBuilderLargeTextarea'><textarea name='" . $field['name'] . "' rows='10' cols='80' " .
+							$formInput = "<div class='formBuilderLargeTextarea controls'><textarea name='" . $field['name'] . "' rows='10' cols='80' " .
 									"id='field$divID' onblur=\"fb_ajaxRequest('" . $page_path . "php/formbuilder_parser.php', " .
 									"'formid=" . $form['id'] . "&amp;fieldid=" . $field['id'] . "&amp;val='+document.getElementById('field$divID').value, " .
 									"'formBuilderErrorSpace$divID')\" >" . $field['value'] . "</textarea></div>";
@@ -515,19 +515,19 @@ function toggleVisOff(boxid)
 
 						case "password box":
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-							$formInput = "<div class='formBuilderInput'><input type='password' name='" . $field['name'] . "' value='" . $field['value'] . "' id='field$divID' onblur=\"fb_ajaxRequest('" . $page_path . "php/formbuilder_parser.php', 'formid=" . $form['id'] . "&amp;fieldid=" . $field['id'] . "&amp;val='+document.getElementById('field$divID').value, 'formBuilderErrorSpace$divID')\" /> $formHelpJava</div>";
+							$formInput = "<div class='formBuilderInput controls'><input type='password' name='" . $field['name'] . "' value='" . $field['value'] . "' id='field$divID' onblur=\"fb_ajaxRequest('" . $page_path . "php/formbuilder_parser.php', 'formid=" . $form['id'] . "&amp;fieldid=" . $field['id'] . "&amp;val='+document.getElementById('field$divID').value, 'formBuilderErrorSpace$divID')\" /> $formHelpJava</div>";
 						break;
 
 						case "required password":
 							$formLabel = "<div class='formBuilderLabelRequired'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-							$formInput = "<div class='formBuilderInput'><input type='password' name='" . $field['name'] . "' value='' id='field$divID' /> $formHelpJava</div>";
+							$formInput = "<div class='formBuilderInput controls'><input type='password' name='" . $field['name'] . "' value='' id='field$divID' /> $formHelpJava</div>";
 						break;
 
 						case "checkbox":
 							if(isset($_POST['formBuilderForm'][$field['field_name']]) AND htmlentities(stripslashes($_POST['formBuilderForm'][$field['field_name']]), ENT_NOQUOTES, get_option('blog_charset')) == $field['field_value']) $selected = "checked";
 								else $selected = "";
 							$formLabel = "<div class='$formLabelCSS'><label for='field$divID'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </label></div>";
-							$formInput = "<div class='formBuilderInput'><input type='checkbox' name='" . $field['name'] . "' id='field$divID' value='" . $field['field_value'] . "' $selected /> <span class='formBuilderCheckboxDescription'>";
+							$formInput = "<div class='formBuilderInput controls'><input type='checkbox' name='" . $field['name'] . "' id='field$divID' value='" . $field['field_value'] . "' $selected /> <span class='formBuilderCheckboxDescription'>";
 
 							if($field['field_value'] != "checked") 
 							{
@@ -543,7 +543,7 @@ function toggleVisOff(boxid)
 							if(isset($_POST['formBuilderForm'][$field['field_name']]) AND htmlentities(stripslashes($_POST['formBuilderForm'][$field['field_name']]), ENT_NOQUOTES, get_option('blog_charset')) == $field['field_value']) $selected = "checked";
 								else $selected = "";
 							$formLabel = "<div class='formBuilderLabelRequired'><label for='field$divID'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </label></div>";
-							$formInput = "<div class='formBuilderInput'><input type='checkbox' name='" . $field['name'] . "' id='field$divID' value='" . $field['field_value'] . "' $selected /> <span class='formBuilderCheckboxDescription'>";
+							$formInput = "<div class='formBuilderInput controls'><input type='checkbox' name='" . $field['name'] . "' id='field$divID' value='" . $field['field_value'] . "' $selected /> <span class='formBuilderCheckboxDescription'>";
 
 							if($field['field_value'] != "checked") 
 							{
@@ -558,7 +558,7 @@ function toggleVisOff(boxid)
 						case "radio buttons":
 							$options = explode("\n", $field['field_value']);
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " $formHelpJava</div>";
-							$formInput = "<div class='formBuilderInput'>";
+							$formInput = "<div class='formBuilderInput controls'>";
 							foreach($options as $option_value=>$roption)
 							{
 								// Check for a pipe, and if it exists, split the value into value, label.
@@ -583,7 +583,7 @@ function toggleVisOff(boxid)
 						case "selection dropdown":
 							$options = explode("\n", $field['field_value']);
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-							$formInput = "<div class='formBuilderSelect'>\n<select name='" . $field['name'] . "'>";
+							$formInput = "<div class='formBuilderSelect controls'>\n<select name='" . $field['name'] . "'>";
 							foreach($options as $option_value=>$roption)
 							{
 								// Check for a pipe, and if it exists, split the value into value|label.
@@ -613,7 +613,7 @@ function toggleVisOff(boxid)
 						case "captcha field":
 							if(function_exists('imagecreate')) {
 								$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-								$formInput = "<div class='formBuilderInput'><div class='formBuilderCaptcha'>" .
+								$formInput = "<div class='formBuilderInput controls'><div class='formBuilderCaptcha'>" .
 										"<img src='" . FORMBUILDER_PLUGIN_URL . "captcha/display.php?" . SID . "' " .
 											 "alt='" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . "' />" .
 										"<br/><input type='text' name='" . $field['name'] . "' value=''/> $formHelpJava</div></div>";
@@ -627,7 +627,7 @@ function toggleVisOff(boxid)
 
 						case "spam blocker":
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-							$formInput = "<div class='formBuilderInput'><input type='text' name='" . $field['name'] . "' value=''/> $formHelpJava</div>";
+							$formInput = "<div class='formBuilderInput controls'><input type='text' name='" . $field['name'] . "' value=''/> $formHelpJava</div>";
 							$divClass = get_option('formbuilder_spam_blocker');
 						break;
 
@@ -640,7 +640,7 @@ function toggleVisOff(boxid)
 							$formLabelCSS = "formBuilderLabelRequired";
 							$options = explode("\n", $field['field_value']);
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-							$formInput = "<div class='formBuilderSelect'>\n<select name='" . $field['name'] . "'>";
+							$formInput = "<div class='formBuilderSelect controls'>\n<select name='" . $field['name'] . "'>";
 							foreach($options as $option_value=>$roption)
 							{
 								// Check for a pipe, and if it exists, split the value into value|label.
@@ -684,7 +684,7 @@ function toggleVisOff(boxid)
 
 						case "reset button":
 							$formLabel = "";
-							$formInput = "<div class='formBuilderSubmit'>$previous_page_insert<input type='reset' name='" . $field['name'] . "' value='" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . "' /> $formHelpJava</div>";
+							$formInput = "<div class='formBuilderSubmit controls'>$previous_page_insert<input type='reset' name='" . $field['name'] . "' value='" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . "' /> $formHelpJava</div>";
 						break;
 
 						case "submit button":
@@ -694,7 +694,7 @@ function toggleVisOff(boxid)
 							if($page_id > 1)
 							$previous_page_insert = "<input type='button' name='formbuilder_page_break' value='" . $formBuilderTextStrings['previous'] . "' onclick=" . '"   fb_toggleLayer(\'formbuilder-' . $form_id . '-page-' . $page_id . '\');  fb_toggleLayer(\'formbuilder-' . $form_id . '-page-' . ($page_id - 1) . '\');  "' . " />";
 							
-							$formInput = "<div class='formBuilderSubmit'>$previous_page_insert<input type='submit' name='" . $field['name'] . "' value='" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . "' /> $formHelpJava</div>";
+							$formInput = "<div class='formBuilderSubmit controls'>$previous_page_insert<input type='submit' name='" . $field['name'] . "' value='" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . "' /> $formHelpJava</div>";
 
 							$submit_button_set = true;
 						break;
@@ -706,7 +706,7 @@ function toggleVisOff(boxid)
 							if($page_id > 1)
 							$previous_page_insert = "<input type='button' name='formbuilder_page_break' value='" . $formBuilderTextStrings['previous'] . "' onclick=" . '"   fb_toggleLayer(\'formbuilder-' . $form_id . '-page-' . $page_id . '\');  fb_toggleLayer(\'formbuilder-' . $form_id . '-page-' . ($page_id - 1) . '\');  "' . " /> $formHelpJava";
 							
-							$formInput = "<div class='formBuilderSubmit'>$previous_page_insert<input type='image' name='" . $field['name'] . "' src='" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . "' value='" . $field['value'] . "' alt='" . $field['value'] . "' /></div>";
+							$formInput = "<div class='formBuilderSubmit controls'>$previous_page_insert<input type='image' name='" . $field['name'] . "' src='" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . "' value='" . $field['value'] . "' alt='" . $field['value'] . "' /></div>";
 
 							$submit_button_set = true;
 						break;
@@ -722,7 +722,7 @@ function toggleVisOff(boxid)
 								$calendar_loading_code = "<script src=\"" . $page_path . "js/calendar.js\" type=\"text/javascript\"></script>";
 								$calendar_loaded = true;
 							}
-							$formInput = "<div class='formBuilderDateStamp'><input type='text' name='" . $field['name'] . "' value='" . $field['value'] . "' id='field$divID' />
+							$formInput = "<div class='formBuilderDateStamp controls'><input type='text' name='" . $field['name'] . "' value='" . $field['value'] . "' id='field$divID' />
 								$calendar_loading_code
 								<script type=\"text/javascript\">
 								fb_calendar.set(\"field$divID\");
@@ -750,7 +750,7 @@ function toggleVisOff(boxid)
 
 						default:
 							$formLabel = "<div class='$formLabelCSS'>" . decode_html_entities($field['field_label'], ENT_NOQUOTES, get_option('blog_charset')) . " </div>";
-							$formInput = "<div class='formBuilderInput'><input type='text' "
+							$formInput = "<div class='formBuilderInput controls'><input type='text' "
 																			. "name='" . $field['name'] . "' "
 																			. "value='" . $field['value'] . "' "
 																			. "id='field$divID' "
@@ -804,7 +804,7 @@ function toggleVisOff(boxid)
 					"onclick=" . '"   fb_toggleLayer(\'formbuilder-' . $form_id . '-page-' . $page_id . '\');  ' .
 					'  fb_toggleLayer(\'formbuilder-' . $form_id . '-page-' . ($page_id - 1) . '\');  "' .	" />";
 	
-				$formDisplay .= "\n<div class='formBuilderSubmit'>$previous_page_insert<input type='submit' name='Submit' value='" . $formBuilderTextStrings['send'] . "' /></div>";
+				$formDisplay .= "\n<div class='formBuilderSubmit form-actions'>$previous_page_insert<input type='submit' name='Submit' value='" . $formBuilderTextStrings['send'] . "' /></div>";
 			}
 			else
 				$formDisplay .= "";
@@ -987,20 +987,20 @@ function toggleVisOff(boxid)
 						}
 						$form['thankyoutext'] = str_replace("~FullForm~", nl2br(trim($txtAllFields)), $form['thankyoutext']);
 									
-						$formDisplay = "\n<div class='formBuilderSuccess'>" 
+						$formDisplay = "\n<div class='formBuilderSuccess alert alert-success'>" 
 							. decode_html_entities($form['thankyoutext'], ENT_QUOTES, get_option('blog_charset')) 
 							. "</div>";
 					}
 					else
-						$formDisplay = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>" . $formBuilderTextStrings['send_failed'] . "<br/>$msg</p></div>";
+						$formDisplay = "\n<div class='formBuilderFailure alert alert-error'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>" . $formBuilderTextStrings['send_failed'] . "<br/>$msg</p></div>";
 				}
 				elseif($msg)
 				{	// Only shown if the function returned some sort of failure.
-					$formDisplay = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>$msg</p></div>$formDisplay";
+					$formDisplay = "\n<div class='formBuilderFailure alert alert-error'><h4>" . $formBuilderTextStrings['failed'] . "</h4><p>$msg</p></div>$formDisplay";
 				}
 				else
 				{
-					$formDisplay = "\n<div class='formBuilderSuccess moduleSuccess'>" 
+					$formDisplay = "\n<div class='formBuilderSuccess moduleSuccess alert alert-success'>" 
 						. decode_html_entities($form['thankyoutext'], ENT_QUOTES, get_option('blog_charset')) 
 						. "</div>";
 				}
@@ -1009,7 +1009,7 @@ function toggleVisOff(boxid)
 			{
 				if(isset($post_errors) AND isset($missing_post_fields) AND $post_errors AND $missing_post_fields)
 				{
-					$msg = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['form_problem'] . "</h4><p>" . $formBuilderTextStrings['send_mistakes'] . "</p>";
+					$msg = "\n<div class='formBuilderFailure alert alert-error'><h4>" . $formBuilderTextStrings['form_problem'] . "</h4><p>" . $formBuilderTextStrings['send_mistakes'] . "</p>";
 					$msg .= "\n<ul>";
 					foreach($missing_post_fields as $idValue=>$field_label) {
 						$msg .= "\n<li><a href='#$idValue'>$field_label</a></li>";
@@ -1020,7 +1020,7 @@ function toggleVisOff(boxid)
 				}
 				elseif(isset($post_errors) AND is_string($post_errors))
 				{
-					$msg = "\n<div class='formBuilderFailure'><h4>" . $formBuilderTextStrings['form_problem'] . "</h4>";
+					$msg = "\n<div class='formBuilderFailure alert alert-error'><h4>" . $formBuilderTextStrings['form_problem'] . "</h4>";
 					$msg .= "\n<p>$post_errors</p></div>\n" . $formDisplay;
 
 					$formDisplay = $msg;
