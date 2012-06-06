@@ -1,12 +1,17 @@
 <?php
 
-if (function_exists('http_build_url')) {
-	function build_url($parts) {
+if (function_exists('http_build_url')) 
+{
+	function formbuilder_create_url($parts) 
+	{
 		$parts += array('path' => preg_replace('/\?.*/', '', $_SERVER['REQUEST_URI']));
 		return http_build_url($parts);
 	}
-} else {
-	function build_url($parts) {
+} 
+else 
+{
+	function formbuilder_create_url($parts) 
+	{
 		static $prefixes = array('password' => ':', 'host' => '://', 'port' => ':',
 								 'path' => '/', 'query' => '?', 'fragment' => '#');
 		$parts += array(

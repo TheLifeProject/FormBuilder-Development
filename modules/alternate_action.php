@@ -43,7 +43,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		if (isset($parts['path']) && $parts['path'][0] !== '/') {
 			$parts['path'] = dirname($_SERVER['REQUEST_URI']) . '/' . $parts['path'];
 		}
-		$url = build_url($parts);
+		$url = formbuilder_create_url($parts);
 
 		// Create data array to be sent to the alternate form processing system.
 		$data['name'] = $form['name'];
