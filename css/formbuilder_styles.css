@@ -76,13 +76,13 @@ div.formBuilderSuccess h4 {
 {
 	width: 98%;
 }
-.formBuilderForm .large_text_area .formBuilderLabel,
-.formBuilderForm .large_text_area .formBuilderLabelRequired
+.formBuilderForm .large-text-area .formBuilderLabel,
+.formBuilderForm .large-text-area .formBuilderLabelRequired
 {
 	width: auto;
 	clear: both;
 }
-.formBuilderForm .large_text_area textarea
+.formBuilderForm .large-text-area textarea
 {
 	width: 98%;
 }
