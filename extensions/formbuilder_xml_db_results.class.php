@@ -867,6 +867,10 @@ class formbuilder_xml_db_results
 						"<strong>" . __("Message:", 'formbuilder') . "</strong>" .
 						"</td>" .
 					"</tr>";
+					
+				// Calculate time offset
+				$currentTime = current_time('timestamp');
+				$offset = time() - $currentTime;
 				
 				for($i=0; $i<$this->result_limit; $i++)
 				{
@@ -913,11 +917,13 @@ class formbuilder_xml_db_results
 							$message = substr($message, 0, 80) . "...";
 						}
 					}
+					
+					$messageDate = date("F j, Y, g:i a", $result['timestamp'] - $offset);
 		
 					echo "<tr class='hoverlite'>" .
 							"<td><input type='checkbox' class='fb_stored_messages' name='formResultSelected[]' value='" . $result['id'] . "'/></td>" .
 							"<td><a href='" . FB_ADMIN_PLUGIN_PATH . "&fbaction=formResults&fbxmlaction=showemail&fbxmlid=" . $result['id'] . $searchQueryVar . "'>" . 
-							date("F j, Y, g:i a", $result['timestamp']) . "</a></td>" .
+							$messageDate . "</a></td>" .
 							"<td>" . $message . "</td>" .
 						"</tr>";
 				}
