@@ -617,6 +617,171 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		include(FORMBUILDER_PLUGIN_PATH . "html/options_edit_form.inc.php");
  	}
  	
+ 	if(!function_exists('formbuilder_debug'))
+ 	{
+ 		function formbuilder_debug($msg)
+ 		{
+ 			echo '<pre>', htmlentities(print_r($msg, true)), '</pre>'; 
+ 		}
+ 	}
+ 	
+ 	function formbuilder_options_exportForm($form_id)
+ 	{
+ 		global $wpdb;
+		
+		if(!formbuilder_user_can('create'))
+		{
+			formbuilder_admin_alert('You do not have permission to access this area.');
+			return;
+		}
+ 		
+ 		/*
+ 		 * Load the form fields from the database.
+ 		*/
+ 		$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FORMS . " WHERE id = '$form_id' LIMIT 0,1;";
+ 		$results = $wpdb->get_results($sql, ARRAY_A);
+ 		$form = $results[0];
+ 		
+ 		$sql = "SELECT * FROM " . FORMBUILDER_TABLE_FIELDS . " WHERE form_id = $form_id ORDER BY display_order ASC;";
+ 		$fields = $wpdb->get_results($sql, ARRAY_A);
+ 		if($fields)
+ 		{
+ 			$counter = 0;
+ 			foreach($fields as $field)
+ 			{
+ 				$form['fields'][] = $field;
+ 			}
+ 		}
+ 		
+ 		$response_id = $form['autoresponse'];
+ 		$results = $wpdb->get_results("SELECT * FROM " . FORMBUILDER_TABLE_RESPONSES . " WHERE id = '" . $response_id . "';", ARRAY_A);
+ 		$autoresponse = $results[0];
+ 		$form['autoresponse'] = $autoresponse;
+ 		
+ 		$sql = "SELECT * FROM " . FORMBUILDER_TABLE_TAGS . " WHERE form_id = $form_id;";
+ 		$tags = $wpdb->get_results($sql, ARRAY_A);
+ 		if($tags)
+ 		{
+ 			$counter = 0;
+ 			foreach($tags as $tag)
+ 			{
+ 				$form['tags'][] = $tag;
+ 			}
+ 		}
+
+ 		$formData = chunk_split(base64_encode(serialize($form)));
+
+		include(FORMBUILDER_PLUGIN_PATH . "html/options_export_form.inc.php");
+ 	}
+ 	
+ 	function formbuilder_options_importForm()
+ 	{
+ 		global $wpdb;
+		
+		if(!formbuilder_user_can('create'))
+		{
+			formbuilder_admin_alert('You do not have permission to access this area.');
+			return;
+		}
+ 		
+ 		if($_POST['formData'])
+ 		{
+ 			formbuilder_debug("Importing...");
+ 			$formData = stripslashes($_POST['formData']);
+ 			
+ 			formbuilder_debug("Decoding...");
+ 			$formData = base64_decode($formData);
+ 			
+ 			formbuilder_debug("Unserializing...");
+ 			$formData = unserialize($formData);
+ 			
+ 			formbuilder_debug("Checking data...");
+ 			if(!isset($formData['name'])
+ 			OR !isset($formData['subject'])
+ 			OR !isset($formData['fields'])
+ 			OR !isset($formData['autoresponse'])
+ 			OR !isset($formData['tags']))
+ 			{
+ 				die("Invalid data detected.");
+ 			}
+ 			
+ 			formbuilder_debug("Extracting parts...");
+ 			$fields = $formData['fields'];
+ 			$autoresponse = $formData['autoresponse'];
+ 			$tags = $formData['tags'];
+ 			$form = $formData;
+ 			unset($form['id'], $form['fields'], $form['tags'], $form['autoresponse']);
+ 			
+ 			$numFields = count($fields);
+ 			formbuilder_debug("{$numFields} fields found...");
+ 			
+ 			if(!$numFields)
+ 			{
+ 				die("No form fields found.");
+ 			}
+ 			
+ 			formbuilder_debug("Creating autoresponse: '{$autoresponse['name']}'");
+ 			unset($autoresponse['id']);
+ 			$result = $wpdb->insert(FORMBUILDER_TABLE_RESPONSES, $autoresponse);
+ 			if($result != 1)
+ 			{
+ 				die("Error creating autoresponse.");
+ 			}
+ 			else
+ 			{
+ 				$form['autoresponse'] = $wpdb->insert_id;
+ 			}
+ 			
+ 			formbuilder_debug("Creating base form: '{$form['name']}'");
+ 			formbuilder_debug($form);
+ 			$result = $wpdb->insert(FORMBUILDER_TABLE_FORMS, $form);
+ 			if($result != 1)
+ 			{
+ 				die("Error creating form.");
+ 			}
+ 			else
+ 			{
+ 				$form_id = $wpdb->insert_id;
+ 			}
+ 			
+ 			
+ 			formbuilder_debug("Creating fields:");
+ 			foreach($fields as $field)
+ 			{
+ 				unset($field['id']);
+ 				$field['form_id'] = $form_id;
+ 				formbuilder_debug("Creating: '{$field['field_name']}'");
+ 				$result = $wpdb->insert(FORMBUILDER_TABLE_FIELDS, $field);
+	 			if(!$result)
+	 			{
+	 				die("Error creating field.");
+	 			}
+ 			}
+ 			
+ 			
+ 			formbuilder_debug("Creating tags:");
+ 			foreach($tags as $tag)
+ 			{
+ 				unset($tag['id']);
+ 				$tag['form_id'] = $form_id;
+ 				formbuilder_debug("Creating: '{$tag['tag']}'");
+ 				$result = $wpdb->insert(FORMBUILDER_TABLE_TAGS, $tag);
+	 			if(!$result)
+	 			{
+	 				echo("Error creating tag.");
+	 			}
+ 			}
+ 			
+ 			formbuilder_debug("ALL DONE.");
+ 			$url = formbuilder_build_url(array('fbaction'=>'editForm', 'fbid'=>$form_id), array('page'));
+ 			echo "<a href='{$url}'>Edit Form Here</a>";
+ 		}
+ 		else
+ 		{
+			include(FORMBUILDER_PLUGIN_PATH . "html/options_import_form.inc.php");
+ 		}
+ 	}
+ 	
  	function formbuilder_get_required_types()
  	{
  		$all_required_types = array(

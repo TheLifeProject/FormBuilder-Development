@@ -94,6 +94,14 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 				formbuilder_options_editForm($_GET['fbid']);
 			break;
 
+			case "exportForm":
+				formbuilder_options_exportForm($_GET['fbid']);
+			break;
+
+			case "importForm":
+				formbuilder_options_importForm();
+			break;
+
 			case "editFormObject":
 				formbuilder_options_editFormObject($_GET['fbid']);
 			break;

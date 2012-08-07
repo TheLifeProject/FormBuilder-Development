@@ -39,8 +39,11 @@ $_GET += array('pageNumber' => '');
 			<input class='searchButton' name='Search' type="submit" value="Search" />
 		</form>
 		
-		<p><?php _e('These are the forms that you currently have running on your blog.', 'formbuilder'); ?>
-		<a href="<?php echo FB_ADMIN_PLUGIN_PATH; ?>&fbaction=newForm"><?php printf(__('Click here%s to create a new form', 'formbuilder'), '</a>'); ?>.</p>
+		<p>
+			<?php _e('These are the forms that you currently have running on your blog.', 'formbuilder'); ?>
+			<a href="<?php echo FB_ADMIN_PLUGIN_PATH; ?>&fbaction=newForm"><?php printf(__('Click here%s to create a new form', 'formbuilder'), '</a>'); ?>.
+			<a href="<?php echo FB_ADMIN_PLUGIN_PATH; ?>&fbaction=importForm"><?php printf(__('Click here%s to %simport%s a form', 'formbuilder'), '</a>', '<strong>', '</strong>'); ?>.
+		</p>
 		
 		<?php 
 			// Get a list of any tags associated with the forms.
@@ -132,8 +135,12 @@ $_GET += array('pageNumber' => '');
 				<th><?php _e('ID #', 'formbuilder'); ?></th>
 				<th><?php _e('Name', 'formbuilder'); ?></th>
 				<th><?php _e('Subject', 'formbuilder'); ?></th>
-				<th><?php _e('Recipient', 'formbuilder'); ?></th>
-				<th width='125' align='right' style='text-align: right;'><?php echo $nav; ?></th>
+				<th>
+					<?php _e('Recipient', 'formbuilder'); ?>
+					<div width='125' style='float: right; text-align: right;'>
+						<?php echo $nav; ?>
+					</span>
+				</th>
 			</tr>
 			<?php
 					
@@ -155,15 +162,22 @@ $_GET += array('pageNumber' => '');
 							$alt = false;
 						}
 				?>
-				<tr valign="top" class="<?php echo $class; ?> hoverlite">
+				<tr valign="top" class="<?php echo $class; ?> hoverlite" onClick="jQuery('#formRow<?php echo $form->id; ?>').show();">
 					<td><acronym title="<?php printf(__("Manually include this form with %s in the page/post content.", 'formbuilder'), "[formbuilder:" . $form->id . "]"); ?>"><?php echo $form->id; ?></acronym></td>
-					<td><?php echo $form->name; ?></td>
-					<td><?php echo $form->subject; ?></td>
-					<td><?php echo $form->recipient; ?></td>
+					<td><a href='javascript:;' onClick="jQuery('#formRow<?php echo $form->id; ?>').show();"><?php echo $form->name; ?></a></td>
+					<td><a href='javascript:;' onClick="jQuery('#formRow<?php echo $form->id; ?>').show();"><?php echo $form->subject; ?></a></td>
+					<td><a href='javascript:;' onClick="jQuery('#formRow<?php echo $form->id; ?>').show();"><?php echo $form->recipient; ?></a></td>
+				</tr>
+				<tr id="formRow<?php echo $form->id; ?>" style="display: none; background-color: #dddddd;">
 					<td>
+						<a href="javascript:;" onClick="jQuery('#formRow<?php echo $form->id; ?>').hide();">^</a>
+					</td>
+					<td colspan="3" style="padding-bottom: 20px;">
 						<a href="<?php echo formbuilder_build_url(array('fbaction'=>'editForm', 'fbid'=>$form->id), array('page')); ?>"><?php _e('Edit', 'formbuilder'); ?></a>
 						 |
 						<a href="<?php echo formbuilder_build_url(array('fbaction'=>'copyForm', 'fbid'=>$form->id), array('page', 'fbtag', 'pageNumber')); ?>"><?php _e('Copy', 'formbuilder'); ?></a>
+						 |
+						<a href="<?php echo formbuilder_build_url(array('fbaction'=>'exportForm', 'fbid'=>$form->id), array('page', 'fbtag', 'pageNumber')); ?>"><?php _e('Export', 'formbuilder'); ?></a>
 						 |
 						<a href="<?php echo formbuilder_build_url(array('fbaction'=>'removeForm', 'fbid'=>$form->id), array('page', 'fbtag', 'pageNumber')); ?>" onclick="return(confirm('<?php _e('Are you sure you want to delete this form?', 'formbuilder'); ?>'));"><?php _e('Remove', 'formbuilder'); ?></a>
 					</td>
@@ -171,7 +185,6 @@ $_GET += array('pageNumber' => '');
 			<?php } ?>
 			
 			<tr valign="top">
-				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>

@@ -301,12 +301,30 @@ class formbuilder_xml_db_results
 		if(!$error)
 		{
 			$email_msg = '';
+			$email_from = '';
 			foreach($form_data['form'] as $key=>$value) 
+			{
 				$email_msg .= strtoupper($key) . ": " . $value . "\n\n";
+				if($key != 'FormSubject' 
+				&& $key != 'FormRecipient' 
+				&& !$email_from 
+				&& preg_match('#' . FORMBUILDER_PATTERN_EMAIL . '#isU', $value))
+				{
+					$email_from = $value;
+				}
+			}
+			if(!$email_from) $email_from = get_option('admin_email');
 			$email_subject = $form_data['form']['FormSubject'];
 			$email_to = $form_data['form']['FormRecipient'];
-			$email_headers='From: ' . get_option('admin_email');
+			$email_headers='From: ' . $email_from;
 			
+			$debg = array(
+					'$email_from'=>$email_from,
+					'$email_subject'=>$email_subject,
+					'$email_to'=>$email_to,
+					'$email_headers'=>$email_headers,
+					);
+#			echo '<pre>', htmlentities(print_r( $debg, true )), '</pre>';
 			$result = formbuilder_send_email($email_to, $email_subject, $email_msg, $email_headers); 
 			if($result)
 			{
@@ -1056,6 +1074,8 @@ class formbuilder_xml_db_results
 		
 		echo "\r\n";
 		
+		$currentTime = current_time('timestamp');
+		$offset = time() - $currentTime;
 		
 		$i = 0;
 		 
@@ -1071,7 +1091,7 @@ class formbuilder_xml_db_results
 			
 			echo $result['id'];
 			echo ',' . $result['form_id'];
-			echo ',"' . date("F j, Y, g:i a", $result['timestamp']) . '"';
+			echo ',"' . date("F j, Y, g:i a", $result['timestamp'] - $offset) . '"';
 			
 
 			if($specific_form == true AND $field_list)
@@ -1132,6 +1152,12 @@ class formbuilder_xml_db_results
 			$timestamp = mktime(23, 59, 59, $datestring['month'], $datestring['day'], $datestring['year']);
 		else
 			$timestamp = mktime(0, 0, 0, $datestring['month'], $datestring['day'], $datestring['year']);
+		
+		
+		$currentTime = current_time('timestamp');
+		$offset = time() - $currentTime;
+		
+		$timestamp = $timestamp + $offset;
 		
 		return($timestamp);
 	}

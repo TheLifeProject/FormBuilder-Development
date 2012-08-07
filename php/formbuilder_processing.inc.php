@@ -191,8 +191,12 @@
 				$formTags[] = preg_replace('/[^a-z0-9_-]/isU', '', $r['tag']);
 			}
 			$formTags = implode(' ', $formTags);
+			
+			$formDisplay = "";
+			
+			$formDisplay = apply_filters('formbuilder_prepend_formDisplay', $formDisplay);
 
-			$formDisplay = "\n<form class='formBuilderForm form-horizontal $formTags' id='formBuilder$formID' " .
+			$formDisplay .= "\n<form class='formBuilderForm form-horizontal $formTags' id='formBuilder$formID' " .
 					"action='" . $form['action_target'] . "' method='" . strtolower($form['method']) . "' onsubmit='return fb_disableForm(this);'>" .
 					"<input type='hidden' name='formBuilderForm[FormBuilderID]' value='" . $form_id . "' />";
 
@@ -811,6 +815,8 @@ function toggleVisOff(boxid)
 
 			$formDisplay .= "\n</div>\n</form>";	// End of paged CSS
 			
+			$formDisplay = apply_filters('formbuilder_append_formDisplay', $formDisplay);
+			
 			
 			// Check posted form data to ensure that we don't have any blacklisted material
 			$blacklist_enabled = get_option('formbuilder_blacklist');
@@ -949,7 +955,7 @@ function toggleVisOff(boxid)
 					$msg = formbuilder_process_email($form, $allFields);
 					
 				// Check for and process any redirections at this point.
-				formbuilder_check_redirection($form, $allFields);
+				if(!$msg) formbuilder_check_redirection($form, $allFields);
 
 				if(!isset($func_run))
 				{
