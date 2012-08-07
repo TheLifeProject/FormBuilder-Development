@@ -718,8 +718,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  				die("No form fields found.");
  			}
  			
- 			formbuilder_debug("Creating autoresponse: '{$autoresponse['name']}'");
  			unset($autoresponse['id']);
+ 			if($autoresponse)
+ 			{
+ 			formbuilder_debug("Creating autoresponse: '{$autoresponse['name']}'");
  			$result = $wpdb->insert(FORMBUILDER_TABLE_RESPONSES, $autoresponse);
  			if($result != 1)
  			{
@@ -728,6 +730,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  			else
  			{
  				$form['autoresponse'] = $wpdb->insert_id;
+ 			}
  			}
  			
  			formbuilder_debug("Creating base form: '{$form['name']}'");
@@ -756,7 +759,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	 			}
  			}
  			
- 			
+ 			$tags[] = array(
+ 					'form_id'=>$form_id,
+ 					'tag'=>'IMPORTED'
+ 			);
  			formbuilder_debug("Creating tags:");
  			foreach($tags as $tag)
  			{
