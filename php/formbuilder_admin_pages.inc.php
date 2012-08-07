@@ -698,9 +698,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  			formbuilder_debug("Checking data...");
  			if(!isset($formData['name'])
  			OR !isset($formData['subject'])
- 			OR !isset($formData['fields'])
- 			OR !isset($formData['autoresponse'])
- 			OR !isset($formData['tags']))
+ 			OR !isset($formData['fields']))
  			{
  				die("Invalid data detected.");
  			}
