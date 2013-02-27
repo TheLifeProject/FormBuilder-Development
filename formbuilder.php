@@ -254,7 +254,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 				$fb_do_js_manually = true;
 			}
 	
-			session_start();
+			if(session_id() == '') session_start();
 			
 			// Check to see if we have POST data to process.
 			formbuilder_checkPOSTData();
