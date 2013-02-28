@@ -16,6 +16,10 @@ function fb_toggleLayer( whichLayer )
 
 /* Disable the form once submitted to prevent multiple hits */
 function fb_disableForm(theform) {
+
+	updateReferrerInfo();
+	
+	
 	if (document.all || document.getElementById) {
 		for (i = 0; i < theform.length; i++) {
 		var tempobj = theform.elements[i];

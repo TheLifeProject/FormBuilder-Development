@@ -4,7 +4,7 @@ Donate link: http://truthmedia.com/engage/giving
 Tags: form, forms, email, comments, contact, input, spam, form to email, email form, contact form
 Requires at least: 2.7
 Tested up to: 3.2.1
-Stable tag: 0.91
+Stable tag: 0.92
 
 Allows WordPress bloggers to easily create customised contact forms for use on pages or posts.
 
@@ -70,6 +70,13 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 3. Adding new form fields.
 
 == Changelog ==
+
+= 0.92 =
+* Cleanup: Cleaning up small bugs and deprecated code in more recent versions of WordPress.
+* Bug Fix: Switched referrer field to populate using JS rather than PHP to allow better functionality on cached sites.
+
+= 0.91 =
+* Security Fix: Resolved XSS vulnerability with the referer functionality.
 
 = 0.90 =
 * Feature: Allow ~variable~ fields in email subject lines.  Generously contributed by maihde in github.

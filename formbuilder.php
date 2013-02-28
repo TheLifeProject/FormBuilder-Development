@@ -4,7 +4,7 @@ Plugin Name: FormBuilder
 Plugin URI: http://truthmedia.com/wordpress/formbuilder
 Description: The FormBuilder plugin allows the administrator to create contact forms of a variety of types for use on their WordPress blog.  The FormBuilder has built-in spam protection and can be further protected by installing the Akismet anti-spam plugin.  Uninstall instructions can be found <a href="http://truthmedia.com/wordpress/formbuilder/documentation/uninstall/">here</a>.  Forms can be included on your pages and posts either by selecting the appropriate form in the dropdown below the content editing box, or by adding them directly to the content with [formbuilder:#] where # is the ID number of the form to be included.
 Author: TruthMedia Internet Group
-Version: 0.91
+Version: 0.92
 Author URI: http://truthmedia.com/
 
 Created by the TruthMedia Internet Group
@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 	
-	define("FORMBUILDER_VERSION_NUM", "0.91");
+	define("FORMBUILDER_VERSION_NUM", "0.92");
 
 	// Define FormBuilder Related Tables
 	global $table_prefix;

@@ -1060,6 +1060,19 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				update_option('formbuilder_version', "0.91");
 			}
 			
+		
+			
+			// Upgrade to version 0.92
+			if(get_option('formbuilder_version') < 0.92)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.92", nl2br("
+* Cleanup: Cleaning up small bugs and deprecated code in more recent versions of WordPress.
+* Bug Fix: Switched referrer field to populate using JS rather than PHP, to allow better functionality on cached sites.
+					"));
+					
+				update_option('formbuilder_version', "0.92");
+			}
+			
 			
 			
 			
