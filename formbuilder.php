@@ -144,7 +144,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		define('FORMBUILDER_SITE_URL', get_bloginfo('url'));
 		define('FORMBUILDER_BLOG_URL', get_bloginfo('wpurl'));
 	}
-	define("FORMBUILDER_PLUGIN_URL", plugins_url() . '/formbuilder/');
+	define("FORMBUILDER_PLUGIN_URL", plugins_url() . '/' . rawurlencode(basename(dirname(__FILE__))) . '/');
   
 	// Define Regular Expressions used throughout.
 	define("FORMBUILDER_CONTENT_TAG", '\[ *formbuilder *\: *([0-9]+) *\]');
