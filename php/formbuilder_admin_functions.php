@@ -79,7 +79,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		$problemThemes = array(
 			'Thesis-disabled',
 		);
-		$theme_name = get_current_theme();
+		$theme_name = wp_get_theme()->get('Name');
 		if(array_search($theme_name, $problemThemes) !== false)
 			formbuilder_admin_warning(sprintf(__("WARNING: FormBuilder has known compatibility issues with the '%s' theme.", 'formbuilder'), $theme_name));
 		

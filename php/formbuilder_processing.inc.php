@@ -421,7 +421,7 @@ function toggleVisOff(boxid)
 					if($field['value'] == "")
 					{
 						$wpuser = wp_get_current_user();
-						if($wpuser->id != 0)
+						if($wpuser->ID != 0)
 						{
 							// User is logged in.  Prepopulate with data.
 							if(preg_match('#^(yourname|name|your_name|display_name|nickname)$#i', $field['field_name'], $regs))

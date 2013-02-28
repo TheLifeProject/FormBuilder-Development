@@ -1,4 +1,10 @@
 /* Generic FormBuilder Display Configuration */
+
+
+div.formbuilder-subnav {
+	clear: both;
+}
+
 form.formBuilderForm {
 	text-align: left;
 	padding: 10px;
