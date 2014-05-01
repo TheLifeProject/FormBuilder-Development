@@ -1,6 +1,5 @@
 === FormBuilder ===
-Contributors: truthmedia, warkior
-Donate link: http://truthmedia.com/engage/giving
+Contributors: warkior
 Tags: form, forms, email, comments, contact, input, spam, form to email, email form, contact form
 Requires at least: 2.7
 Tested up to: 3.8.3
@@ -31,9 +30,7 @@ enough to satisfy the needs of experienced web developers.
 * Permissions control
 * and LOTS more...
 
-Created by [TruthMedia](http://truthmedia.com)
-
-Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
+Programming and Design by [James Warkentin](http://www.warkior.com/)
 
 == Installation ==
 1.	Upload the /formbuilder/ folder and files to your WordPress plugins folder,
@@ -58,10 +55,10 @@ Programming and Design by [James Warkentin](http://www.warkensoft.com/about-me/)
 	site, you may add additional CSS information in the additional_styles.css
 	file.  Styles in this file will cascade and over-ride the preset defaults.
 
-7.	Have fun, enjoy using the FormBuilder plugin, and don't forget to come
-	[visit us](http://truthmedia.com "TruthMedia.com"). For the
-	latest	version, more extensive documentation or to stay updated see
-	[our FormBuilder blog](http://truthmedia.com/wordpress/formbuilder/ "TruthMedia FormBuilder Blog").
+7.	Have fun, enjoy using the FormBuilder plugin.
+
+8.  For technical support and bleeding edge versions, find FormBuilder on GitHub:
+    https://github.com/warkior/FormBuilder-Development
 
 == Screenshots ==
 
