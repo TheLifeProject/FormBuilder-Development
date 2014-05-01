@@ -1079,6 +1079,7 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 			if(get_option('formbuilder_version') < 0.93)
 			{
 				formbuilder_admin_alert("Upgraded FormBuilder to version 0.93", nl2br("
+* Ownership Change: TruthMedia will no longer be maintaining this plugin. Ongoing development will be handled by James Warkentin.
 * Better Email Handling: Switching forms to send from predefined email address, rather than from the visitor. This avoids many spam false positives and complies properly with new DMARK policy rules.
 WARNING! This update will change how the email FROM address is created. You may adjust the default on the settings page.
 					"));
