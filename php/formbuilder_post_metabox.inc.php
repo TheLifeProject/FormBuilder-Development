@@ -135,8 +135,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		    if( !isset( $id ) )
 		      $id = $_REQUEST[ 'post_ID' ];
 
-			$sql = "SELECT * FROM " . FORMBUILDER_TABLE_PAGES . " WHERE post_id = '" . $id . "';";
+			// Get any fb entries for the given page ID.
+		    $sql = "SELECT * FROM " . FORMBUILDER_TABLE_PAGES . " WHERE post_id = '" . $id . "';";
 			$results = $wpdb->get_results($sql, ARRAY_A);
+			
+			// If page entries exist, 
 			if($results)
 			{
 				$pageDetails = $results[0];
@@ -144,14 +147,17 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 			}
 			
 			if(!isset($pageDetails['form_id'])) $pageDetails['form_id'] = false;
-
+			
 			// Determine if the selected form ID is the same as the old form ID.
 	    	if($_POST['formbuilderFormSelection'] != $pageDetails['form_id'])
 	    	{
 	    		if($_POST['formbuilderFormSelection'] == "noform")
 	    		{	// The form was removed from the post, we should remove it completely from the db.
-	    			$sql = "DELETE FROM " . FORMBUILDER_TABLE_PAGES . " WHERE id = '" . $pageDetails['id'] . "' LIMIT 1;";
-	    			$wpdb->query($sql);
+	    			if(isset($pageDetails['id']))
+	    			{	// Only do this if we have an id... otherwise, we can assume the page wasn't in the table to begin with, and don't need to delete it.
+		    			$sql = "DELETE FROM " . FORMBUILDER_TABLE_PAGES . " WHERE id = '" . $pageDetails['id'] . "' LIMIT 1;";
+		    			$wpdb->query($sql);
+	    			}
 	    		}
 	    		else
 	    		{	// A form was added to the post.  Go ahead and add or modify it in the db.

@@ -661,6 +661,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 				'manage' => 'no'
 			);
 			
+			$fb_permissions['level_0'] = array(
+				'connect' => 'no',
+				'create' => 'no',
+				'manage' => 'no'
+			);
+			
 			update_option('formbuilder_permissions', $fb_permissions);
 		}
 	
@@ -673,7 +679,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 		else
 			$level = 'level_0';
 		
-		if($fb_permissions[$level][$capability] == 'yes')
+		if(isset($fb_permissions[$level][$capability]) && $fb_permissions[$level][$capability] == 'yes')
 			return(true);
 		else
 			return(false);
