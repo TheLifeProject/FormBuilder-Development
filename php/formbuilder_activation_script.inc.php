@@ -1073,6 +1073,31 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 				update_option('formbuilder_version', "0.92");
 			}
 			
+		
+			
+			// Upgrade to version 0.93
+			if(get_option('formbuilder_version') < 0.93)
+			{
+				formbuilder_admin_alert("Upgraded FormBuilder to version 0.93", nl2br("
+* Better Email Handling: Switching forms to send from predefined email address, rather than from the visitor. This avoids many spam false positives and complies properly with new DMARK policy rules.
+WARNING! This update will change how the email FROM address is created. You may adjust the default on the settings page.
+					"));
+				
+				// pulled from the wp core to set a default from address.
+				
+				// Get the site domain and get rid of www.
+				$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+				if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+					$sitename = substr( $sitename, 4 );
+				}
+				
+				// Set the default from address to wordpress@sitename.com
+				$formBuilder_Default_from = 'wordpress@' . $sitename;
+				update_option('formBuilder_Default_from', $formBuilder_Default_from);
+				
+				update_option('formbuilder_version', "0.93");
+			}
+			
 			
 			
 			
@@ -1308,6 +1333,16 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 		
 		// Set referrer info to be collected by default.
 		update_option('formBuilder_referrer_info', 'Enabled');
+		
+		// Get the site domain and get rid of www.
+		$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+		if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+			$sitename = substr( $sitename, 4 );
+		}
+		
+		// Set the default from address to wordpress@sitename.com
+		$formBuilder_Default_from = 'wordpress@' . $sitename;
+		update_option('formBuilder_Default_from', $formBuilder_Default_from);
 	}
 	
 	

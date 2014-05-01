@@ -1340,14 +1340,45 @@ function toggleVisOff(boxid)
 		$email_sub = preg_replace('#[^a-z0-9_ -]#isU', '', $email_sub);
 
 		if(!$source_email) $source_email = get_option('admin_email');
+		
+		// Updated to force from address to use what is saved in settings.
+		$formBuilder_Default_from = formbuilder_get_default_from();
+		
+		// Allow for old style messaging.
+		if(strtoupper($formBuilder_Default_from) == '[SENDER_EMAIL]')
+			$formBuilder_Default_from = $source_email;
+				
 		return(formbuilder_send_email(
 			$form['recipient'], 
 			decode_html_entities($email_sub, ENT_QUOTES, get_option('blog_charset')), 
 			$email_msg, 
-			"From: " . $source_email . "\nReply-To: " . $source_email . "\n"));
+			"From: " . $formBuilder_Default_from . "\nReply-To: " . $source_email . "\n"));
 
 	}
+	
+	function formbuilder_get_default_from()
+	{
+		$from = get_option('formBuilder_Default_from');
+		
+		if(empty($from))
+		{
+				// Get the site domain and get rid of www.
+				$sitename = strtolower( $_SERVER['SERVER_NAME'] );
+				if ( substr( $sitename, 0, 4 ) == 'www.' ) {
+					$sitename = substr( $sitename, 4 );
+				}
+				$from = 'wordpress@' . $sitename;
+		}
+		
+		return($from);
+	}
 
+	function formbuilder_set_default_from($from)
+	{
+		update_option('formBuilder_Default_from', $from);	
+	}
+						
+						
 	// Function to send an email
 	function formbuilder_send_email($to, $subject, $message, $headers="")
 	{

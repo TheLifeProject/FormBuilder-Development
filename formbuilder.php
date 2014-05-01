@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
 	
-	define("FORMBUILDER_VERSION_NUM", "0.92");
+	define("FORMBUILDER_VERSION_NUM", "0.93");
 
 	// Define FormBuilder Related Tables
 	global $table_prefix;
@@ -407,7 +407,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	function clean_field_name($text)
 	{
 		$text = str_replace(" ", "_", $text);
-		$text = eregi_replace("[^a-z0-9_]", "", $text);
+		$text = preg_replace("#[^a-z0-9_]#isU", "", $text);
 		return($text);
 	}
 

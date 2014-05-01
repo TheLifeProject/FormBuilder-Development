@@ -207,6 +207,34 @@
 	<div id='formbuilder-admin-right'>
 		
 		<div class="info-box-formbuilder postbox">
+			<h3 class="info-box-title hndle"><?php _e('Default From Address', 'formbuilder'); ?></h3>
+			<div class="inside">
+			<p><?php _e('Please set a default email address that email from your website will be sent from. This address should be a valid address directly connected to your website domain in order to avoid potential problems with spam false positives and DMARK problems.', 'formbuilder'); ?></p>
+			<p><?php _e('To restore the old method of using the visitor\'s email address as the From address, enter this shortcode in the field: [SENDER_EMAIL]', 'formbuilder'); ?></p>
+			<?php
+				if(!empty($_POST['formBuilder_Default_from'])) {
+					$formBuilder_Default_from = $_POST['formBuilder_Default_from'];
+					if(is_email($formBuilder_Default_from))
+						formbuilder_set_default_from($formBuilder_Default_from);
+					elseif(strtoupper($formBuilder_Default_from) == '[SENDER_EMAIL]')
+					{
+						formbuilder_set_default_from($formBuilder_Default_from);
+						echo "<span style='color: green;'>Restoring old functionality. WARNING: This may cause email not to be delivered to you properly.</span>";
+					}
+					else
+						echo "<span style='color: red;'>Invalid email address.</span>";
+				}
+				$formBuilder_Default_from = formbuilder_get_default_from();
+			?>
+			<form action="<?php echo FB_ADMIN_PLUGIN_PATH; ?>&fbaction=settings" method="POST">
+				<input type="text" width="40" name="formBuilder_Default_from" placeholder="email@<?php echo str_replace('www.', '', $_SERVER['HTTP_HOST']); ?>" value="<?php echo htmlentities($formBuilder_Default_from); ?>" />
+				
+				<input type="submit" name="Submit" value="<?php _e('Save', 'formbuilder'); ?>" />
+			</form>
+			</div>
+		</div>
+		
+		<div class="info-box-formbuilder postbox">
 			<h3 class="info-box-title hndle"><?php _e('Spam Blocker', 'formbuilder'); ?></h3>
 			<div class="inside">
 			<p><?php printf(__('The FormBuilder can employ a %sspam blocking system%s in order to prevent automated computers from spamming the forms.  To accomplish this we put a field on the form that has been hidden, so that computers can see it, but people cannot.  If the field has been filled out when the form is submitted, the system will assume that a spammer is attempting to use the form, and will ignore the submission.', 'formbuilder'), '<a href="http://truthmedia.com/2008/06/27/feature-reverse-captcha/" title="Read More: FormBuilder Spam Blocking" target="_blank">', '</a>'); ?></p>
