@@ -1084,17 +1084,8 @@ CHANGE `from_name` `from_name` BLOB NOT NULL ';
 WARNING! This update will change how the email FROM address is created. You may adjust the default on the settings page.
 					"));
 				
-				// pulled from the wp core to set a default from address.
-				
-				// Get the site domain and get rid of www.
-				$sitename = strtolower( $_SERVER['SERVER_NAME'] );
-				if ( substr( $sitename, 0, 4 ) == 'www.' ) {
-					$sitename = substr( $sitename, 4 );
-				}
-				
-				// Set the default from address to wordpress@sitename.com
-				$formBuilder_Default_from = 'wordpress@' . $sitename;
-				update_option('formBuilder_Default_from', $formBuilder_Default_from);
+				// Updating db to use the shortcode to leave things functioning as they did before.
+				update_option('formBuilder_Default_from', '[SENDER_EMAIL]');
 				
 				update_option('formbuilder_version', "0.93");
 			}

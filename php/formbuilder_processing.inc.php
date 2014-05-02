@@ -1360,15 +1360,7 @@ function toggleVisOff(boxid)
 	{
 		$from = get_option('formBuilder_Default_from');
 		
-		if(empty($from))
-		{
-				// Get the site domain and get rid of www.
-				$sitename = strtolower( $_SERVER['SERVER_NAME'] );
-				if ( substr( $sitename, 0, 4 ) == 'www.' ) {
-					$sitename = substr( $sitename, 4 );
-				}
-				$from = 'wordpress@' . $sitename;
-		}
+		if(empty($from)) $from = "[SENDER_EMAIL]";
 		
 		return($from);
 	}
